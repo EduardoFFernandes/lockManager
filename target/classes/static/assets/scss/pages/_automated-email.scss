@@ -1,0 +1,70 @@
+.email-guest-template{
+
+  .nav-item{
+    span.nav-link.dropdown-toggle{
+      font-weight: 500;
+    }
+  }
+  h4.header-title{
+    .instructions{
+      font-size: 14px;
+    }
+  }
+  .mail-instructions-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 10px;
+
+    &:last-child{
+      padding-bottom: 0px;
+    }
+
+    span:first-child{
+      display: block;
+      min-width: 60px;
+    }
+    span{
+      margin-right: 10px;
+      &.btn{
+        padding: 4px 8px;
+      }
+    }
+  }
+
+  .save-actions{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .email-preview{
+    .header{
+      span{
+        font-weight: bold;
+      }
+
+      .contact{
+        font-size: 12px;
+        margin-bottom: 0;
+      }
+
+      .sub-header{
+        font-size: 10px;
+        margin-bottom: 0;
+      }
+    }
+
+    .subject{
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .body{
+    }
+    
+  }
+}
+
+

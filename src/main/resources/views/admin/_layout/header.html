@@ -1,0 +1,110 @@
+
+<div
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    th:fragment="topbar">
+
+    <!-- Top Bar Start -->
+    <div class="topbar">
+
+        <!-- LOGO -->
+        <div class="topbar-left">
+            <a th:href="@{/admin/dashboard/index}" class="logo">
+                <span>
+                    <img th:src="@{#{img.logo.hz}}" alt="" height="30">
+                </span>
+                <i>
+                    <img th:src="@{/assets/images/logo_sm.png}" alt="" height="30">
+                </i>
+            </a>
+        </div>
+
+        <nav class="navbar-custom">
+            <!-- <ul class="list-inline float-right mb-0 d-flex">
+
+                <li class="list-inline-item dropdown notification-list">
+                
+                    <a href="#" class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="false">
+                        <i class="noti-icon" th:with="language=${@languageService.getCurrentSystemLanguage()}">
+                            <img th:if="${language != null}" class="i18n-flags" th:src="|@{/assets/images/country-flags/}${language.localeFlag}|">
+                        </i>
+                    </a>
+                    
+                    <div class="dropdown-menu dropdown-menu-animated dropdown-menu-right profile-dropdown">
+                        <a href="#" class="dropdown-item notify-item action-icon edit lang-select" 
+                        th:each="language : ${@languageService.getOtherLanguages()}" th:data-lang="${language.locale}">
+                            <img class="i18n-flags" th:src="|@{/assets/images/country-flags/}${language.localeFlag}|">
+                            <span class="align-middle ml-2" th:text="#{${language.name}}"></span>
+                        </a>
+                    </div>
+                    
+                </li>
+
+                <li class="list-inline-item dropdown notification-list">
+                    <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+
+                        <i class="noti-icon">
+                            <i class="mdi mdi-account-circle fz-28"></i>
+                        </i>
+
+                        <span class="profile-username ml-2 text-dark" th:text="${@authService.getConnectedUser().name.split(' ')[0]}"> </span> <span class="mdi mdi-menu-down text-dark"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-animated dropdown-menu-right profile-dropdown ">
+
+                        item
+                        <div class="dropdown-item noti-title">
+                            <h5 class="text-overflow"><small th:text="#{welcome}"></small> </h5>
+                        </div>
+
+                        item
+                        <a th:href="@{/admin/system/user/profile}" class="dropdown-item notify-item action-icon edit">
+                            <i class="mdi mdi-account-circle"></i> <span th:text="#{menu.profile}"></span>
+                        </a>
+
+                        item
+                        <a th:href="@{/admin/system/user/account}" class="dropdown-item notify-item action-icon edit"
+                        sec:authorize="
+                            hasRole(T(app.models._BaseModel.Role).ROLE_ADMIN.templateName()) ||
+                            hasRole(T(app.models._BaseModel.Role).ROLE_CUSTOMER.templateName())">
+                            <i class="mdi mdi-settings"></i> <span th:text="#{menu.account.settings}"></span>
+                        </a>
+
+                        item
+                        <a th:href="@{/admin/system/user/billing}" class="dropdown-item notify-item action-icon edit"
+                            sec:authorize="
+                            hasRole(T(app.models._BaseModel.Role).ROLE_CUSTOMER.templateName())">
+                            <i class="mdi mdi-credit-card"></i> <span th:text="#{menu.user.billing}"></span>
+                        </a>
+
+                        item
+                        <a th:href="@{/logout}" class="dropdown-item notify-item action-icon delete">
+                            <i class="mdi mdi-power"></i> <span th:text="#{secure.logout}"></span>
+                        </a>
+
+                    </div>
+                </li>
+
+            </ul> -->
+
+            <ul class="list-inline menu-left mb-0">
+                <li class="float-left">
+                    <button class="button-menu-mobile open-left waves-light waves-effect">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                </li>
+            </ul>
+
+        </nav>
+
+    </div>
+    <!-- Top Bar End -->
+    <div id="systemLanguages" class="hidden" style="display: none;">
+        <!-- <span class="language" th:each="language : ${@languageService.getSystemLanguages()}" 
+        th:data-tag="${language.name}" th:data-translation="#{${language.name}}"
+        th:data-locale="${language.locale}">
+
+        </span> -->
+    </div>
+
+</div>

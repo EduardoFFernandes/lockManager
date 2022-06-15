@@ -1,0 +1,20 @@
+
+<head 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    
+    <!-- System title -->
+    <title th:text="#{system.name}"></title>
+    
+    <!-- System favicon -->
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon"/>
+    
+    <th:block layout:replace="~{guest/_layout/commons/stylesheets}"/>
+
+    <th:block layout:replace="~{guest/_layout/commons/scripts_top}"/>
+    
+</head>

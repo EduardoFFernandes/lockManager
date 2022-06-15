@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html
+    th:lang="${#locale.language}"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{guest/_layout/main_layout}">
+
+    <div layout:fragment="content" class="container">
+    
+        <div class="wrapper-page">
+            <div class="account-pages">
+                <div class="account-box">
+                    <div class="login-box p-4 text-center">
+                        <div class="center-box">
+                            <img th:src="@{#{img.logo.hz}}" alt="">
+                        </div>
+                    </div>
+                    <div class="login-box-divider"></div>
+                    <div class="login-box account-content text-center">
+                        <div class="content-box">
+                            <h1 class="text-error display-4 font-weight-bold">404</h1>
+                            <h3 class="text-uppercase font-weight-bold text-danger m-t-30" th:text="#{error.404}"></h3>
+                            <p class="text-muted mt-3" th:text="#{error.404.desc}"></p>
+                            <a class="btn btn-md btn-block btn-primary waves-effect waves-light m-t-20" th:href="@{/login}" th:text="#{return.login}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</html>

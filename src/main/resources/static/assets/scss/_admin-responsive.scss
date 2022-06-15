@@ -1,0 +1,160 @@
+@import "variables";
+@import "custom-colors";
+
+@media (max-width: 767px) {
+
+    .header-title.mb-5 {
+        margin-bottom: 1em !important;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .not-mobile {
+        display: none !important;
+    }
+
+    .label-not-mobile {
+        display: none !important;
+    }
+
+    .label-mobile {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 480px),
+(max-width: 600px) and (max-height: 800px) {
+
+    .email-guest-template {
+        .mail-instructions-row {
+            display: table;
+
+            span {
+                &.btn {
+                    margin: 4px;
+                }
+            }
+        }
+    }
+
+    .portlet {
+        &.filters-portlet {
+
+            .portlet-heading,
+            .portlet-body {
+                padding: 20px;
+            }
+        }
+
+        .portlet-heading {
+            padding: 20px 5px;
+        }
+
+        .portlet-body {
+            background: #fff;
+            padding: 2px;
+        }
+    }
+
+    .form-group.col-md-6 {
+        padding-right: 0px;
+    }
+
+    .btn-filter {
+        text-align: left;
+        padding-right: 5px;
+        padding-left: 10px;
+    }
+
+    .modal-dialog {
+        margin-top: 1.3em;
+        margin-left: 1.3em;
+        margin-right: 1.3em;
+    }
+
+    .excel-export-button {
+        .dt-buttons.btn-group {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    .btn-add.mobile {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .nav-tabs .btn-add {
+        display: none;
+    }
+
+    .dataTables_length {
+        margin-bottom: 0px;
+    }
+
+    .lock-tabs li.nav-item {
+        width: 50%;
+    }
+
+    .page-title-box .lock-title, .checkbox-label{
+        white-space: break-spaces;
+    }
+
+    .custom-multi-select-button-div {
+        justify-content: flex-end;
+        width: 45%;
+    }
+
+    .page-title-box {
+        padding: 15px 0;
+    }
+
+}
+
+@media (max-width: 350px) {
+
+    .checkbox-width {
+        width: 10%;
+    }
+
+    .checkbox-width-custom {
+        width: 13%;
+    }
+}
+
+@media (min-width: 350px) and (max-width: 400px) {
+
+    .checkbox-width {
+        width: 8%;
+    }
+
+    .checkbox-width-custom {
+        width: 10%;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 700px) {
+
+    .checkbox-width {
+        width: 8%;
+    }
+
+    .checkbox-width-custom {
+        width: 8%;
+    }
+}
+
+@media (max-width: 375px) {
+
+    .date-time-picker-field {
+        width: 100%;
+    }
+}
+
+@media (max-width: 335px) {
+
+    .custom-form-width {
+        width: 130px;
+    }
+}

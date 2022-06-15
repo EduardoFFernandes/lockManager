@@ -1,0 +1,136 @@
+<th:block 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <!-- Libs js -->
+    <script th:src="@{/assets/js/modernizr.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.min.js}"></script>
+    <script th:src="@{/assets/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/assets/js/metisMenu.min.js}"></script>
+    <script th:src="@{/assets/js/waves.js}"></script>
+    <script th:src="@{/assets/js/jquery.slimscroll.js}"></script>
+
+<!-- VUE for DEV -->
+    <script th:src="@{/assets/plugins/vue/vue.dev.js}"></script>
+    
+<!-- VUE for PROD -->
+    <!-- <script th:src="@{/assets/plugins/vue/vue.min.js}"></script>  -->
+    
+    <!-- Plugins js -->
+    <script th:src="@{/assets/plugins/jquery-touch-punch/jquery.ui.touch-punch.min.js}"></script>
+    <script th:src="@{/assets/plugins/moment/min/moment-with-locales.min.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/dataTables.bootstrap4.min.js}"></script>    
+    <script th:src="@{/assets/plugins/datatables/dataTables.buttons.min.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/buttons.bootstrap4.min.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/jszip.min.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/pdfmake.min.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/vfs_fonts.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/buttons.html5.min.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/buttons.print.min.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/buttons.colVis.min.js}"></script>  
+    <script th:src="@{/assets/plugins/datatables/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/assets/plugins/datatables/datetime-moment.js}"></script>
+    <script th:src="@{/assets/plugins/notifications/notify.min.js}"></script>
+    <script th:src="@{/assets/plugins/notifications/notify-metro.js}"></script>
+    <script th:src="@{/assets/plugins/notifications/notifications.js}"></script>
+    <script th:src="@{/assets/plugins/select2/js/select2.min.js}"></script>
+    <script th:src="@{/assets/plugins/country-to-timezone/country-to-timezone.min.js}"></script>
+    <script th:src="@{/assets/plugins/fullcalendar/core/main.min.js}"></script>
+    <script th:src="@{/assets/plugins/fullcalendar/daygrid/main.min.js}"></script>
+    <script th:src="@{/assets/plugins/fullcalendar/interaction/main.min.js}"></script>
+    <script th:src="@{/assets/plugins/fullcalendar/timegrid/main.min.js}"></script>
+    <script th:src="@{/assets/plugins/jquery-multiselect/jquery.multi-select.js}"></script>
+    <script th:src="@{/assets/plugins/jquery-quicksearch/jquery.quicksearch.js}"></script>
+    <script th:src="@{/assets/plugins/vue/v-clipboard/index.min.js}"></script>
+    <script th:src="@{/assets/plugins/axios/axios.min.js}"></script>
+    <script th:src="@{/assets/plugins/fullcalendar/vue/vue-fullcalendar-wrapper.js}"></script>
+
+    <script th:src="@{/assets/plugins/parsleyjs/parsley.min.js}"></script>
+    <script th:src="@{/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+    
+    <th:block th:with="language=${#locale.getLanguage()},country=${#locale.getCountry()}">
+    
+        <th:block th:switch="${language}">
+            <th:block th:case="'en'">
+                <script th:if="${country != 'US'}" th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}-${country}.min.js|"></script>
+            </th:block>
+            <th:block th:case="'pt'">
+                <script th:src="|@{/assets/plugins/parsleyjs/i18n/}${language}-${#strings.toLowerCase(country)}.js|"></script>
+                <script th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}-${country}.min.js|"></script>
+            </th:block>
+            <th:block th:case="'zh'">
+                <script th:src="|@{/assets/plugins/parsleyjs/i18n/}${language}_${#strings.toLowerCase(country)}.js|"></script>
+                <script th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}-${country}.min.js|"></script>
+            </th:block>
+            <th:block th:case="*">
+                <script th:src="|@{/assets/plugins/parsleyjs/i18n/}${language}.js|"></script>
+                <script th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}.min.js|"></script>
+            </th:block>
+        </th:block>
+        
+    </th:block>
+    <script th:inline="javascript">
+
+        var API_BASE_URL = [[@{'/api'}]]
+        var ASSETS_BASE_URL = [[@{'/assets'}]]
+
+        const api = axios.create({
+            baseURL: API_BASE_URL,
+            // withCredentials: true,
+            // crossdomain: true,
+        });
+
+        var SYSTEM_LANGUAGE = [[${#locale.getLanguage()}]];
+        var SYSTEM_LOCALE = [[${#locale.toLanguageTag()}]];
+        var DATATABLES_LANGUAGE = [[${#strings.capitalize(#locale.getDisplayLanguage('en'))}]];
+        var DATATABLES_COUNTRY = [[${#strings.capitalize(#locale.getDisplayCountry('en'))}]];
+        
+        /***********************************************
+         * Different CSS depending on OS (mac/pc)- (c) Dynamic Drive (www.dynamicdrive.com)
+         * This notice must stay intact for use
+         * Visit http://www.dynamicdrive.com/ for full source code
+         ***********************************************/
+
+        var csstype = "inline" //Specify type of CSS to use. "Inline" or "external"
+
+        var mac_css = `
+            ::-webkit-scrollbar {-webkit-appearance: none!important;}
+            ::-webkit-scrollbar:vertical {width: 11px!important;}
+            ::-webkit-scrollbar:horizontal {height: 11px!important;}
+            ::-webkit-scrollbar-thumb {border-radius: 8px!important;border: 2px solid white!important;background-color: rgba(0, 0, 0, .5)!important;}
+            ` //if "inline", specify PC/default css here//if "inline", specify mac css here
+        var pc_css =
+            `
+            body{font-weight: 500 !important;}
+            .h1,.h2,.h3,.h4,.h5,.h6{font-weight: 700 !important;}
+            ::-webkit-scrollbar {-webkit-appearance: none;}
+            ::-webkit-scrollbar:vertical {width: 11px;}
+            ::-webkit-scrollbar:horizontal {height: 11px;}
+            ::-webkit-scrollbar-thumb {border-radius: 8px;border: 2px solid white;background-color: rgba(0, 0, 0, .5);}
+            ` //if "inline", specify PC/default css here
+
+        ///////No need to edit beyond here////////////
+
+        var mactest = navigator.userAgent.indexOf("Mac") != -1;
+        document.write('<style type="text/css">');
+        if (mactest) {
+            document.write(mac_css);
+        } else {
+            document.write(pc_css);
+        }
+        document.write('</style>');
+        
+    </script>
+    
+    <!-- Stripe js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <!-- Custom js -->
+    <script th:src="@{/js/vue-components-init.js}"></script>
+    <script th:src="@{/js/top.js?v=0.0.28}"></script>
+    
+</th:block>

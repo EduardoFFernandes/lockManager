@@ -1,0 +1,153 @@
+<th:block 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <!-- Libs js -->
+    <script th:src="@{/assets/js/jquery.blockui.min.js}"></script>
+    
+    <!-- Plugins js -->
+    <script th:src="@{/assets/plugins/tooltipster/js/tooltipster.bundle.min.js}"></script>
+    <script th:src="@{/assets/plugins/intl-tel-input/build/js/intlTelInput.js}"></script>
+    <script th:src="@{/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js}"></script>
+    <script th:src="@{/assets/plugins/jquery-maskmoney/dist/jquery.maskMoney.min.js}"></script>
+    <script th:src="@{/assets/plugins/jquery-mask-plugin/dist/jquery.mask.min.js}"></script>
+    <script th:src="@{/assets/plugins/jquery-credit-card-validator/jquery.creditCardValidator.js}"></script>
+    <script th:src="@{/assets/plugins/materialize-css/extras/noUiSlider/nouislider.min.js}"></script>
+    <script th:src="@{/assets/plugins/materialize-css/extras/noUiSlider/wNumb.min.js}"></script>
+    <script th:src="@{/assets/plugins/switchery/switchery.min.js}"></script>
+
+    <!-- App js -->
+    <script th:src="@{/assets/js/jquery.core.js}"></script>
+    <script th:src="@{/assets/js/jquery.app.js}"></script>
+    
+
+
+    <!-- System bottom scripts -->
+    <script th:inline="javascript">
+        
+        // Thymeleaf global variables (to use in bottom.js)
+        // -------    
+        var utilsI18nPhoneInput = [[@{/assets/plugins/intl-tel-input/build/js/utils.js}]]
+        
+        var defaultDateFormat = [[${@environment.getProperty('default.date.format')}]]
+        
+        // JS i18n
+        var i18n = {};
+        i18n.languages = {};
+        i18n.error500                 =[[#{error.500}]]
+        i18n.error500Desc             =[[#{error.500.desc}]]
+        i18n.block                    = [[#{wait}]];
+        i18n.delete                   = [[#{message.warning.delete}]];
+        i18n.deleteDesc               = [[#{message.warning.delete.desc}]];
+        i18n.yes                      = [[#{yes}]];
+        i18n.no                       = [[#{no}]];
+        i18n.dtSearch                 = [[#{search}]];
+        i18n.dtInfo                   = [[#{datatable.info}]];
+        i18n.dtZeroRecords            = [[#{datatable.zeroRecords}]];
+        i18n.dtinfoFiltered           = [[#{datatable.infoFiltered}]];
+        i18n.dtlengthMenu             = [[#{datatable.lengthMenu}]];
+        i18n.filter                   = [[#{filter}]];
+        i18n.msgRequired              = [[#{validation.value.required}]];
+        i18n.hide					  = [[#{hide}]];
+        i18n.show				   	  = [[#{show}]];
+        i18n.dateLessThan             = [[#{validation.date.less.than}]];
+        i18n.dateLessEqualThan        = [[#{validation.date.less.equal.than}]];
+        i18n.dateGreaterThan          = [[#{validation.date.greater.than}]];
+        i18n.dateGreaterThanToday     = [[#{validation.date.greater.than.today}]];
+        i18n.msgErrorOperation        = [[#{message.error.operation}]];
+        i18n.export                   = [[#{export}]]
+        i18n.dateBetween              = [[#{validation.date.between}]]
+        i18n.dateBetweenYears         = [[#{validation.date.between.years}]]
+        i18n.validatingCreditCard     = [[#{validation.validating.credit.card}]]
+        i18n.systemName               = [[#{system.name}]]
+        i18n.startDate                = [[#{start.date}]]
+        i18n.endDate                  = [[#{end.date}]]
+        i18n.servicePlan              = [[#{menu.system.service.plan}]]
+        i18n.company                  = [[#{company}]]
+        i18n.numberOfLocks            = [[#{number.of.locks}]]
+        i18n.limit                    = [[#{limit}]]
+        i18n.type                     = [[#{type}]]
+        i18n.legalResponsible         = [[#{legal.responsible}]]
+        i18n.locks                    = [[#{locks}]]
+        i18n.price                    = [[#{price}]]
+        i18n.proRataDiscount          = [[#{pro.rata.discount}]]
+        i18n.total                    = [[#{total}]]
+        i18n.issuedDate               = [[#{issued.date}]]
+        i18n.period                   = [[#{period}]]
+        i18n.invoice                  = [[#{invoice}]]
+        i18n.month                    = [[#{month}]]
+        i18n.year                     = [[#{year}]]
+        i18n.invoiceTransactionStatus = [[#{invoice.transaction.status}]]
+        i18n.msgErrorAddSchedule      = [[#{validation.access.schedule.no.events}]];
+        i18n.associationDescription   = [[#{message.warning.delete.associations.desc}]];
+
+        (function initLanguei18nTranslations() {
+            
+            $('#systemLanguages .language').each( (_, element) => {
+                var tag = element.dataset.tag;
+                var translation = element.dataset.translation;
+                i18n.languages[tag] = translation;
+            });
+        })()
+        
+        var DateUtil = {
+            dateFormat: {
+                default: null,
+                moment: null
+            },
+            timestampFormat_HH_MM_SS : {
+                default: null,
+                moment: null
+            },
+            timestampFormat_HH_MM : {
+                default: null,
+                moment: null
+            },
+            timestampFormat_HH_MM_A : {
+                default: null,
+                moment: null
+            },
+            HH_MM_SS : {
+
+            }
+        };
+        
+        (function initDateUtil() {
+        	DD_MMMM_YYYY
+            // common pattern
+            var dateFormat                                  = 'dd/MM/yyyy'
+            var timestampFormat_HH_MM_SS                    = dateFormat + [[${T(brisa.lockmanager.commons.utils.DateUtil).HH_MM_SS}]]
+            var timestampFormat_HH_MM                       = dateFormat + [[${T(brisa.lockmanager.commons.utils.DateUtil).HH_MM}]]
+            var timestampFormat_HH_MM_A                     = dateFormat + [[${T(brisa.lockmanager.commons.utils.DateUtil).HH_MM_A}]]
+            var HH_MM_SS                                    = [[${T(brisa.lockmanager.commons.utils.DateUtil).HH_MM_SS}]]
+
+            // all toLowerCase - datatable pattern
+            DateUtil.dateFormat.default                     = dateFormat.toLowerCase();
+            DateUtil.timestampFormat_HH_MM_SS.default       = timestampFormat_HH_MM_SS.toLowerCase();
+            DateUtil.timestampFormat_HH_MM.default          = timestampFormat_HH_MM.toLowerCase();
+            DateUtil.timestampFormat_HH_MM_A.default        = timestampFormat_HH_MM_A.toLowerCase();
+            DateUtil.HH_MM_SS.default                       = HH_MM_SS.toLowerCase();
+
+            // Case adjusts - moment pattern
+            DateUtil.dateFormat.moment                      = dateFormat.toUpperCase();
+            DateUtil.timestampFormat_HH_MM_SS.moment        = timestampFormat_HH_MM_SS.toUpperCase().replace(':MM', ':mm').replace(':SS', ':ss');
+            DateUtil.timestampFormat_HH_MM.moment           = timestampFormat_HH_MM.toUpperCase().replace(':MM', ':mm');
+            DateUtil.HH_MM_SS.moment                        = HH_MM_SS.toUpperCase().replace(':MM', ':mm').replace(':SS', ':ss');
+            DateUtil.timestampFormat_HH_MM_A.moment         = timestampFormat_HH_MM_A.toUpperCase().replace(':MM', ':mm')
+        })()
+
+        $('.lang-select').click(function() {
+            var data = $(this).data();
+            var lang = data.lang
+            if (lang != ''){
+                window.location.replace('?lang=' + lang);
+            }
+        })
+    </script>
+            
+    <!-- Custom js -->
+    <script th:src="@{/js/invoice-pdf.js}"></script>
+    <script th:src="@{/js/bottom.js?v=0.0.28}"></script>
+    
+</th:block>

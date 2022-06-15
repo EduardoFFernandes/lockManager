@@ -1,0 +1,259 @@
+@import "../variables";
+@import "../custom-colors";
+
+.user-billing {
+  .card{
+    .card-header{
+      font-size: 1rem;
+      font-family: $font-secondary;
+      font-weight: $font-weight-medium;
+      color: $dark;
+
+      .ion-ios-add-circle{
+        font-size: 35px;
+      }
+    }
+    table th{
+      border: none;
+    }
+  }
+
+  .card-billing-subscription{
+    .status-highlight{
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .pointer-right{
+      cursor: e-resize;
+    }
+
+  }
+  .card-billing-plans{
+
+  }
+  .card-billing-credit-cards{
+    .credit-card-dots{
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .card-body{
+      .card-table{
+        padding: 0 25px;
+        margin-right: -10px;
+        margin-left: -10px;
+      }
+    }
+  }
+  .card-billing-invoices{
+    .card-body{
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .card-service-plans {
+    // limegreen RGB (50, 205, 50)
+    $limegreen: rgb(50, 205, 50);
+    $limegreen-disabled: rgba(50, 205, 50, 0.74);
+    $box-shadow : 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    $box-shadow-hover : 8px 6px 10px 0 rgba(0, 0, 0, 0.2), 10px 3px 15px 0 rgba(50, 205, 50, 0.19);
+
+    .service-plan-detail{
+      &:hover{
+        box-shadow: $box-shadow;
+      }
+      &.selected{
+        border: 2px solid $limegreen;
+        box-shadow: $box-shadow;
+        &:hover{
+          box-shadow: $box-shadow-hover ;
+        }
+
+        .plan-highlight{
+          display: block;
+        }
+        .plan-prices{
+          span.btn.disabled{
+            background-color: $limegreen-disabled !important;
+            cursor: not-allowed;
+            border: none !important;
+          }
+        }
+      }
+      .plan-highlight{
+        width: 0; 
+        height: 0; 
+        border-right: 30px solid transparent;        
+        border-top: 30px solid $limegreen;
+        position: absolute;
+        display: none;
+      }
+      .plan-detail{
+        padding: 20px 40px;
+        align-items: center;
+        .plan-name{
+          font-weight: bold;
+          font-size: 2em;
+        }
+      }
+
+      .plan-features-list{
+        padding: 20px 0px;
+        padding-bottom: 0px;
+        .item{
+          font-size: 16px;
+          .list-icon{
+            width: 18px;
+            height: 15px;
+            display: inline-block;
+          }
+          .list-feature{
+            font-weight: bold;
+            white-space: nowrap;
+          }
+          
+        }
+      }
+
+      .plan-prices{
+        padding: 20px 10px;
+        span{
+          font-size: 1.1rem;
+          margin: 0;
+
+          &.period{
+            font-size: 0.8rem;
+          }
+        }
+        span.btn:not(.disabled){
+          &:hover{
+            box-shadow: $box-shadow;
+          }
+        }
+      }
+    }
+  }
+
+  #modal-credit-card{
+    .credit-card-input-group{
+      .credit-card-logo {
+        background-color: initial !important;
+        padding: 0;
+
+        span{
+          width: 54px;
+          height: 30px;
+          background-size: 45px 30px;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+      
+        .card-name{
+          -webkit-transition: all .5s ease-out;
+          transition: all .5s ease-out;
+
+          &.default{
+            background-image: url('../images/credit-cards-images/default.png');
+          }
+          &.visa{
+            background-image: url('../images/credit-cards-images/visa.png');
+          }
+          &.mastercard{
+            background-image: url('../images/credit-cards-images/mastercard.png');
+          }
+          &.amex {
+            background-image: url('../images/credit-cards-images/amex.png');
+          }
+
+          &.diners_club_carte_blanche{
+            background-image: url('../images/credit-cards-images/diners_club_carte_blanche.png');
+          }
+          &.discover{
+            background-image: url('../images/credit-cards-images/discover.png');
+          }
+          &.jcb{
+            background-image: url('../images/credit-cards-images/jcb.png');
+          }
+        }
+      }
+
+      .credit-card-input{
+        border-left: 0 none !important;
+      }
+    }
+
+  }
+
+  #modal-change-plan{
+    .form-group{
+      label.term-link a{
+        text-decoration: underline;
+      }
+    }
+    .subscription-type-choose{
+      .title{
+        text-align: center;
+        padding: 0.5em 0;
+      }      
+    }
+    button#changePlanSubmit{
+      cursor: not-allowed;
+    }
+
+  }
+
+  #modal-account-total-error{
+    .plan-divergence{
+      margin: 15px 0;
+      .divergence-line{
+        padding-bottom: 14px;
+        .title{
+          text-align: center;
+          font-weight: bold;
+          font-size: 16px;
+          color: inherit;
+          margin-bottom: 15px;
+        }
+        .item-list{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          padding: 0 40px;
+          .item{
+            display: flex;
+            flex-direction: column;
+            span.number{
+              text-align: center;
+              vertical-align: middle;
+              padding: 15px 15px;
+              border: 0.5px solid black;
+              border-radius: 50%;
+            }
+            span.name{
+              font-family: monospace;
+              text-align: center;
+              padding-top: 5px;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .card-service-plans {
+      .plan-prices{
+        & > span.btn{
+          margin-bottom: 1em;
+        }
+        padding: 20px 30px !important;
+        
+      }
+    }
+  }
+  
+  
+}

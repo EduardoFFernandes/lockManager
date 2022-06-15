@@ -1,0 +1,11 @@
+{
+    "java.jdt.ls.java.home": "/Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk/Contents/Home",
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m",
+    "java.configuration.runtimes": [
+        {
+          "name": "JavaSE-14",
+          "path": "/Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk/Contents/Home",
+          "default": true
+        },
+      ]
+}

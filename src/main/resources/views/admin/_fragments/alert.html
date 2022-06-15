@@ -1,0 +1,38 @@
+
+<div 
+    xmlns:th="http://www.w3.org/1999/xhtml" 
+    th:fragment="alert">
+
+    <script 
+        th:inline="javascript"
+        th:if="${alert != null}">
+
+        $(function() {
+
+            var notifyStyle = [[${alert.style}]]; 
+
+            if (isMobile()) {
+                notifyStyle = 'top-right'
+            }
+            
+            if ([[${!alert.autohide}]]) {
+                $.Notification.notify(
+                    [[${alert.type}]],
+                    notifyStyle, 
+                    [[${#messages.msg(alert?.type)}]], 
+                    [[(${alert.args == null}) ? ${#messages.msgOrNull(alert?.message)} : ${#messages.msgOrNullWithParams(alert?.message, alert?.args)}]]
+                );
+            } else {
+                $.Notification.autoHideNotify(
+                    [[${alert.type}]],
+                    notifyStyle, 
+                    [[${#messages.msg(alert?.type)}]], 
+                    [[(${alert.args == null}) ? ${#messages.msgOrNull(alert?.message)} : ${#messages.msgOrNullWithParams(alert?.message, alert?.args)}]]
+                );
+            }
+
+        });
+        
+    </script>
+
+</div>

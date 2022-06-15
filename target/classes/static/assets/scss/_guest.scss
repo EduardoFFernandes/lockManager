@@ -1,0 +1,77 @@
+@import "variables";
+@import "custom-colors";
+
+.account-box {
+  max-width: 100%;
+  display: flex;
+
+  .login-box {
+    background-color: $white;
+    display: flex;
+    width: 100%;
+    border-radius: 50%;
+
+    .center-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      img {
+        height: 110px;
+      }
+    }
+
+    .content-box {
+      width: 100%;
+
+      .login-form-title {
+        text-align: center;
+        color: darken($primary, 5%);
+        font-size: 30px;
+      }
+      form{
+        width: 75%;
+        margin: 0 auto;
+      }
+
+      form a {
+        color: $primary;
+      }
+    }
+  }
+
+  .login-box-divider {
+    border: 0.5px solid #A0CDD9;
+    margin: 4% 0;
+  }
+}
+
+.footer-guest {
+  color: $white;
+  .flags{
+    float: right;
+    margin-right: 15px;
+    .noti-icon{
+      padding-right: 5px;
+      cursor: pointer;
+    }
+    .i18n-flags {
+      height: 20px;
+      width: 20px;
+    }
+  }
+}
+
+.grecaptcha-badge {
+  margin-bottom: 3.7em;
+}
+
+.reset-pwd {
+  padding-top: 0px !important;
+}
+
+.reset-pwd i {
+  color: #666f7b;
+  font-size: 80px;
+}

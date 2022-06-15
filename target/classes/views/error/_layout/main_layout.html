@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html 
+    th:lang="${#locale.language}"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <th:block layout:insert="~{guest/_layout/commons/head}"/>
+    
+    <body class="pb-0 guest-body">
+
+        <div th:replace="guest/_layout/header :: header"></div>
+
+        <div th:replace="admin/_fragments/alert"></div>
+
+        <div layout:fragment="content"></div>
+
+        <div th:replace="guest/_layout/footer :: footer('width: 100%; right: unset; left: unset;', true)"></div>
+
+        <th:block layout:replace="~{guest/_layout/commons/scripts_bottom}"/>
+        
+    </body>
+
+</html>

@@ -1,0 +1,101 @@
+@import "variables";
+@import "custom-colors";
+
+.guest-body {
+    background-image:
+        radial-gradient(white, 5%, darken($primary, 10%));
+    background-repeat: no-repeat;
+    @import "guest";
+}
+
+@import "_guest-responsive";
+
+.admin-body {
+    @import "admin";
+    @import "_admin-responsive";
+}
+
+.alert-success {
+    color: $success;
+    background-color: lighten($success, 70%);
+    border-color: lighten($success, 65%);
+
+    .alert-link {
+        color: darken($success, 10%);
+    }
+
+    hr {
+        border-top-color: darken($success, 10%);
+    }
+}
+
+.alert-warning {
+    color: $warning;
+    background-color: lighten($warning, 55%);
+    border-color: lighten($warning, 40%);
+
+    .alert-link {
+        color: darken($warning, 10%);
+    }
+
+    hr {
+        border-top-color: darken($warning, 10%);
+    }
+}
+
+.notifyjs-metro-warning {
+    color: $warning !important;
+    background-color: lighten($warning, 55%);
+    border: 1px solid lighten($warning, 40%);
+}
+
+.tooltipster-sidetip.tooltipster-shadow.tooltipster-shadow .tooltipster-box {
+    background: $primary;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 0 10px 6px rgba(0, 0, 0, .1);
+}
+
+.tooltipster-sidetip.tooltipster-shadow.tooltipster-shadow .tooltipster-content {
+    color: $white;
+}
+
+.tooltipster-sidetip.tooltipster-shadow.tooltipster-bottom .tooltipster-arrow-border {
+    border-bottom-color: $primary
+}
+
+.tooltipster-sidetip.tooltipster-shadow.tooltipster-left .tooltipster-arrow-border {
+    border-left-color: $primary
+}
+
+.tooltipster-sidetip.tooltipster-shadow.tooltipster-right .tooltipster-arrow-border {
+    border-right-color: $primary
+}
+
+.tooltipster-sidetip.tooltipster-shadow.tooltipster-top .tooltipster-arrow-border {
+    border-top-color: $primary
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
+    background-color: $primary;
+}
+
+.datepicker table tr td.today,
+.datepicker table tr td.today:hover,
+.datepicker table tr td.today.disabled,
+.datepicker table tr td.today.disabled:hover {
+    background-color: lighten($primary, 40%) !important;
+    color: $white !important;
+    background-image: none !important;
+}
+
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none !important;
+    background:
+        transparent url('data:image/gif;base64,R0lGODlhBgAGAKEDAFVVVX9/f9TU1CgmNyH5BAEKAAMALAAAAAAGAAYAAAIODA4hCDKWxlhNvmCnGwUAOw==') right center no-repeat !important;
+    background-position-x: right;
+    background-position-y: center;
+    background-position: calc(100% - 5px) center !important;
+}

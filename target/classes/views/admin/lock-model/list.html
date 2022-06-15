@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{admin/_layout/main_layout}">
+
+<div layout:fragment="content">
+
+<div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body table-responsive">
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-11">
+                                <h4 class="m-t-0 header-title mb-5" th:text="#{menu.lock.model.list}"></h4>
+                            </div>
+                            <div class="col-sm-12 col-md-1 text-right pr-4 btn-add">
+                                <a th:href="@{/admin/lock-model/list}" class="tooltip-left" th:title="#{lock.model.add}">
+                                    <i class="ion ion-ios-add-circle"></i>
+                                </a>
+                            </div>
+                            
+                           <!--  <form
+                                 id="editForm"
+                                 th:action="@{/admin/lock/list}"
+                                 method="get"
+                                 data-parsley-validate
+                                 data-parsley-trigger="focusout"
+                            >
+                                <div class="d-flex align-items-center active-filter target">
+                                    <div class="checkbox checkbox-primary activeCheckBox mt-2 mr-3 ml-1">
+                                        <input type="checkbox" id="commIssue" name="commIssue" th:checked="*{commIssue}">
+                                        <label class="clickable" for="commIssue" th:text="#{filter.comm.issue}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </form> -->
+                            
+                        </div>
+
+                        <table id="datatable" class="table table-hover table-bordered">
+
+                            <thead class="thead-light ">
+                                <tr th:if="${objects == null || objects?.isEmpty()}">
+                                    <th th:text="#{no.records.found}"></th>
+                                </tr>
+                                <tr th:if="${!objects?.isEmpty()}" >
+                                    <th data-priority="1" th:text="#{name}"></th>
+                                    <th th:text="#{description}"></th>
+                                    <th class="th-text-bool" th:text="#{type}"></th>
+                                    <th th:text="#{color}"></th>
+                                    <th class="th-text-bool" th:text="#{status}"></th>
+                                    <th th:text="#{menu}" data-priority="2" class="actions">&nbsp;</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr th:each="object : ${objects}">
+                                    <td th:text="${object.name}"></td>
+                                    <td th:text="${object.description}"></td>
+                                    <td th:text="${object.type}"></td>
+                                    <td th:text="${object.color}"></td>
+                                    <td th:text="${object.status}"></td>
+                                    <td class="actions lock-actions pb-0 pt-10">                                      
+                                        <a class="action-icon edit" data-toggle="dropdown" href="#" role="button">
+                                            <i class="mdi mdi-menu icon-resize"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-left profile-dropdown">
+                                            <ul class="list-inline mb-0">
+                                                <li class="dropdown notification-list">
+                                                    <a href="#" class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
+                                                        <i class="fas fa-edit font-size-16 tab-width"></i> <span th:text="#{edit}"></span>
+                                                    </a>
+                                                    <span>
+                                                        <a href="#" class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit" th:title="#{delete}" th:data-id="${object.id}">
+                                                            <i class="far fa-trash-alt mr-13"></i> <span th:text="#{delete}"></span>
+                                                        </a>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- end card-body -->
+                </div><!-- end card -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+</div>
+
+</html>
+<!-- end fragment -->

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- System head -->
+<th:block th:replace="admin/_layout/commons/head" />
+
+<!-- <div th:replace="admin/_fragments/alert"></div>
+    <div th:replace="admin/_fragments/deleteWarning"></div>
+    <div th:replace="admin/_fragments/modalResetWarning"></div>
+    <div th:replace="admin/_fragments/modalDeactivateUserWarning"></div> -->
+
+
+<body class="admin-body">
+
+    <div id="wrapper">
+
+        <header>
+            <!-- Header -->
+            <div th:replace="admin/_layout/header :: topbar"></div>
+
+            <!-- Side bar Menu -->
+            <div th:replace="admin/_layout/menu :: sidebar"></div>
+
+        </header>
+
+        <div class="content-page">
+
+            <div class="content">
+                <div class="container-fluid">
+
+                    <!-- Content pages -->
+                    <div layout:fragment="content"></div>
+
+                </div>
+            </div>
+
+            <!-- System footer -->
+            <!-- <div th:replace="guest/_layout/footer :: footer('', false)">
+                </div> -->
+
+        </div>
+    </div>
+
+    <th:block th:replace="admin/_layout/commons/scripts_bottom" />
+
+</body>
+
+</html>

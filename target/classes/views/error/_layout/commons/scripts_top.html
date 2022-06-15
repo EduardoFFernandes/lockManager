@@ -1,0 +1,25 @@
+<th:block 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <!-- Google recaptcha js -->
+    <script th:src="|https://www.google.com/recaptcha/api.js?render=${googleKey}|"></script>
+
+    <!-- Libs js -->
+    <script th:src="@{/assets/js/modernizr.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.min.js}"></script>
+    <script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/assets/plugins/vue/vue.min.js}"></script> 
+
+    <!-- Plugins js -->
+    <script th:src="@{/assets/plugins/country-to-timezone/country-to-timezone.min.js}"></script>
+    <script th:src="@{/assets/plugins/select2/js/select2.min.js}"></script>
+    <script th:src="@{/assets/plugins/notifications/notify.min.js}"></script>
+    <script th:src="@{/assets/plugins/notifications/notify-metro.js}"></script>
+    <script th:src="@{/assets/plugins/notifications/notifications.js}"></script>
+    <script th:src="@{/assets/plugins/intl-tel-input/build/js/intlTelInput.js}"></script>
+    <script th:src="@{/assets/plugins/intl-tel-input/build/js/utils.js}"></script>
+
+    <!-- Custom js -->
+    <script th:src="@{/js/vue-components-init.js}"></script>
+    <script th:src="@{/js/top-guest.js}"></script>

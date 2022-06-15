@@ -1,0 +1,253 @@
+@import "variables";
+@import "custom-colors";
+
+.credit-card-dots{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.excel-export-button {
+    .buttons-excel {
+        padding: 5px 5px;
+    }
+
+    .mdi-file-excel {
+        font-size: 18px;
+        color: green
+    }
+}
+
+#sidebar-menu>ul>li>a {
+    color: $menu-item-color;
+    display: block;
+    padding: 14px 20px;
+    margin: 2px 0;
+    font-size: 15px;
+    position: relative;
+    transition: all 0.5s;
+    border-left: 3px solid transparent;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: lighten($primary, 20%) !important;
+        text-decoration: none;
+        background-color: darken($bg-leftbar, 2.5%);
+        border-left: 3px solid $primary;
+    }
+}
+
+.enlarged #wrapper .left.side-menu {
+    #sidebar-menu>ul>li>a {
+        padding: 15px 20px;
+        padding-left: 15px;
+        min-height: 56px;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: lighten($primary, 20%) !important;
+            background-color: darken($bg-leftbar, 2.5%);
+        }
+
+        i {
+            font-size: 24px;
+            margin-right: 20px !important;
+        }
+    }
+}
+
+#sidebar-menu>ul>li>a.active {
+    color: lighten($primary, 20%) !important;
+}
+
+.topbar {
+    .topbar-left {
+        background: $bg-topbar;
+    }
+}
+
+.notification-list {
+    .noti-icon {
+        color: $primary;
+    }
+}
+
+.btn-add a {
+    color: $primary;
+}
+
+.btn-add i:hover {
+    color: darken($primary, 5%) !important;
+    border-color: darken($primary, 5%) !important;
+}
+
+.font-size-24 {
+    font-size: 24px !important;
+}
+
+#modalMailboxMessage {
+    .media-body {
+        margin: auto 0;
+    }
+
+    .modal-footer {
+        justify-content: space-between;
+    }
+
+    .noti-icon {
+        font-size: 18px;
+        vertical-align: middle;
+        color: rgba($dark, 0.8);
+        line-height: 32px;
+        height: 32px;
+        width: 32px;
+        text-align: center;
+        background-color: darken($white, 7%);
+        border-radius: 50%;
+        display: inline-block;
+    }
+}
+
+td.tb-hidden-filter,
+th.tb-hidden-filter {
+    visibility: hidden;
+}
+
+td.sized-column,
+th.sized-column {
+    text-align: center;
+}
+
+#modalMap {
+    .lat-long-group {
+        padding: 0 10px;
+
+        .form-row {
+            margin: 0;
+
+            .form-group {
+                flex: auto;
+                padding-right: 15px;
+                margin: 0;
+            }
+        }
+    }
+}
+
+.element {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+
+    .element-details {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+
+        .element-icon-bg {
+            color: rgb(30, 136, 229);
+            background-color: rgb(187, 222, 251);
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            border-radius: 50%;
+            height: 54px;
+            width: 54px;
+            margin-right: 16px;
+        }
+    }
+}
+
+.element-status {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 2;
+
+    .status {
+        padding-right: 10px;
+    }
+
+    .status-action {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        span {
+            padding-bottom: 5px;
+        }
+    }
+
+}
+
+.custom-control.form-check-inline {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-left: 1.5rem;
+}
+
+.save-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions.lock-actions {
+    vertical-align: middle !important;
+    padding-top: 0px !important;
+
+    .icon-resize {
+        font-size: 19px;
+    }
+}
+
+.input-group-text {
+
+    .mdi-calendar,
+    .mdi-clock {
+        font-size: 14px;
+    }
+}
+
+.btn-filter {
+    text-align: right;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.table .thead-light th {
+    white-space: nowrap;
+}
+
+.btn-add.mobile {
+    display: none;
+}
+
+.w-px-60 {
+    width: 60px;
+}
+
+.label-not-mobile {
+    display: flex !important;
+}
+
+.label-mobile {
+    display: none !important;
+}
+
+.custom-multi-select-button-div {
+    justify-content: space-between;
+    width: 45%;
+}
+
+
+.dropdown-item.flag.notify-item{
+    cursor: pointer;
+}
+
+
+@import "./pages/_automated-email.scss";
+@import "./pages/_user-billing.scss";

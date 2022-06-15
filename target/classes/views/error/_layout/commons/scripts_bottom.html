@@ -1,0 +1,104 @@
+<th:block 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <!-- Libs js -->
+    <script th:src="@{/assets/js/metisMenu.min.js}"></script>
+    <script th:src="@{/assets/js/waves.js}"></script>
+    <script th:src="@{/assets/js/jquery.slimscroll.js}"></script>
+    <script th:src="@{/assets/js/jquery.blockui.min.js}"></script>
+    
+    <!-- Plugins js -->
+    <script th:src="@{/assets/plugins/jquery-mask-plugin/dist/jquery.mask.min.js}"></script>
+    <script th:src="@{/assets/plugins/tooltipster/js/tooltipster.bundle.min.js}"></script>
+    <script th:src="@{/assets/plugins/parsleyjs/parsley.min.js}"></script>
+    <script th:src="@{/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+    <th:block th:with="language=${#locale.getLanguage()},country=${#locale.getCountry()}">
+        <th:block th:switch="${language}">
+            <th:block th:case="'en'">
+                <script th:if="${country != 'US'}" th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}-${country}.min.js|"></script>
+            </th:block>
+            <th:block th:case="'pt'">
+                <script th:src="|@{/assets/plugins/parsleyjs/i18n/}${language}-${#strings.toLowerCase(country)}.js|"></script>
+                <script th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}-${country}.min.js|"></script>
+            </th:block>
+            <th:block th:case="'zh'">
+                <script th:src="|@{/assets/plugins/parsleyjs/i18n/}${language}_${#strings.toLowerCase(country)}.js|"></script>
+                <script th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}-${country}.min.js|"></script>
+            </th:block>
+            <th:block th:case="*">
+                <script th:src="|@{/assets/plugins/parsleyjs/i18n/}${language}.js|"></script>
+                <script th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}.min.js|"></script>
+            </th:block>
+            
+            
+        </th:block>
+    </th:block>
+
+    
+    <!-- App js -->
+    <script th:src="@{/assets/js/jquery.core.js}"></script>
+    <script th:src="@{/assets/js/jquery.app.js}"></script>
+ 
+    <!-- System bottom scripts -->
+    <script th:inline="javascript">
+
+        // Thymeleaf global variables (to use in bottom.js)
+        // -------
+        var utilsI18nPhoneInput = [[@{/assets/plugins/intl-tel-input/build/js/utils.js}]]
+
+        function onSubmit(token, event) {
+
+            if ($('#editForm')[0]) {
+                var formEl = $('#editForm');
+                formEl.parsley().validate();
+                if(!formEl.parsley().isValid()) {
+                    unblock();
+                    grecaptcha.reset();
+                    return false;
+                }
+            }
+            
+            return new Promise(function (resolve, reject) {
+                if (grecaptcha.getResponse() !== '') {
+                    $('#editForm').submit();
+                    return;
+                }
+                unblock();
+                grecaptcha.reset();
+            });
+        }
+
+        function bind(){
+            var divCaptcha = $('body > div:not(.blockUI, .container):has(iframe)').children('div:first-child:not(.grecaptcha-badge)')
+            divCaptcha.click(function(){
+                unblock();
+                divCaptcha.unbind();
+            })
+        }
+
+        $('.lang-select').click(function() {
+            var data = $(this).data();
+            var lang = data.lang
+            if (lang != ''){
+                window.location.replace('?lang=' + lang);
+            }
+        })
+
+        
+        // JS i18n
+        var i18n = {};
+        i18n.block                    = [[#{wait}]];
+
+        //Language
+        var SYSTEM_LANGUAGE = [[${#locale.getLanguage()}]];
+        var SYSTEM_LOCALE = [[${#locale.toLanguageTag()}]];
+        var DATATABLES_LANGUAGE = [[${#strings.capitalize(#locale.getDisplayLanguage('en'))}]];
+        var DATATABLES_COUNTRY = [[${#strings.capitalize(#locale.getDisplayCountry('en'))}]];
+    
+        
+    </script> 
+   
+    <!-- Custom js -->
+    <script th:src="@{/js/bottom.js}"></script>

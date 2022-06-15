@@ -1,0 +1,108 @@
+
+@media (max-width: 480px),
+(max-width: 600px) and (max-height: 800px) {
+
+    .grecaptcha-badge {
+        visibility: hidden !important;
+    }
+
+    .guest-body.enlarged {
+        min-height: 50% !important;
+    }
+
+    .guest-body {
+        background-image: none;
+        background-color: $primary;
+
+        .footer-guest,
+        .footer {
+            // padding-top: 3.7em;
+            bottom: initial;
+            text-align: center !important;
+
+            .system-version {
+                float: none !important;
+                text-align: center !important;
+                display: block;
+            }
+            .flags{
+                float: none !important;
+                .i18n-flags {
+                    height: 25px;
+                    width: 25px;
+                }
+            }
+        }
+
+        .account-box {
+            max-width: initial;
+            display: block;
+
+            .account-content {
+                padding-top: 0;
+            }
+
+            .login-box {
+                .content-box {
+                    form {
+                        width: 100%;
+                        margin: initial;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .accept-invite {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+}
+
+
+
+@media only screen and (max-height: 380px) and (orientation: landscape),
+screen and (max-width: 600px) and (orientation: landscape) {
+    .grecaptcha-badge {
+        visibility: hidden !important;
+    }
+
+    body.enlarged {
+        min-height: 0;
+    }
+
+    .guest-body {
+        .container {
+            max-width: 100% !important;
+        }
+
+        .account-box {
+            max-width: 100%;
+
+            .login-box {
+                .center-box {
+                    img {
+                        height: 60px;
+                    }
+                }
+
+                .content-box {
+                    .login-form-title {
+                        display: none;
+                    }
+
+                    form {
+                        width: 100%;
+                        margin: initial;
+                    }
+                }
+            }
+        }
+
+        .footer-guest,
+        .footer {
+            position: initial;
+        }
+    }
+}
