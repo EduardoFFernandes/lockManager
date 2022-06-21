@@ -60,7 +60,7 @@
                                     <td th:text="${object.serialNumber}"></td>
                                     <td th:text="${object.address}"></td>
                                     <td th:text="${object.lockModel} ? ${object.lockModel.name} : ''"></td>
-                                    <td th:text="${object.client} ? ${object.client.name} : ''"></td>
+                                    <td th:text="${object.client} ? ${object.client.name} : ''" data-placement="top" data-trigger="hover" data-toggle="popover" th:data-content="${object.client.name}" th:title="${object.client.name}"></td>
                                     <td th:text="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
                                     <td class="actions lock-actions pb-0 pt-10">                                      
                                         <a class="action-icon edit" data-toggle="dropdown" href="#" role="button">
@@ -72,9 +72,9 @@
                                                     <a th:href="|@{/admin/lock/edit}/${object.id}|"  class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
                                                         <i class="fas fa-edit font-size-16 tab-width"></i> <span th:text="#{edit}"></span>
                                                     </a>
-                                                    <span>
-                                                        <a href="#" class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit" th:title="#{delete}" th:data-id="${object.id}">
-                                                            <i class="far fa-trash-alt mr-13"></i> <span th:text="#{delete}"></span>
+                                                    <span data-toggle="modal" data-target="#modalDeleteWarning">
+                                                        <a class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit" href="#" th:data-url="@{/admin/lock/delete}" th:data-id="${object.id}">    
+                                                            <i class="far fa-trash-alt font-size-16 tab-width"></i><span th:text="#{delete}"></span>
                                                         </a>
                                                     </span>
                                                 </li>
@@ -88,6 +88,22 @@
                 </div><!-- end card -->
             </div><!-- end col -->
         </div><!-- end row -->
+        
+        <script th:inline="javascript">
+
+            $(function() {
+
+            var columnsDefinitions = [ 
+                { targets : [ 5 ], orderable : false } 
+            ];
+
+            if ([[${!objects?.isEmpty()}]]) {
+                $('#datatable').DataTable(
+                    buildDataTable(columnsDefinitions)
+                );
+            }
+            });
+        </script>
 </div>
 
 </html>

@@ -45,7 +45,6 @@ public class StartupConfig {
             final LockModel object = new LockModel();
 
             object.setName(DEFAULT_MESSAGE_STRING);
-            object.setDescription(DEFAULT_MESSAGE_STRING);
             object.setFirmwareVersion("0.0.0.00");
 
             repository.save(object);

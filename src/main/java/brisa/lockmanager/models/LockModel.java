@@ -12,8 +12,6 @@ public class LockModel extends _BaseModelId {
 
     @Column(name = "name")
     private String name;
-    @Column(name = "description")
-    private String description;
     @Column(name = "firmware_version")
     private String firmwareVersion;
 
@@ -36,13 +34,6 @@ public class LockModel extends _BaseModelId {
         this.name = name;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
-    }
 
 
     public String getFirmwareVersion() {
