@@ -9,5 +9,6 @@ public class LockManagerApplication {
     public static void main(final String[] args) {
         SpringApplication.run(LockManagerApplication.class, args);
     }
+    // Teste
 
 }
