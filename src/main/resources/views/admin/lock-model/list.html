@@ -47,8 +47,6 @@
                                 </tr>
                                 <tr th:if="${!objects?.isEmpty()}" >
                                     <th data-priority="1" th:text="#{name}"></th>
-                                    <th th:text="#{description}"></th>
-                                    <th th:text="#{firmware.version}"></th>
                                     <th th:text="#{menu}" data-priority="2" class="actions">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -56,8 +54,6 @@
                             <tbody>
                                 <tr th:each="object : ${objects}">
                                     <td th:text="${object.name}"></td>
-                                    <td th:text="${object.description}"></td>
-                                    <td th:text="${object.firmwareVersion}"></td>
                                     <td class="actions lock-actions pb-0 pt-10">                                      
                                         <a class="action-icon edit" data-toggle="dropdown" href="#" role="button">
                                             <i class="mdi mdi-menu icon-resize"></i>

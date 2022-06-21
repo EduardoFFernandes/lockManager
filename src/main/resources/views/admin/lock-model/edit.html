@@ -51,20 +51,10 @@
                                     <li class="parsley-required" th:errors="*{name}"></li>
                                 </ul>
                             </div>
-                            <div class="form-group">
-                                <label th:text="#{description}"></label> 
-                                <input type="text"class="form-control" th:field="*{description}" 
-                                    required
-                                    data-parsley-maxlength="255"
-                                />
-                                <ul class="parsley-errors-list filled">
-                                    <li class="parsley-required" th:errors="*{description}"></li>
-                                </ul>
-                            </div>
                             <div class="form-group mb-1 mt-4 text-right">
                                 <div>
                                     <button type="submit" class="btn btn-primary waves-effect waves-light" th:text="#{save}"></button>
-                                    <a class="btn btn-secondary waves-effect ml-1" th:href="@{/admin/lock/special-pin/list}" th:text="#{cancel}"></a>
+                                    <a class="btn btn-secondary waves-effect ml-1" th:href="@{/admin/lock-model/list}" th:text="#{cancel}"></a>
                                 </div>
                             </div>
                             
