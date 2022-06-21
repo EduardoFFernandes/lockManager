@@ -60,8 +60,15 @@
                                     <td th:text="${object.serialNumber}"></td>
                                     <td th:text="${object.address}"></td>
                                     <td th:text="${object.lockModel} ? ${object.lockModel.name} : ''"></td>
-                                    <td th:text="${object.client} ? ${object.client.name} : ''" data-placement="top" data-trigger="hover" data-toggle="popover" th:data-content="${object.client.name}" th:title="${object.client.name}"></td>
-                                    <td th:text="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
+                                <td
+                                    th:text="${object.client} ? ${object.client.name} : ''"
+                                    data-placement="top"
+                                    data-trigger="hover"
+                                    data-toggle="popover"
+                                    data-html="true"
+                                    th:data-content="|<b>Email</b>: ${object.client.email} <br> <b>Telefone</b>: ${object.client.cellphone} <br> <b>Identificador</b>: ${object.client.identifier}|"
+                                    th:title="${object.client.name}"></td>
+                                <td th:text="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
                                     <td class="actions lock-actions pb-0 pt-10">                                      
                                         <a class="action-icon edit" data-toggle="dropdown" href="#" role="button">
                                             <i class="mdi mdi-menu icon-resize"></i>
