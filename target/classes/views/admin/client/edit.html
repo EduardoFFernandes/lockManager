@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/_layout/main_layout}">
+
+<div layout:fragment="content">
+
+	<div class="row">
+		<div class="col-12">
+			<div class="page-title-box">
+
+				<h4 class="page-title float-left" th:if="${object.id == null}"
+					th:text="#{lock.model.add}"></h4>
+				<h4 class="page-title float-left" th:if="${object.id != null}"
+					th:text="#{lock.model.edit}"></h4>
+
+				<ol class="breadcrumb float-right">
+					<li class="breadcrumb-item"><a
+						th:href="@{/admin/dashboard/index}" th:text="#{home}"></a></li>
+					<li class="breadcrumb-item"><a th:href="@{/admin/client/list}"
+						th:text="#{menu.lock.model.list}"></a></li>
+					<li class="breadcrumb-item active" th:if="${object.id == null}"
+						th:text="#{lock.model.add}"></li>
+					<li class="breadcrumb-item active" th:if="${object.id != null}"
+						th:text="#{lock.model.edit}"></li>
+				</ol>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" id="form-edit-special-pin">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="m-t-0 header-title mb-4" th:text="#{fill.form.desc}"></h4>
+
+					<form id="editForm" th:action="@{/admin/client/edit}"
+						th:object="${object}" method="post" data-parsley-validate
+						data-parsley-trigger="focusout">
+
+						<input type="hidden" name="id" th:value="${object.id}" />
+
+						<div class="form-group">
+							<label th:text="#{name}"></label> <input type="text"
+								class="form-control" th:field="*{name}" required
+								data-parsley-maxlength="255" />
+							<ul class="parsley-errors-list filled">
+								<li class="parsley-required" th:errors="*{name}"></li>
+							</ul>
+						</div>
+						<div class="form-group">
+							<label th:text="#{phone.number}"></label>
+							<div>
+								<input type="text" class="form-control phone"
+									th:field="*{cellphone}" id="phone" data-parsley-maxlength="30"
+									data-parsley-trigger="keypress change" data-parsley-phonelength />
+								<ul class="parsley-errors-list filled">
+									<li class="parsley-required" th:errors="*{cellphone}"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="form-group">
+							<label th:text="#{email}"></label>
+							<div>
+								<input type="email" class="form-control" th:field="*{email}"
+									data-parsley-type="email" data-parsley-maxlength="255" />
+								<ul class="parsley-errors-list filled">
+									<li class="parsley-required" th:errors="*{email}"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="form-group">
+							<label th:text="#{description}"></label> <input type="text"
+								class="form-control" th:field="*{identifier}"
+								data-parsley-maxlength="30" />
+							<ul class="parsley-errors-list filled">
+								<li class="parsley-required" th:errors="*{identifier}"></li>
+							</ul>
+						</div>
+						<div class="form-group">
+							<label th:text="#{description}"></label> <input type="text"
+								class="form-control" th:field="*{address}"
+								data-parsley-maxlength="150" />
+							<ul class="parsley-errors-list filled">
+								<li class="parsley-required" th:errors="*{address}"></li>
+							</ul>
+						</div>
+						<!--  <div class="form-group">
+                                <label th:text="#{type}"></label>
+                                <div>
+                                    <select class="form-control select2" th:field="*{country}"
+                                        data-parsley-errors-container="#select2-error" required
+                                    >
+                                        <option value="" th:text="#{select}"></option>
+                                        <option 
+                                            th:each="item : ${T(app.models._BaseModel.CommunicationMode).values()}"
+                                            th:value="${item}" 
+                                            th:text="#{${item}}">
+                                        </option>
+                                    </select>
+                                    <span id="select2-error"></span>
+                                    <ul class="parsley-errors-list filled">
+                                        <li class="parsley-required" th:errors="*{country}"></li>
+                                    </ul>
+                                </div>
+                            </div> -->
+
+						<div class="form-group mb-1 mt-4 text-right">
+							<div>
+								<button type="submit"
+									class="btn btn-primary waves-effect waves-light"
+									th:text="#{save}"></button>
+								<a class="btn btn-secondary waves-effect ml-1"
+									th:href="@{/admin/lock/special-pin/list}" th:text="#{cancel}"></a>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+			<!-- end card -->
+		</div>
+		<!-- end col -->
+	</div>
+
+	<script th:inline="javascript">
+        $(function(){
+            
+            var app = new Vue({
+                el: '#form-edit-special-pin',
+                data: {
+                	
+                    editorForm: null,
+                    pin: null,
+                    pinLenghtDefault: [[${@authService.getConnectedUserInDB().getAccount().getDefaultPinLength()}]],
+                },
+                methods:{
+                	
+                	generatePin(){
+                        this.pin = getRandomPin(this.pinLenghtDefault);
+                    },
+                },
+                created() {
+                	
+                    this.pin = [[${object.pin}]]
+                },
+                mounted(){
+                	
+                	if([[${object.id}]] == null){
+                		this.pin = getRandomPin(this.pinLenghtDefault);
+					}
+                },
+                updated() {
+                	
+                    $(this.$refs.pin).parsley().validate()
+                }
+            })
+        });
+
+        
+    </script>
+
+</div>
+
+</html>

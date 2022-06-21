@@ -24,136 +24,109 @@ import brisa.lockmanager.commons.utils.DateUtil;
 //@SerialNumberUnique(fieldId = "id", fieldSerialNumber = "serialNumber")
 public class Lock extends _BaseModelId {
 
-    private static final long serialVersionUID = 929153996749512858L;
+	private static final long serialVersionUID = 929153996749512858L;
 
-    @Column(name = "serial_number", nullable = false)
-    private String serialNumber;
+	@Column(name = "serial_number", nullable = false)
+	private String serialNumber;
 
-    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
-    @Column(name = "registry_date")
-    private Timestamp registryDate;
+	@Column(name = "address")
+	private String address;
 
-    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
-    @Column(name = "update_date")
-    private Timestamp updateDate;
+	@JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+	@Column(name = "registry_date")
+	private Timestamp registryDate;
 
-    @Column(name = "id_address", updatable = false, insertable = false)
-    private Long idAddress;
+	@JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+	@Column(name = "update_date")
+	private Timestamp updateDate;
 
-    @Column(name = "id_model", updatable = false, insertable = false)
-    private Long idModel;
+	// uni-directional many-to-one association to Address
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_model", nullable = false)
+	private LockModel lockModel;
 
-    @Column(name = "id_client", updatable = false, insertable = false)
-    private Long idClient;
+	// uni-directional many-to-one association to Address
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_client", nullable = false)
+	private Client client;
 
-    @Column(name = "id_warehouse", updatable = false, insertable = false)
-    private Long idWarehouse;
+	// uni-directional many-to-one association to Address
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_warehouse", nullable = false)
+	private Warehouse warehouse;
 
-    //uni-directional many-to-one association to Address
-    @JsonIgnoreProperties({
-            "hibernateLazyInitializer",
-            "handler"
-    })
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_address", nullable = false)
-    private Address address;
+	// ---------------------------------------------------------------------------------------------
+	// Constructors
+	// ---------------------------------------------------------------------------------------------
+	public Lock() {
+		super();
+	}
 
-    //uni-directional many-to-one association to Address
-    @JsonIgnoreProperties({
-            "hibernateLazyInitializer",
-            "handler"
-    })
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_model", nullable = false)
-    private LockModel lockModel;
+	// ---------------------------------------------------------------------------------------------
+	// Transients
+	// ---------------------------------------------------------------------------------------------
 
-    //uni-directional many-to-one association to Address
-    @JsonIgnoreProperties({
-            "hibernateLazyInitializer",
-            "handler"
-    })
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_client", nullable = false)
-    private Client client;
+	// ---------------------------------------------------------------------------------------------
+	// get/set
+	// ---------------------------------------------------------------------------------------------
 
-    //uni-directional many-to-one association to Address
-    @JsonIgnoreProperties({
-            "hibernateLazyInitializer",
-            "handler"
-    })
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_warehouse", nullable = false)
-    private Warehouse warehouse;
+	public String getSerialNumber() {
+		return this.serialNumber;
+	}
 
-    // ---------------------------------------------------------------------------------------------
-    // Constructors
-    // ---------------------------------------------------------------------------------------------
-    public Lock() {
-        super();
-    }
+	public void setSerialNumber(final String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
 
-    // ---------------------------------------------------------------------------------------------
-    // Transients
-    // ---------------------------------------------------------------------------------------------
+	public Timestamp getRegistryDate() {
+		return this.registryDate;
+	}
 
-    // ---------------------------------------------------------------------------------------------
-    // get/set
-    // ---------------------------------------------------------------------------------------------
+	public void setRegistryDate(final Timestamp registryDate) {
+		this.registryDate = registryDate;
+	}
 
-    public String getSerialNumber() {
-        return this.serialNumber;
-    }
+	public Timestamp getUpdateDate() {
+		return this.updateDate;
+	}
 
-    public void setSerialNumber(final String serialNumber) {
-        this.serialNumber = serialNumber;
-    }
+	public void setUpdateDate(final Timestamp updateDate) {
+		this.updateDate = updateDate;
+	}
 
-    public Timestamp getRegistryDate() {
-        return this.registryDate;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public void setRegistryDate(final Timestamp registryDate) {
-        this.registryDate = registryDate;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public Timestamp getUpdateDate() {
-        return this.updateDate;
-    }
+	public LockModel getLockModel() {
+		return this.lockModel;
+	}
 
-    public void setUpdateDate(final Timestamp updateDate) {
-        this.updateDate = updateDate;
-    }
+	public void setLockModel(final LockModel lockModel) {
+		this.lockModel = lockModel;
+	}
 
-    public Address getAddress() {
-        return this.address;
-    }
+	public Client getClient() {
+		return this.client;
+	}
 
-    public void setAddress(final Address address) {
-        this.address = address;
-    }
+	public void setClient(final Client client) {
+		this.client = client;
+	}
 
-    public LockModel getLockModel() {
-        return this.lockModel;
-    }
+	public Warehouse getWarehouse() {
+		return this.warehouse;
+	}
 
-    public void setLockModel(final LockModel lockModel) {
-        this.lockModel = lockModel;
-    }
-
-    public Client getClient() {
-        return this.client;
-    }
-
-    public void setClient(final Client client) {
-        this.client = client;
-    }
-
-    public Warehouse getWarehouse() {
-        return this.warehouse;
-    }
-
-    public void setWarehouse(final Warehouse warehouse) {
-        this.warehouse = warehouse;
-    }
+	public void setWarehouse(final Warehouse warehouse) {
+		this.warehouse = warehouse;
+	}
 
 }

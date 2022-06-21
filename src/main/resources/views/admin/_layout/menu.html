@@ -1,64 +1,41 @@
 
-<header
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    th:fragment="sidebar">
+<header xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	th:fragment="sidebar">
 
-    <!-- Left Sidebar Start -->
-    <div class="left side-menu">
-        <div class="slimscroll-menu" id="remove-scroll">
-            <!--- Sidemenu -->
-            <div id="sidebar-menu">
-                <!-- Left Menu Start -->
-                <ul class="metismenu" id="side-menu">
-                    <li class="menu-title">&nbsp;</li>
+	<!-- Left Sidebar Start -->
+	<div class="left side-menu">
+		<div class="slimscroll-menu" id="remove-scroll">
+			<!--- Sidemenu -->
+			<div id="sidebar-menu">
+				<!-- Left Menu Start -->
+				<ul class="metismenu" id="side-menu">
+					<li class="menu-title">&nbsp;</li>
 
-                    <!-- Access Menu -->
-                    <li>
+					<!-- Access Menu -->
+					<li><a th:href="@{/admin/lock/list}"> <span
+							th:text="#{menu.lock.list}"></span>
+					</a></li>
+					<li><a th:href="@{/admin/warehouse/list}"> <span
+							th:text="#{menu.warehouse.list}"></span>
+					</a></li>
+					<li><a th:href="@{/admin/client/list}"> <span
+							th:text="#{menu.client.list}"></span>
+					</a></li>
+					<li><a th:href="@{/admin/lock-model/list}"> <span
+							th:text="#{menu.lock.model.list}"></span>
+					</a></li>
+				</ul>
 
-                        <a href="#">
-                            <i class="mdi mdi-key-variant font-size-24"></i> <span th:text="INICIO" ></span> <span class="menu-arrow"></span>
-                        </a>
+			</div>
+			<!-- Sidebar -->
+			<div class="clearfix"></div>
 
-                        <ul class="nav-second-level" aria-expanded="false" >
-                            <!-- <li>
-                                <a th:href="@{/admin/home}" >
-                                    <span th:text="'Home'"></span>
-                                </a>
-                            </li> -->
-                            <li>
-                                <a th:href="@{/admin/lock-model/list}" >
-                                    <span th:text="#{menu.lock.model.list}"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a th:href="@{/admin/lock/list}" >
-                                    <span th:text="#{menu.lock.list}"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a th:href="@{/admin/warehouse/list}" >
-                                    <span th:text="#{menu.warehouse.list}"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a th:href="@{/admin/client/list}" >
-                                    <span th:text="#{menu.client.list}"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+		</div>
+		<!-- Sidebar -left -->
 
-            </div>
-            <!-- Sidebar -->
-            <div class="clearfix"></div>
-
-        </div>
-        <!-- Sidebar -left -->
-
-    </div>
-    <!-- Left Sidebar End -->
+	</div>
+	<!-- Left Sidebar End -->
 
 </header>

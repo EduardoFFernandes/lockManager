@@ -13,11 +13,6 @@
         <span class="system-version" th:text="${@environment.getProperty('system.version')}"
             th:if="${fromGuest}">
         </span>
-        <span class="flags" th:if="${fromGuest}">
-            <i class="noti-icon lang-select" th:each="language : ${@languageService.getSystemLanguages()}" th:data-lang="${language.locale}">
-                <img class="i18n-flags" th:src="|@{/assets/images/country-flags/}${language.localeFlag}|">
-            </i>
-        </span>
     </div>
     
 </footer>

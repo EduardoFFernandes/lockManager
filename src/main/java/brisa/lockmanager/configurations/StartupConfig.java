@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import brisa.lockmanager.commons.utils.DateUtil;
-import brisa.lockmanager.models.Address;
 import brisa.lockmanager.models.Client;
 import brisa.lockmanager.models.Lock;
 import brisa.lockmanager.models.LockModel;
@@ -61,21 +60,12 @@ public class StartupConfig {
 
             final Timestamp now = DateUtil.getCurrentTimestamp();
 
-            final Address defaultAddress = new Address();
-            defaultAddress.setAddress("7380 W Sand Lake Rd #500");
-            defaultAddress.setCity("Orlando");
-            defaultAddress.setState("Florida");
-            defaultAddress.setZipCode("32819");
-            defaultAddress.setCountryIso2("US");
-            defaultAddress.setCountryName("United States of America");
-            defaultAddress.setCountryTimeZone("America/New_York");
-
             object.setName(DEFAULT_MESSAGE_STRING);
             object.setCellphone("6198147-3090");
             object.setEmail(DEFAULT_MESSAGE_STRING);
             object.setIdentifier(DEFAULT_MESSAGE_STRING);
             object.setRegistryDate(now);
-            object.setAddress(defaultAddress);
+            object.setAddress(DEFAULT_MESSAGE_STRING);
 
             repository.save(object);
 
@@ -89,17 +79,8 @@ public class StartupConfig {
 
             final Timestamp now = DateUtil.getCurrentTimestamp();
 
-            final Address defaultAddress = new Address();
-            defaultAddress.setAddress("7380 W Sand Lake Rd #500");
-            defaultAddress.setCity("Orlando");
-            defaultAddress.setState("Florida");
-            defaultAddress.setZipCode("32819");
-            defaultAddress.setCountryIso2("US");
-            defaultAddress.setCountryName("United States of America");
-            defaultAddress.setCountryTimeZone("America/New_York");
-
             object.setName(DEFAULT_MESSAGE_STRING);
-            object.setAddress(defaultAddress);
+            object.setAddress(DEFAULT_MESSAGE_STRING);
             object.setRegistryDate(now);
 
             repository.save(object);
@@ -114,19 +95,10 @@ public class StartupConfig {
 
             final Timestamp now = DateUtil.getCurrentTimestamp();
 
-            final Address defaultAddress = new Address();
-            defaultAddress.setAddress("7380 W Sand Lake Rd #500");
-            defaultAddress.setCity("Orlando");
-            defaultAddress.setState("Florida");
-            defaultAddress.setZipCode("32819");
-            defaultAddress.setCountryIso2("US");
-            defaultAddress.setCountryName("United States of America");
-            defaultAddress.setCountryTimeZone("America/New_York");
-
             object.setRegistryDate(now);
             object.setSerialNumber(DEFAULT_SERIAL_NUMBER);
             //            object.setClient(client);
-            object.setAddress(defaultAddress);
+            object.setAddress(DEFAULT_MESSAGE_STRING);
             //            object.setWarehouse(warehouse);
             //            object.setModel(model);
 

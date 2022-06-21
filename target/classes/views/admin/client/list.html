@@ -16,7 +16,7 @@
                                 <h4 class="m-t-0 header-title mb-5" th:text="#{menu.client.list}"></h4>
                             </div>
                             <div class="col-sm-12 col-md-1 text-right pr-4 btn-add">
-                                <a th:href="@{/admin/client/list}" class="tooltip-left" th:title="#{client.add}">
+                                <a th:href="@{/admin/client/edit}" class="tooltip-left" th:title="#{client.add}">
                                     <i class="ion ion-ios-add-circle"></i>
                                 </a>
                             </div>
@@ -67,7 +67,7 @@
                                         <div class="dropdown-menu dropdown-menu-left profile-dropdown">
                                             <ul class="list-inline mb-0">
                                                 <li class="dropdown notification-list">
-                                                    <a href="#" class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
+                                                    <a th:href="|@{/admin/client/edit}/${object.id}|"  class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
                                                         <i class="fas fa-edit font-size-16 tab-width"></i> <span th:text="#{edit}"></span>
                                                     </a>
                                                     <span>

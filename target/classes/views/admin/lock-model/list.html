@@ -16,7 +16,7 @@
                                 <h4 class="m-t-0 header-title mb-5" th:text="#{menu.lock.model.list}"></h4>
                             </div>
                             <div class="col-sm-12 col-md-1 text-right pr-4 btn-add">
-                                <a th:href="@{/admin/lock-model/list}" class="tooltip-left" th:title="#{lock.model.add}">
+                                <a th:href="@{/admin/lock-model/edit}" class="tooltip-left" th:title="#{lock.model.add}">
                                     <i class="ion ion-ios-add-circle"></i>
                                 </a>
                             </div>
@@ -48,9 +48,7 @@
                                 <tr th:if="${!objects?.isEmpty()}" >
                                     <th data-priority="1" th:text="#{name}"></th>
                                     <th th:text="#{description}"></th>
-                                    <th class="th-text-bool" th:text="#{type}"></th>
-                                    <th th:text="#{color}"></th>
-                                    <th class="th-text-bool" th:text="#{status}"></th>
+                                    <th th:text="#{firmware.version}"></th>
                                     <th th:text="#{menu}" data-priority="2" class="actions">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -59,9 +57,7 @@
                                 <tr th:each="object : ${objects}">
                                     <td th:text="${object.name}"></td>
                                     <td th:text="${object.description}"></td>
-                                    <td th:text="${object.type}"></td>
-                                    <td th:text="${object.color}"></td>
-                                    <td th:text="${object.status}"></td>
+                                    <td th:text="${object.firmwareVersion}"></td>
                                     <td class="actions lock-actions pb-0 pt-10">                                      
                                         <a class="action-icon edit" data-toggle="dropdown" href="#" role="button">
                                             <i class="mdi mdi-menu icon-resize"></i>
@@ -69,7 +65,7 @@
                                         <div class="dropdown-menu dropdown-menu-left profile-dropdown">
                                             <ul class="list-inline mb-0">
                                                 <li class="dropdown notification-list">
-                                                    <a href="#" class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
+                                                    <a th:href="|@{/admin/lock-model/edit}/${object.id}|"  class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
                                                         <i class="fas fa-edit font-size-16 tab-width"></i> <span th:text="#{edit}"></span>
                                                     </a>
                                                     <span>

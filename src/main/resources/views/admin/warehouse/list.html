@@ -16,7 +16,7 @@
                                 <h4 class="m-t-0 header-title mb-5" th:text="#{menu.warehouse.list}"></h4>
                             </div>
                             <div class="col-sm-12 col-md-1 text-right pr-4 btn-add">
-                                <a th:href="@{/admin/lock-model/list}" class="tooltip-left" th:title="#{warehouse.add}">
+                                <a th:href="@{/admin/warehouse/edit}" class="tooltip-left" th:title="#{warehouse.add}">
                                     <i class="ion ion-ios-add-circle"></i>
                                 </a>
                             </div>
@@ -57,7 +57,7 @@
                                 <tr th:each="object : ${objects}">
                                     <td th:text="${object.name}"></td>
                                     <td th:text="${object.registryDate}"></td>
-                                    <td th:text="${object.address} ? ${object.address.address} : ''"></td>
+                                    <td th:text="${object.address}"></td>
                                     <td class="actions lock-actions pb-0 pt-10">                                      
                                         <a class="action-icon edit" data-toggle="dropdown" href="#" role="button">
                                             <i class="mdi mdi-menu icon-resize"></i>
@@ -65,7 +65,7 @@
                                         <div class="dropdown-menu dropdown-menu-left profile-dropdown">
                                             <ul class="list-inline mb-0">
                                                 <li class="dropdown notification-list">
-                                                    <a href="#" class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
+                                                    <<a th:href="|@{/admin/warehouse/edit}/${object.id}|"  class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
                                                         <i class="fas fa-edit font-size-16 tab-width"></i> <span th:text="#{edit}"></span>
                                                     </a>
                                                     <span>
