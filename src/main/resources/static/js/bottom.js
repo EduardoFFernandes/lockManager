@@ -350,7 +350,7 @@ function formatStartEndDate(startValue, endValue) {
         && $(startTime).val() !== ''
         && $(endTime).val() !== '') {
 
-        if($(startTime).val().includes('AM')
+          if($(startTime).val().includes('AM')
             || $(startTime).val().includes('PM')
             || $(endTime).val().includes('AM')
             || $(endTime).val().includes('PM')){
@@ -757,6 +757,7 @@ function initCheckAssociations(){
         $('.checkAssociations').click(function() {
             var id = $(this).children("a").data("id");
             var url = urlCheckAssociations + "/" + id;
+            debugger
             modalDeleteWarning = $($(this).attr("data-target"))
             call(GET, url, handleCheckAssociationsResponse);
         });

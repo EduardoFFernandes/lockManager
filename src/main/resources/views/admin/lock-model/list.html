@@ -64,8 +64,8 @@
                                                     <a th:href="|@{/admin/lock-model/edit}/${object.id}|"  class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
                                                         <i class="fas fa-edit font-size-16 tab-width"></i> <span th:text="#{edit}"></span>
                                                     </a>
-                                                    <span>
-                                                        <a href="#" class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit" th:title="#{delete}" th:data-id="${object.id}">
+                                                    <span class="checkAssociations" data-toggle="modal" data-target="#modalDeleteWarning">
+                                                        <a class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit" href="#" th:title="#{delete}" th:data-url="@{/admin/lock-model/delete}" th:data-id="${object.id}">
                                                             <i class="far fa-trash-alt mr-13"></i> <span th:text="#{delete}"></span>
                                                         </a>
                                                     </span>
