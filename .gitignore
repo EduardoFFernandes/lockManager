@@ -1,3 +1,15 @@
 /target/
+/tmp/
+/eclipse/
+/.settings/
+/.classpath
+/.project
+/logs
 *.DS_Store
 **/META-INF/
+var
+/var/
+/var/*
+.vscode
+.vscode/*
+docker-compose.yml
