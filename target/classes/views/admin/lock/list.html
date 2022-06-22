@@ -75,7 +75,10 @@
                                     data-trigger="hover"
                                     th:data-toggle="${object.client} ? 'popover' : ''"
                                     data-html="true"
-                                    th:data-content="${object.client} ? |<b>Email</b>: ${object.client.email} <br> <b>Telefone</b>: ${object.client.cellphone} <br> <b>Identificador</b>: ${object.client.identifier}| : ''"
+                                    th:data-content="${object.client} ? |
+                                    <b>#{email}</b>: ${object.client.email} <br> 
+                                    <b>#{cellphone}</b>: ${object.client.cellphone} <br> 
+                                    <b>#{identifier}</b>: ${object.client.identifier}| : ''"
                                     th:title="${object.client} ? ${object.client.name} : ''"></td>
                                 <td
                                     th:text="${object.warehouse} ? ${object.warehouse.name} : ''"
@@ -83,7 +86,7 @@
                                     data-trigger="hover"
                                     th:data-toggle="${object.warehouse} ? 'popover' : ''"
                                     data-html="true"
-                                    th:data-content="${'teste'}"
+                                    th:data-content="${object.warehouse} ? |<b>#{address}</b>: ${object.warehouse.address} <br>| : '' "
                                     th:title="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
 <!--                                     th:data-content="getWarehousePopOver(${object.warehouse})" -->
                                 <td
