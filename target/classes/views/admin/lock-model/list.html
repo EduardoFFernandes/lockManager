@@ -8,6 +8,21 @@
 
     <div class="row">
         <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title float-left" th:text="#{menu.lock.model.list}"></h4>
+
+                <ol class="breadcrumb float-right">
+                    <li class="breadcrumb-item"><a th:href="@{#}" th:text="#{home}"></a></li>
+                    <li class="breadcrumb-item active" th:text="#{menu.lock.model.list}"></li>
+                </ol>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
             <div class="card mt-4">
                 <div class="card-body table-responsive">
 
@@ -80,16 +95,18 @@
                                                     class="fas fa-edit font-size-16 tab-width"></i>
                                                     <span
                                                     th:text="#{edit}"></span>
-                                            </a> <span> <a href="#"
-                                                    class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
-                                                    th:title="#{delete}"
-                                                    th:data-id="${object.id}">
-                                                        <i
-                                                        class="far fa-trash-alt mr-13"></i>
-                                                        <span
-                                                        th:text="#{delete}"></span>
-                                                </a>
-                                            </span>
+                                            </a> <span 
+                                                data-toggle="modal"
+                                                data-target="#modalDeleteWarning"> 
+                                                    <a href="#"
+                                                       class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
+                                                       th:title="#{delete}"
+                                                       th:data-url="@{/admin/lock-model/delete}"
+                                                       th:data-id="${object.id}">
+                                                       <i class="far fa-trash-alt font-size-16 tab-width"></i>
+                                                       <span th:text="#{delete}"></span>
+                                                    </a>
+                                                </span>
                                             </li>
                                         </ul>
                                     </div>
@@ -107,8 +124,6 @@
     <!-- end row -->
 
     <script th:inline="javascript">
-            var urlCheckAssociations = [[@{${T(app.Routes).API_EXISTS_LOCK_ASSOCIATIONS}}]]; // used in bottom.js
-
             $(function() {
 
             var columnsDefinitions = [ 

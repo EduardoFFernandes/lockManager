@@ -8,6 +8,21 @@
 
     <div class="row">
         <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title float-left" th:text="#{menu.client.list}"></h4>
+
+                <ol class="breadcrumb float-right">
+                    <li class="breadcrumb-item"><a th:href="@{#}" th:text="#{home}"></a></li>
+                    <li class="breadcrumb-item active" th:text="#{menu.client.list}"></li>
+                </ol>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
             <div class="card mt-4">
                 <div class="card-body table-responsive">
 
@@ -86,13 +101,16 @@
                                                     class="fas fa-edit font-size-16 tab-width"></i>
                                                     <span
                                                     th:text="#{edit}"></span>
-                                            </a> <span> <a href="#"
+                                            </a> <span
+                                                data-toggle="modal"
+                                                data-target="#modalDeleteWarning">
+                                                    <a
                                                     class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
-                                                    th:title="#{delete}"
+                                                    href="#"
+                                                    th:data-url="@{/admin/client/delete}"
                                                     th:data-id="${object.id}">
                                                         <i
-                                                        class="far fa-trash-alt mr-13"></i>
-                                                        <span
+                                                        class="far fa-trash-alt font-size-16 tab-width"></i><span
                                                         th:text="#{delete}"></span>
                                                 </a>
                                             </span>

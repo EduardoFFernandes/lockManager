@@ -8,6 +8,21 @@
 
     <div class="row">
         <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title float-left" th:text="#{menu.lock.list}"></h4>
+
+                <ol class="breadcrumb float-right">
+                    <li class="breadcrumb-item"><a th:href="@{#}" th:text="#{home}"></a></li>
+                    <li class="breadcrumb-item active" th:text="#{menu.lock.list}"></li>
+                </ol>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
             <div class="card mt-4">
                 <div class="card-body table-responsive">
 
@@ -109,7 +124,6 @@
                                                     <span
                                                     th:text="#{edit}"></span>
                                             </a> <span
-                                                class="checkAssociations"
                                                 data-toggle="modal"
                                                 data-target="#modalDeleteWarning">
                                                     <a
