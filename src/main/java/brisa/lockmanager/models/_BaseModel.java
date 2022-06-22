@@ -50,4 +50,12 @@ public class _BaseModel implements Serializable {
             return this.templateName;
         }
     }
+
+    public enum ItemStatus {
+
+        INSTALLED,
+        OFF,
+        DEFECTIVE
+
+    }
 }
