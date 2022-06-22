@@ -42,21 +42,30 @@
 
 
 						<input type="hidden" name="id" th:value="${object.id}" />
-
-						<div class="form-group">
-							<label th:text="#{serial.number}"></label>
-							<div>
-								<input th:if="${object.id == null}" type="text"
-									class="form-control" th:field="*{serialNumber}"
-									data-parsley-maxlength="255" required /> <input
-									th:if="${object.id != null}" type="text" class="form-control"
-									th:field="*{serialNumber}" readonly
-									data-parsley-maxlength="255" required />
-								<ul class="parsley-errors-list filled">
-									<li class="parsley-required" th:errors="*{serialNumber}"></li>
-								</ul>
-							</div>
-						</div>
+                        <div class="row">
+    						<div class="form-group col-md-4">
+    							<label th:text="#{serial.number}"></label>
+    							<div>
+    								<input th:if="${object.id == null}" type="text"
+    									class="form-control" th:field="*{serialNumber}"
+    									data-parsley-maxlength="255" required /> <input
+    									th:if="${object.id != null}" type="text" class="form-control"
+    									th:field="*{serialNumber}" readonly
+    									data-parsley-maxlength="255" required />
+    								<ul class="parsley-errors-list filled">
+    									<li class="parsley-required" th:errors="*{serialNumber}"></li>
+    								</ul>
+    							</div>
+    						</div>
+                            <div class="form-group col-md-4">
+                                <label th:text="#{firmware.version}"></label> <input type="text"
+                                    class="form-control" th:field="*{firmwareVersion}"
+                                    data-parsley-maxlength="150" />
+                                <ul class="parsley-errors-list filled">
+                                    <li class="parsley-required" th:errors="*{firmwareVersion}"></li>
+                                </ul>
+                            </div>
+                        </div>
 
 						<div class="form-group">
 							<label th:text="#{address}"></label> <input type="text"

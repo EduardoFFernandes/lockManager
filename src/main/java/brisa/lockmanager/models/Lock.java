@@ -31,6 +31,9 @@ public class Lock extends _BaseModelId {
 
 	@Column(name = "address")
 	private String address;
+	
+	@Column(name = "firmware_version")
+    private String firmwareVersion;
 
 	@JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
 	@Column(name = "registry_date")
@@ -127,6 +130,14 @@ public class Lock extends _BaseModelId {
 
 	public void setWarehouse(final Warehouse warehouse) {
 		this.warehouse = warehouse;
-	}
+    }
+
+    public String getFirmwareVersion() {
+        return this.firmwareVersion;
+    }
+
+    public void setFirmwareVersion(String firmwareVersion) {
+        this.firmwareVersion = firmwareVersion;
+    }
 
 }

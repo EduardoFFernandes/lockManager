@@ -70,6 +70,7 @@
                                 <th data-priority="1"
                                     th:text="#{serial.number}"></th>
                                 <th th:text="#{address}"></th>
+                                <th th:text="#{firmware.version}"></th>
                                 <th th:text="#{model}"></th>
                                 <th th:text="#{client}"></th>
                                 <th th:text="#{warehouse}"></th>
@@ -82,6 +83,7 @@
                             <tr th:each="object : ${objects}">
                                 <td th:text="${object.serialNumber}"></td>
                                 <td th:text="${object.address}"></td>
+                                <td th:text="${object.firmwareVersion}"></td>
                                 <td
                                     th:text="${object.lockModel} ? ${object.lockModel.name} : ''"></td>
                                 <td

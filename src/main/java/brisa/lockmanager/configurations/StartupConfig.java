@@ -45,7 +45,7 @@ public class StartupConfig {
             final LockModel object = new LockModel();
 
             object.setName(DEFAULT_MESSAGE_STRING);
-            object.setFirmwareVersion("0.0.0.00");
+            
 
             repository.save(object);
 
@@ -81,7 +81,7 @@ public class StartupConfig {
             object.setName(DEFAULT_MESSAGE_STRING);
             object.setAddress(DEFAULT_MESSAGE_STRING);
             object.setRegistryDate(now);
-
+            object.setUpdateDate(now);
             repository.save(object);
 
         }
@@ -96,6 +96,7 @@ public class StartupConfig {
 
             object.setRegistryDate(now);
             object.setSerialNumber(DEFAULT_SERIAL_NUMBER);
+            object.setFirmwareVersion("0.0.0.00");
             //            object.setClient(client);
             object.setAddress(DEFAULT_MESSAGE_STRING);
             //            object.setWarehouse(warehouse);
