@@ -36,6 +36,13 @@ public interface Routes {
     static final String ADMIN_CLIENT_EDIT = ADMIN + "/client/edit";
     static final String ADMIN_CLIENT_DELETE = ADMIN + "/client/delete";
 
+    // Purchase Routes
+    // -------------
+
+    static final String ADMIN_PURCHASE_LIST = ADMIN + "/purchase/list";
+    static final String ADMIN_PURCHASE_EDIT = ADMIN + "/purchase/edit";
+    static final String ADMIN_PURCHASE_DELETE = ADMIN + "/purchase/delete";
+
     // REST Routes
     // -----------
     static final String API = "/api";

@@ -1,0 +1,9 @@
+CREATE ROLE dblockmanager WITH
+  LOGIN
+  NOSUPERUSER
+  INHERIT
+  CREATEDB
+  NOCREATEROLE
+  NOREPLICATION;
+  
+ALTER USER dblockmanager WITH PASSWORD 'dblockmanager';
