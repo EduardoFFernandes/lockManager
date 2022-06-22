@@ -61,30 +61,10 @@
                                     <li class="parsley-required" th:errors="*{description}"></li>
                                 </ul>
                             </div>
-                           <!--  <div class="form-group">
-                                <label th:text="#{type}"></label>
-                                <div>
-                                    <select class="form-control select2" th:field="*{country}"
-                                        data-parsley-errors-container="#select2-error" required
-                                    >
-                                        <option value="" th:text="#{select}"></option>
-                                        <option 
-                                            th:each="item : ${T(app.models._BaseModel.CommunicationMode).values()}"
-                                            th:value="${item}" 
-                                            th:text="#{${item}}">
-                                        </option>
-                                    </select>
-                                    <span id="select2-error"></span>
-                                    <ul class="parsley-errors-list filled">
-                                        <li class="parsley-required" th:errors="*{country}"></li>
-                                    </ul>
-                                </div>
-                            </div> -->
-                            
                             <div class="form-group mb-1 mt-4 text-right">
                                 <div>
                                     <button type="submit" class="btn btn-primary waves-effect waves-light" th:text="#{save}"></button>
-                                    <a class="btn btn-secondary waves-effect ml-1" th:href="@{/admin/lock-model/list}" th:text="#{cancel}"></a>
+                                    <a class="btn btn-secondary waves-effect ml-1" th:href="@{/admin/warewouse/list}" th:text="#{cancel}"></a>
                                 </div>
                             </div>
                             

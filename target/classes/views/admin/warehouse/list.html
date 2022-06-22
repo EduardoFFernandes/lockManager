@@ -9,11 +9,14 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title float-left" th:text="#{menu.warehouse.list}"></h4>
+                <h4 class="page-title float-left"
+                    th:text="#{menu.warehouse.list}"></h4>
 
                 <ol class="breadcrumb float-right">
-                    <li class="breadcrumb-item"><a th:href=@{#} th:text="#{home}"></a></li>
-                    <li class="breadcrumb-item active" th:text="#{menu.warehouse.list}"></li>
+                    <li class="breadcrumb-item"><a th:href=@{#}
+                        th:text="#{home}"></a></li>
+                    <li class="breadcrumb-item active"
+                        th:text="#{menu.warehouse.list}"></li>
                 </ol>
 
                 <div class="clearfix"></div>
@@ -96,20 +99,21 @@
                                                 <a
                                                 th:href="|@{/admin/warehouse/edit}/${object.id}|"
                                                 class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
-                                                    <i
-                                                    class="fas fa-edit font-size-16 tab-width"></i>
-                                                    <span
-                                                    th:text="#{edit}"></span>
-                                            </a> <span> <a href="#"
-                                                    class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
-                                                    th:title="#{delete}"
-                                                    th:data-id="${object.id}">
-                                                        <i
-                                                        class="far fa-trash-alt mr-13"></i>
-                                                        <span
-                                                        th:text="#{delete}"></span>
-                                                </a>
-                                            </span>
+                                                    <i class="fas fa-edit font-size-16 tab-width"></i>
+                                                    <span th:text="#{edit}"></span>
+                                                </a> 
+                                                <span 
+                                                data-toggle="modal"
+                                                data-target="#modalDeleteWarning"> 
+                                                    <a href="#"
+                                                       class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
+                                                       th:title="#{delete}"
+                                                       th:data-url="@{/admin/warehouse/delete}"
+                                                       th:data-id="${object.id}">
+                                                       <i class="far fa-trash-alt font-size-16 tab-width"></i>
+                                                       <span th:text="#{delete}"></span>
+                                                    </a>
+                                                </span>
                                             </li>
                                         </ul>
                                     </div>
