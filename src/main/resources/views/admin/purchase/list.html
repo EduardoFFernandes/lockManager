@@ -10,13 +10,13 @@
         <div class="col-12">
             <div class="page-title-box">
                 <h4 class="page-title float-left"
-                    th:text="#{menu.warehouse.list}"></h4>
+                    th:text="#{menu.lock.list}"></h4>
 
                 <ol class="breadcrumb float-right">
-                    <li class="breadcrumb-item"><a th:href=@{#}
+                    <li class="breadcrumb-item"><a th:href="@{#}"
                         th:text="#{home}"></a></li>
                     <li class="breadcrumb-item active"
-                        th:text="#{menu.warehouse.list}"></li>
+                        th:text="#{menu.lock.list}"></li>
                 </ol>
 
                 <div class="clearfix"></div>
@@ -32,13 +32,13 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-11">
                             <h4 class="m-t-0 header-title mb-5"
-                                th:text="#{menu.warehouse.list}"></h4>
+                                th:text="#{menu.purchase.list.desc}"></h4>
                         </div>
                         <div
                             class="col-sm-12 col-md-1 text-right pr-4 btn-add">
-                            <a th:href="@{/admin/warehouse/edit}"
+                            <a th:href="@{/admin/lock/edit}"
                                 class="tooltip-left"
-                                th:title="#{warehouse.add}"> <i
+                                th:title="#{lock.add}"> <i
                                 class="ion ion-ios-add-circle"></i>
                             </a>
                         </div>
@@ -71,9 +71,11 @@
                             </tr>
                             <tr th:if="${!objects?.isEmpty()}">
                                 <th data-priority="1"
-                                    th:text="#{registry.date}"></th>
-                                <th th:text="#{name}"></th>
-                                <th th:text="#{address}"></th>
+                                    th:text="#{purchase.date}"></th>
+                                <th th:text="#{client}"></th>
+                                <th th:text="#{due.date}"></th>
+                                <th th:text="#{client}"></th>
+                                <th th:text="#{warehouse}"></th>
                                 <th th:text="#{menu}" data-priority="2"
                                     class="actions">&nbsp;</th>
                             </tr>
@@ -81,9 +83,19 @@
 
                         <tbody>
                             <tr th:each="object : ${objects}">
-                                <td th:text="${object.registryDate}"></td>
-                                <td th:text="${object.name}"></td>
-                                <td th:text="${object.address}"></td>
+                                <td th:text="${object.purchaseDate}"></td>
+                                <td
+                                    th:text="${object.client} ? ${object.client.name} : ''"
+                                    data-placement="top"
+                                    data-trigger="hover"
+                                    th:data-toggle="${object.client} ? 'popover' : ''"
+                                    data-html="true"
+                                    th:data-content="${object.client} ? |
+                                    <b>#{email}</b>: ${object.client.email} <br> 
+                                    <b>#{cellphone}</b>: ${object.client.cellphone} <br> 
+                                    <b>#{identifier}</b>: ${object.client.identifier}| : ''"
+                                    th:title="${object.client} ? ${object.client.name} : ''"></td>
+                                <td th:text="${object.dueDate}"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
                                     <a class="action-icon edit"
@@ -97,23 +109,24 @@
                                             <li
                                                 class="dropdown notification-list">
                                                 <a
-                                                th:href="|@{/admin/warehouse/edit}/${object.id}|"
+                                                th:href="|@{/admin/lock/edit}/${object.id}|"
                                                 class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
-                                                    <i class="fas fa-edit font-size-16 tab-width"></i>
-                                                    <span th:text="#{edit}"></span>
-                                                </a> 
-                                                <span 
-                                                data-toggle="modal"
-                                                data-target="#modalDeleteWarning"> 
-                                                    <a href="#"
-                                                       class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
-                                                       th:title="#{delete}"
-                                                       th:data-url="@{/admin/warehouse/delete}"
-                                                       th:data-id="${object.id}">
-                                                       <i class="far fa-trash-alt font-size-16 tab-width"></i>
-                                                       <span th:text="#{delete}"></span>
-                                                    </a>
-                                                </span>
+                                                    <i
+                                                    class="fas fa-edit font-size-16 tab-width"></i>
+                                                    <span
+                                                    th:text="#{edit}"></span>
+                                            </a> <span data-toggle="modal"
+                                                data-target="#modalDeleteWarning">
+                                                    <a
+                                                    class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
+                                                    href="#"
+                                                    th:data-url="@{/admin/lock/delete}"
+                                                    th:data-id="${object.id}">
+                                                        <i
+                                                        class="far fa-trash-alt font-size-16 tab-width"></i><span
+                                                        th:text="#{delete}"></span>
+                                                </a>
+                                            </span>
                                             </li>
                                         </ul>
                                     </div>
@@ -129,12 +142,12 @@
         <!-- end col -->
     </div>
     <!-- end row -->
-    <script th:inline="javascript">
 
-            $(function() {
+    <script th:inline="javascript">
+        $(function() {
 
             var columnsDefinitions = [ 
-                { targets : [ 3 ], orderable : false } 
+                { targets : [ 5 ], orderable : false } 
             ];
 
             if ([[${!objects?.isEmpty()}]]) {
@@ -142,8 +155,12 @@
                     buildDataTable(columnsDefinitions)
                 );
             }
+            
+            $('#modalDeleteWarning').on('hidden.bs.modal', function () {
+                $('#modalDeleteDesc').html([[#{message.warning.delete.desc}]]);
             });
-        </script>
+        });
+    </script>
 </div>
 
 </html>

@@ -16,7 +16,6 @@ CREATE TABLE lockmanager.tb_lock (
     id_model BIGINT,
     id_warehouse BIGINT,
     acquired_date TIMESTAMP,
-    address CHARACTER VARYING(150),
     CONSTRAINT pk_tb_lock PRIMARY KEY (id)
 
 );

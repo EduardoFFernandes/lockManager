@@ -3,21 +3,20 @@ package brisa.lockmanager.models;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import brisa.lockmanager.commons.utils.DateUtil;
 
 @Entity
-@Table(name = "tb_lock_model")
+@Table(name = "tb_item")
 public class Item extends _BaseModelId {
 
     private static final long serialVersionUID = 2872707560912382028L;
@@ -30,18 +29,16 @@ public class Item extends _BaseModelId {
     @Column(name = "update_date")
     private Timestamp updateDate;
 
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_purchase")
     private Purchase purchase;
 
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_lock")
     private Lock lock;
 
     @Column(length = 50)
-    private Integer status;
+    private ItemStatus status;
 
     private BigDecimal price;
 
@@ -71,10 +68,6 @@ public class Item extends _BaseModelId {
         return purchase;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -95,8 +88,12 @@ public class Item extends _BaseModelId {
         this.purchase = purchase;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(ItemStatus status) {
         this.status = status;
+    }
+
+    public ItemStatus getStatus() {
+        return status;
     }
 
     public Lock getLock() {

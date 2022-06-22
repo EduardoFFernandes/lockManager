@@ -2,7 +2,6 @@ package brisa.lockmanager.models;
 
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,12 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import brisa.lockmanager.commons.utils.DateUtil;
 
 @Entity
-@Table(name = "tb_lock_model")
+@Table(name = "tb_purchase")
 public class Purchase extends _BaseModelId {
 
     private static final long serialVersionUID = 8339307493249944086L;
@@ -29,8 +27,7 @@ public class Purchase extends _BaseModelId {
     @Column(name = "update_date")
     private Timestamp updateDate;
 
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_client", nullable = false)
     private Client client;
 

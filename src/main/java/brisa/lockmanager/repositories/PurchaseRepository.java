@@ -9,6 +9,8 @@ import brisa.lockmanager.models.Purchase;
 @Repository
 public interface PurchaseRepository extends BaseRepository<Purchase, Long> {
 
+    Purchase findFirstByOrderByIdAsc();
+
     @Override
     List<Purchase> findAll();
 
