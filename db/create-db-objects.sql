@@ -46,7 +46,7 @@ CREATE TABLE lockmanager.tb_client (
 CREATE TABLE lockmanager.tb_warehouse (
     id BIGINT DEFAULT nextval('tb_warehouse_id_seq') NOT NULL,
     registry_date TIMESTAMP DEFAULT now()  NOT NULL,
-    update_date TIMESTAMP DEFAULT now()  NOT NULL,
+    update_date TIMESTAMP,
     name CHARACTER VARYING(255) NOT NULL,
     address CHARACTER VARYING(150) NOT NULL,
     CONSTRAINT pk_tb_warehouse PRIMARY KEY (id)
