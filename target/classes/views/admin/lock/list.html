@@ -6,22 +6,26 @@
 
 <div layout:fragment="content">
 
-<div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body table-responsive">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-4">
+                <div class="card-body table-responsive">
 
-                        <div class="row">
-                            <div class="col-sm-12 col-md-11">
-                                <h4 class="m-t-0 header-title mb-5" th:text="#{menu.lock.list}"></h4>
-                            </div>
-                            <div class="col-sm-12 col-md-1 text-right pr-4 btn-add">
-                                <a th:href="@{/admin/lock/edit}" class="tooltip-left" th:title="#{lock.add}">
-                                    <i class="ion ion-ios-add-circle"></i>
-                                </a>
-                            </div>
-                            
-                           <!--  <form
+                    <div class="row">
+                        <div class="col-sm-12 col-md-11">
+                            <h4 class="m-t-0 header-title mb-5"
+                                th:text="#{menu.lock.list}"></h4>
+                        </div>
+                        <div
+                            class="col-sm-12 col-md-1 text-right pr-4 btn-add">
+                            <a th:href="@{/admin/lock/edit}"
+                                class="tooltip-left"
+                                th:title="#{lock.add}"> <i
+                                class="ion ion-ios-add-circle"></i>
+                            </a>
+                        </div>
+
+                        <!--  <form
                                  id="editForm"
                                  th:action="@{/admin/lock/list}"
                                  method="get"
@@ -36,69 +40,104 @@
                                     </div>
                                 </div>
                             </form> -->
-                            
-                        </div>
 
-                        <table id="datatable" class="table table-hover table-bordered">
+                    </div>
 
-                            <thead class="thead-light ">
-                                <tr th:if="${objects == null || objects?.isEmpty()}">
-                                    <th th:text="#{no.records.found}"></th>
-                                </tr>
-                                <tr th:if="${!objects?.isEmpty()}" >
-                                    <th data-priority="1" th:text="#{serial.number}"></th>
-                                    <th th:text="#{address}"></th>
-                                    <th th:text="#{model}"></th>
-                                    <th th:text="#{client}"></th>
-                                    <th th:text="#{warehouse}"></th>
-                                    <th th:text="#{menu}" data-priority="2" class="actions">&nbsp;</th>
-                                </tr>
-                            </thead>
-                            
-                            <tbody>
-                                <tr th:each="object : ${objects}">
-                                    <td th:text="${object.serialNumber}"></td>
-                                    <td th:text="${object.address}"></td>
-                                    <td th:text="${object.lockModel} ? ${object.lockModel.name} : ''"></td>
+                    <table id="datatable"
+                        class="table table-hover table-bordered">
+
+                        <thead class="thead-light ">
+                            <tr
+                                th:if="${objects == null || objects?.isEmpty()}">
+                                <th th:text="#{no.records.found}"></th>
+                            </tr>
+                            <tr th:if="${!objects?.isEmpty()}">
+                                <th data-priority="1"
+                                    th:text="#{serial.number}"></th>
+                                <th th:text="#{address}"></th>
+                                <th th:text="#{model}"></th>
+                                <th th:text="#{client}"></th>
+                                <th th:text="#{warehouse}"></th>
+                                <th th:text="#{menu}" data-priority="2"
+                                    class="actions">&nbsp;</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="object : ${objects}">
+                                <td th:text="${object.serialNumber}"></td>
+                                <td th:text="${object.address}"></td>
+                                <td
+                                    th:text="${object.lockModel} ? ${object.lockModel.name} : ''"></td>
                                 <td
                                     th:text="${object.client} ? ${object.client.name} : ''"
                                     data-placement="top"
                                     data-trigger="hover"
-                                    data-toggle="popover"
+                                    th:data-toggle="${object.client} ? 'popover' : ''"
                                     data-html="true"
-                                    th:data-content="|<b>Email</b>: ${object.client.email} <br> <b>Telefone</b>: ${object.client.cellphone} <br> <b>Identificador</b>: ${object.client.identifier}|"
-                                    th:title="${object.client.name}"></td>
-                                <td th:text="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
-                                    <td class="actions lock-actions pb-0 pt-10">                                      
-                                        <a class="action-icon edit" data-toggle="dropdown" href="#" role="button">
-                                            <i class="mdi mdi-menu icon-resize"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-left profile-dropdown">
-                                            <ul class="list-inline mb-0">
-                                                <li class="dropdown notification-list">
-                                                    <a th:href="|@{/admin/lock/edit}/${object.id}|"  class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
-                                                        <i class="fas fa-edit font-size-16 tab-width"></i> <span th:text="#{edit}"></span>
-                                                    </a>
-                                                    <span data-toggle="modal" data-target="#modalDeleteWarning">
-                                                        <a class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit" href="#" th:data-url="@{/admin/lock/delete}" th:data-id="${object.id}">    
-                                                            <i class="far fa-trash-alt font-size-16 tab-width"></i><span th:text="#{delete}"></span>
-                                                        </a>
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div><!-- end card-body -->
-                </div><!-- end card -->
-            </div><!-- end col -->
-        </div><!-- end row -->
-        
-        <script th:inline="javascript">
+                                    th:data-content="${object.client} ? |<b>Email</b>: ${object.client.email} <br> <b>Telefone</b>: ${object.client.cellphone} <br> <b>Identificador</b>: ${object.client.identifier}| : ''"
+                                    th:title="${object.client} ? ${object.client.name} : ''"></td>
+                                <td
+                                    th:text="${object.warehouse} ? ${object.warehouse.name} : ''"
+                                    data-placement="top"
+                                    data-trigger="hover"
+                                    th:data-toggle="${object.warehouse} ? 'popover' : ''"
+                                    data-html="true"
+                                    th:data-content="${'teste'}"
+                                    th:title="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
+<!--                                     th:data-content="getWarehousePopOver(${object.warehouse})" -->
+                                <td
+                                    class="actions lock-actions pb-0 pt-10">
+                                    <a class="action-icon edit"
+                                    data-toggle="dropdown" href="#"
+                                    role="button"> <i
+                                        class="mdi mdi-menu icon-resize"></i>
+                                </a>
+                                    <div
+                                        class="dropdown-menu dropdown-menu-left profile-dropdown">
+                                        <ul class="list-inline mb-0">
+                                            <li
+                                                class="dropdown notification-list">
+                                                <a
+                                                th:href="|@{/admin/lock/edit}/${object.id}|"
+                                                class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
+                                                    <i
+                                                    class="fas fa-edit font-size-16 tab-width"></i>
+                                                    <span
+                                                    th:text="#{edit}"></span>
+                                            </a> <span
+                                                class="checkAssociations"
+                                                data-toggle="modal"
+                                                data-target="#modalDeleteWarning">
+                                                    <a
+                                                    class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
+                                                    href="#"
+                                                    th:data-url="@{/admin/lock/delete}"
+                                                    th:data-id="${object.id}">
+                                                        <i
+                                                        class="far fa-trash-alt font-size-16 tab-width"></i><span
+                                                        th:text="#{delete}"></span>
+                                                </a>
+                                            </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end card-body -->
+            </div>
+            <!-- end card -->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row -->
 
-            $(function() {
+    <script th:inline="javascript">
+        var urlCheckAssociations = [[@{${T(brisa.lockmanager.Routes).API_EXISTS_LOCK_ASSOCIATIONS}}]]; // used in bottom.js
+        $(function() {
 
             var columnsDefinitions = [ 
                 { targets : [ 5 ], orderable : false } 
@@ -109,8 +148,26 @@
                     buildDataTable(columnsDefinitions)
                 );
             }
+            
+            $('#modalDeleteWarning').on('hidden.bs.modal', function () {
+                $('#modalDeleteDesc').html([[#{message.warning.delete.desc}]]);
             });
-        </script>
+        });
+        
+        function getWarehousePopOver(warehouse) {
+            let content = '';
+            if (warehouse) {
+                if(object.warehouse.address) {
+                    content += '<b>Endereço</b>:' + object.warehouse.address;
+                }
+            }
+            return content;
+        }
+        
+        function test() {
+            return 'test';
+        }
+    </script>
 </div>
 
 </html>

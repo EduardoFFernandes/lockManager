@@ -11,10 +11,6 @@
 
             var notifyStyle = [[${alert.style}]]; 
 
-            if (isMobile()) {
-                notifyStyle = 'top-right'
-            }
-            
             if ([[${!alert.autohide}]]) {
                 $.Notification.notify(
                     [[${alert.type}]],

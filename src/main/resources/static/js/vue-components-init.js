@@ -164,9 +164,6 @@ Vue.component('vue-full-calendar', {
     },
     getHeight() {
         var height = 650;
-        if (isMobile()){
-            height = 'auto';
-        }
         return height;
     }
   },
@@ -187,9 +184,6 @@ Vue.component('vue-full-calendar', {
       allDaySlot: false,
       columnHeaderText: function(date) {
           var format = 'dddd';
-          if (isMobile()){
-              format = 'dd';
-          }
           return moment(date).format(format);
       },
       eventTimeFormat: {

@@ -36,4 +36,9 @@ public interface Routes {
     static final String ADMIN_CLIENT_EDIT = ADMIN + "/client/edit";
     static final String ADMIN_CLIENT_DELETE = ADMIN + "/client/delete";
 
+    // REST Routes
+    // -----------
+    static final String API = "/api";
+    static final String API_EXISTS_LOCK_ASSOCIATIONS = API + "/lock/associations";
+
 }

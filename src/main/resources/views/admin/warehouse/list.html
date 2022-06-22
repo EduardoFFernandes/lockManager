@@ -6,22 +6,26 @@
 
 <div layout:fragment="content">
 
-<div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body table-responsive">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-4">
+                <div class="card-body table-responsive">
 
-                        <div class="row">
-                            <div class="col-sm-12 col-md-11">
-                                <h4 class="m-t-0 header-title mb-5" th:text="#{menu.warehouse.list}"></h4>
-                            </div>
-                            <div class="col-sm-12 col-md-1 text-right pr-4 btn-add">
-                                <a th:href="@{/admin/warehouse/edit}" class="tooltip-left" th:title="#{warehouse.add}">
-                                    <i class="ion ion-ios-add-circle"></i>
-                                </a>
-                            </div>
-                            
-                           <!--  <form
+                    <div class="row">
+                        <div class="col-sm-12 col-md-11">
+                            <h4 class="m-t-0 header-title mb-5"
+                                th:text="#{menu.warehouse.list}"></h4>
+                        </div>
+                        <div
+                            class="col-sm-12 col-md-1 text-right pr-4 btn-add">
+                            <a th:href="@{/admin/warehouse/edit}"
+                                class="tooltip-left"
+                                th:title="#{warehouse.add}"> <i
+                                class="ion ion-ios-add-circle"></i>
+                            </a>
+                        </div>
+
+                        <!--  <form
                                  id="editForm"
                                  th:action="@{/admin/lock/list}"
                                  method="get"
@@ -36,54 +40,91 @@
                                     </div>
                                 </div>
                             </form> -->
-                            
-                        </div>
 
-                        <table id="datatable" class="table table-hover table-bordered">
+                    </div>
 
-                            <thead class="thead-light ">
-                                <tr th:if="${objects == null || objects?.isEmpty()}">
-                                    <th th:text="#{no.records.found}"></th>
-                                </tr>
-                                <tr th:if="${!objects?.isEmpty()}" >
-                                    <th data-priority="1" th:text="#{registry.date}"></th>
-                                    <th th:text="#{name}"></th>
-                                    <th th:text="#{address}"></th>
-                                    <th th:text="#{menu}" data-priority="2" class="actions">&nbsp;</th>
-                                </tr>
-                            </thead>
+                    <table id="datatable"
+                        class="table table-hover table-bordered">
 
-                            <tbody>
-                                <tr th:each="object : ${objects}">
-                                    <td th:text="${object.name}"></td>
-                                    <td th:text="${object.registryDate}"></td>
-                                    <td th:text="${object.address}"></td>
-                                    <td class="actions lock-actions pb-0 pt-10">                                      
-                                        <a class="action-icon edit" data-toggle="dropdown" href="#" role="button">
-                                            <i class="mdi mdi-menu icon-resize"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-left profile-dropdown">
-                                            <ul class="list-inline mb-0">
-                                                <li class="dropdown notification-list">
-                                                    <a th:href="|@{/admin/warehouse/edit}/${object.id}|"  class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
-                                                        <i class="fas fa-edit font-size-16 tab-width"></i> <span th:text="#{edit}"></span>
-                                                    </a>
-                                                    <span>
-                                                        <a href="#" class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit" th:title="#{delete}" th:data-id="${object.id}">
-                                                            <i class="far fa-trash-alt mr-13"></i> <span th:text="#{delete}"></span>
-                                                        </a>
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div><!-- end card-body -->
-                </div><!-- end card -->
-            </div><!-- end col -->
-        </div><!-- end row -->
+                        <thead class="thead-light ">
+                            <tr
+                                th:if="${objects == null || objects?.isEmpty()}">
+                                <th th:text="#{no.records.found}"></th>
+                            </tr>
+                            <tr th:if="${!objects?.isEmpty()}">
+                                <th data-priority="1"
+                                    th:text="#{registry.date}"></th>
+                                <th th:text="#{name}"></th>
+                                <th th:text="#{address}"></th>
+                                <th th:text="#{menu}" data-priority="2"
+                                    class="actions">&nbsp;</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="object : ${objects}">
+                                <td th:text="${object.name}"></td>
+                                <td th:text="${object.registryDate}"></td>
+                                <td th:text="${object.address}"></td>
+                                <td
+                                    class="actions lock-actions pb-0 pt-10">
+                                    <a class="action-icon edit"
+                                    data-toggle="dropdown" href="#"
+                                    role="button"> <i
+                                        class="mdi mdi-menu icon-resize"></i>
+                                </a>
+                                    <div
+                                        class="dropdown-menu dropdown-menu-left profile-dropdown">
+                                        <ul class="list-inline mb-0">
+                                            <li
+                                                class="dropdown notification-list">
+                                                <a
+                                                th:href="|@{/admin/warehouse/edit}/${object.id}|"
+                                                class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
+                                                    <i
+                                                    class="fas fa-edit font-size-16 tab-width"></i>
+                                                    <span
+                                                    th:text="#{edit}"></span>
+                                            </a> <span> <a href="#"
+                                                    class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
+                                                    th:title="#{delete}"
+                                                    th:data-id="${object.id}">
+                                                        <i
+                                                        class="far fa-trash-alt mr-13"></i>
+                                                        <span
+                                                        th:text="#{delete}"></span>
+                                                </a>
+                                            </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end card-body -->
+            </div>
+            <!-- end card -->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row -->
+    <script th:inline="javascript">
+
+            $(function() {
+
+            var columnsDefinitions = [ 
+                { targets : [ 3 ], orderable : false } 
+            ];
+
+            if ([[${!objects?.isEmpty()}]]) {
+                $('#datatable').DataTable(
+                    buildDataTable(columnsDefinitions)
+                );
+            }
+            });
+        </script>
 </div>
 
 </html>
