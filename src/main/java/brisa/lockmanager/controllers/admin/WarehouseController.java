@@ -74,8 +74,10 @@ public class WarehouseController extends BaseAdminController<WarehouseRepository
 		if (isEditing) {
 			final Warehouse currentObject = this.repository.findById(object.getId()).get();
 			object.setRegistryDate(currentObject.getRegistryDate());
+			object.setUpdateDate(now);
+		} else {
+		    object.setRegistryDate(now);
 		}
-		object.setUpdateDate(now);
 
 		this.repository.save(object);
 		redirect.addFlashAttribute(Alerts.success());

@@ -11,8 +11,8 @@
             <div class="col-12">
                 <div class="page-title-box">
                 
-                    <h4 class="page-title float-left" th:if="${object.id == null}" th:text="#{lock.model.add}" ></h4>
-                    <h4 class="page-title float-left" th:if="${object.id != null}" th:text="#{lock.model.edit}"></h4>     
+                    <h4 class="page-title float-left" th:if="${object.id == null}" th:text="#{warehouse.add}" ></h4>
+                    <h4 class="page-title float-left" th:if="${object.id != null}" th:text="#{warehouse.edit}"></h4>     
 
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item"><a th:href="@{#}" th:text="#{home}"></a></li>
@@ -33,7 +33,7 @@
                         <h4 class="m-t-0 header-title mb-4" th:text="#{fill.form.desc}"></h4> 
                         
                         <form id="editForm" 
-                            th:action="@{/admin/lock-model/edit}" 
+                            th:action="@{/admin/warehouse/edit}" 
                             th:object="${object}" 
                             method="post" 
                             data-parsley-validate
