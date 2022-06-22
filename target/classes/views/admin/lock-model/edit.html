@@ -15,7 +15,7 @@
                     <h4 class="page-title float-left" th:if="${object.id != null}" th:text="#{lock.model.edit}"></h4>     
 
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a th:href="@{/admin/dashboard/index}" th:text="#{home}"></a></li>
+                        <li class="breadcrumb-item"><a th:href="@{#}" th:text="#{home}"></a></li>
                         <li class="breadcrumb-item"><a th:href="@{/admin/lock-model/list}" th:text="#{menu.lock.model.list}"></a></li>
                         <li class="breadcrumb-item active" th:if="${object.id == null}" th:text="#{lock.model.add}"></li>
                         <li class="breadcrumb-item active" th:if="${object.id != null}" th:text="#{lock.model.edit}"></li>
