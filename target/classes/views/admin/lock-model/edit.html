@@ -65,41 +65,9 @@
         </div>
 
         <script th:inline="javascript">
-        $(function(){
-            
-            var app = new Vue({
-                el: '#form-edit-special-pin',
-                data: {
-                	
-                    editorForm: null,
-                    pin: null,
-                    pinLenghtDefault: [[${@authService.getConnectedUserInDB().getAccount().getDefaultPinLength()}]],
-                },
-                methods:{
-                	
-                	generatePin(){
-                        this.pin = getRandomPin(this.pinLenghtDefault);
-                    },
-                },
-                created() {
-                	
-                    this.pin = [[${object.pin}]]
-                },
-                mounted(){
-                	
-                	if([[${object.id}]] == null){
-                		this.pin = getRandomPin(this.pinLenghtDefault);
-					}
-                },
-                updated() {
-                	
-                    $(this.$refs.pin).parsley().validate()
-                }
-            })
-        });
-
-        
-    </script>
+            $(function(){
+            });
+        </script>
         
     </div>
         
