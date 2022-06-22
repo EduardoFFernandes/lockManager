@@ -1,36 +1,48 @@
 
-<div 
-    xmlns:th="http://www.w3.org/1999/xhtml" 
-    th:fragment="deleteWarning">
+<div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="deleteWarning">
 
-    <div id="modalDeleteWarning" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none;" aria-hidden="true">
+    <div id="modalDeleteWarning" class="modal fade" tabindex="-1"
+        role="dialog" aria-labelledby="mySmallModalLabel"
+        style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            
+
                 <div class="modal-header">
-                    <h4 class="modal-title" id="mySmallModalLabel">
-                        <i class="fas fa-exclamation-triangle icon-warning"></i>
-                        <span class="ml-2" th:text="#{message.warning.delete}"></span>
+                    <h4 class="modal-title" id="mySmallModalLabel">a
+                        <i
+                            class="fas fa-exclamation-triangle icon-warning"></i>
+                        <span class="ml-2"
+                            th:text="#{message.warning.delete}"></span>
                     </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
-                
+
                 <form action="#" id="deleteForm" method="GET">
-                    
-                    <input type="hidden" name="id" id="deleteId" value=""/>
-                    
+
+                    <input type="hidden" name="id" id="deleteId"
+                        value="" />
+
                     <div class="modal-body">
-                        <p id="modalDeleteDesc" th:text="#{message.warning.delete.desc}"></p>
+                        <p id="modalDeleteDesc"
+                            th:text="#{message.warning.delete.desc}"></p>
                     </div>
-                    
+
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal" th:text="#{no}"></button>
-                        <button type="submit" class="btn btn-danger waves-effect waves-light" th:text="#{yes}"></button>
+                        <button type="button"
+                            class="btn btn-primary waves-effect"
+                            data-dismiss="modal" th:text="#{no}"></button>
+                        <button type="submit"
+                            class="btn btn-danger waves-effect waves-light"
+                            th:text="#{yes}"></button>
                     </div>
-                </form>   
-                 
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+                </form>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
 </div>
