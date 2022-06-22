@@ -74,6 +74,7 @@ CREATE TABLE lockmanager.tb_item (
     registry_date TIMESTAMP DEFAULT now()  NOT NULL,
     update_date TIMESTAMP,
     id_purchase BIGINT,
+    id_lock BIGINT,
     sensor BOOLEAN NOT NULL,
     status INTEGER DEFAULT 0  NOT NULL,
     price NUMERIC(10,2),

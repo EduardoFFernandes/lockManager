@@ -9,11 +9,14 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title float-left" th:text="#{menu.lock.list}"></h4>
+                <h4 class="page-title float-left"
+                    th:text="#{menu.lock.list}"></h4>
 
                 <ol class="breadcrumb float-right">
-                    <li class="breadcrumb-item"><a th:href="@{#}" th:text="#{home}"></a></li>
-                    <li class="breadcrumb-item active" th:text="#{menu.lock.list}"></li>
+                    <li class="breadcrumb-item"><a th:href="@{#}"
+                        th:text="#{home}"></a></li>
+                    <li class="breadcrumb-item active"
+                        th:text="#{menu.lock.list}"></li>
                 </ol>
 
                 <div class="clearfix"></div>
@@ -103,7 +106,7 @@
                                     data-html="true"
                                     th:data-content="${object.warehouse} ? |<b>#{address}</b>: ${object.warehouse.address} <br>| : '' "
                                     th:title="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
-<!--                                     th:data-content="getWarehousePopOver(${object.warehouse})" -->
+                                <!--                                     th:data-content="getWarehousePopOver(${object.warehouse})" -->
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
                                     <a class="action-icon edit"
@@ -123,8 +126,7 @@
                                                     class="fas fa-edit font-size-16 tab-width"></i>
                                                     <span
                                                     th:text="#{edit}"></span>
-                                            </a> <span
-                                                data-toggle="modal"
+                                            </a> <span data-toggle="modal"
                                                 data-target="#modalDeleteWarning">
                                                     <a
                                                     class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
@@ -170,20 +172,6 @@
                 $('#modalDeleteDesc').html([[#{message.warning.delete.desc}]]);
             });
         });
-        
-        function getWarehousePopOver(warehouse) {
-            let content = '';
-            if (warehouse) {
-                if(object.warehouse.address) {
-                    content += '<b>Endereço</b>:' + object.warehouse.address;
-                }
-            }
-            return content;
-        }
-        
-        function test() {
-            return 'test';
-        }
     </script>
 </div>
 

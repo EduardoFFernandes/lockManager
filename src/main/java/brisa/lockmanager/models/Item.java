@@ -32,8 +32,13 @@ public class Item extends _BaseModelId {
 
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_purchase", nullable = false)
+    @JoinColumn(name = "id_purchase")
     private Purchase purchase;
+
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_lock")
+    private Lock lock;
 
     @Column(length = 50)
     private Integer status;
@@ -92,6 +97,14 @@ public class Item extends _BaseModelId {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Lock getLock() {
+        return lock;
+    }
+
+    public void setLock(Lock lock) {
+        this.lock = lock;
     }
 
     public void setPrice(BigDecimal price) {
