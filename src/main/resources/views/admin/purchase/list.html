@@ -74,8 +74,6 @@
                                     th:text="#{purchase.date}"></th>
                                 <th th:text="#{client}"></th>
                                 <th th:text="#{due.date}"></th>
-                                <th th:text="#{client}"></th>
-                                <th th:text="#{warehouse}"></th>
                                 <th th:text="#{menu}" data-priority="2"
                                     class="actions">&nbsp;</th>
                             </tr>
@@ -95,7 +93,7 @@
                                     <b>#{cellphone}</b>: ${object.client.cellphone} <br> 
                                     <b>#{identifier}</b>: ${object.client.identifier}| : ''"
                                     th:title="${object.client} ? ${object.client.name} : ''"></td>
-                                <td th:text="${object.dueDate}"></td>
+                                <td th:text="${#dates.format(object.dueDate, @languageService.currentSystemLanguage.dateFormat.concat(' HH:mm')}"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
                                     <a class="action-icon edit"

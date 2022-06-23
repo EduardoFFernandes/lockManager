@@ -40,6 +40,8 @@ public class Item extends _BaseModelId {
     @Column(length = 50)
     private ItemStatus status;
 
+    private boolean sensor;
+
     private BigDecimal price;
 
     @Column(name = "installation_location", length = 150)
@@ -94,6 +96,14 @@ public class Item extends _BaseModelId {
 
     public ItemStatus getStatus() {
         return status;
+    }
+
+    public boolean isSensor() {
+        return sensor;
+    }
+
+    public void setSensor(boolean sensor) {
+        this.sensor = sensor;
     }
 
     public Lock getLock() {

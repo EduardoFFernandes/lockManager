@@ -151,6 +151,7 @@ public class StartupConfig {
             object.setPurchase(purchaseRepository.findFirstByOrderByIdAsc());
             object.setPrice(BigDecimal.TEN);
             object.setLock(lockRepository.findFirstByOrderByIdAsc());
+            object.setSensor(true);
             // object.setClient(client);
             // object.setWarehouse(warehouse);
             // object.setModel(model);
