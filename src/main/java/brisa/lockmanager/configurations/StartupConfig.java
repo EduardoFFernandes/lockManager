@@ -106,9 +106,6 @@ public class StartupConfig {
             object.setRegistryDate(now);
             object.setSerialNumber(DEFAULT_SERIAL_NUMBER);
             object.setFirmwareVersion("0.0.0.00");
-            // object.setClient(client);
-            // object.setWarehouse(warehouse);
-            // object.setModel(model);
 
             repository.save(object);
 
@@ -127,9 +124,6 @@ public class StartupConfig {
             object.setDueDate(now);
             object.setPurchaseDate(now);
             object.setClient(clientRepository.findFirstByOrderByIdAsc());
-            // object.setClient(client);
-            // object.setWarehouse(warehouse);
-            // object.setModel(model);
 
             repository.save(object);
 
@@ -152,9 +146,6 @@ public class StartupConfig {
             object.setPrice(BigDecimal.TEN);
             object.setLock(lockRepository.findFirstByOrderByIdAsc());
             object.setSensor(true);
-            // object.setClient(client);
-            // object.setWarehouse(warehouse);
-            // object.setModel(model);
 
             repository.save(object);
 

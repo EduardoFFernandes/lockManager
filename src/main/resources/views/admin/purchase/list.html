@@ -36,7 +36,7 @@
                         </div>
                         <div
                             class="col-sm-12 col-md-1 text-right pr-4 btn-add">
-                            <a th:href="@{/admin/lock/edit}"
+                            <a th:href="@{/admin/purchase/edit}"
                                 class="tooltip-left"
                                 th:title="#{lock.add}"> <i
                                 class="ion ion-ios-add-circle"></i>
@@ -81,7 +81,7 @@
 
                         <tbody>
                             <tr th:each="object : ${objects}">
-                                <td th:text="${object.purchaseDate}"></td>
+                                <td th:text="${#dates.format(object.purchaseDate, 'dd/MM/yyyy HH:mm')}"></td>
                                 <td
                                     th:text="${object.client} ? ${object.client.name} : ''"
                                     data-placement="top"
@@ -93,7 +93,7 @@
                                     <b>#{cellphone}</b>: ${object.client.cellphone} <br> 
                                     <b>#{identifier}</b>: ${object.client.identifier}| : ''"
                                     th:title="${object.client} ? ${object.client.name} : ''"></td>
-                                <td th:text="${#dates.format(object.dueDate, @languageService.currentSystemLanguage.dateFormat.concat(' HH:mm')}"></td>
+                                <td th:text="${#dates.format(object.dueDate, 'dd/MM/yyyy HH:mm')}"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
                                     <a class="action-icon edit"
@@ -107,7 +107,7 @@
                                             <li
                                                 class="dropdown notification-list">
                                                 <a
-                                                th:href="|@{/admin/lock/edit}/${object.id}|"
+                                                th:href="|@{/admin/purchase/edit}/${object.id}|"
                                                 class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
                                                     <i
                                                     class="fas fa-edit font-size-16 tab-width"></i>
@@ -145,7 +145,7 @@
         $(function() {
 
             var columnsDefinitions = [ 
-                { targets : [ 5 ], orderable : false } 
+                { targets : [ 3 ], orderable : false } 
             ];
 
             if ([[${!objects?.isEmpty()}]]) {

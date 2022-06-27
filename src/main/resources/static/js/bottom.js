@@ -398,22 +398,12 @@ function initSelect2ComboBox() {
 function initDatepicker() {
 
     if ($('.datepicker')[0]) {
-        var lang = 'en'
-        if(SYSTEM_LOCALE != 'en-US'){
-            var especialLanguages = ['pt', 'zh', 'en']
-            if(especialLanguages.includes(SYSTEM_LANGUAGE)){
-                lang = SYSTEM_LOCALE
-            } else {
-                lang = SYSTEM_LANGUAGE
-            }
-        }
-
         $('.datepicker').datepicker({
             autoclose: true,
             todayHighlight: true,
             format:  DateUtil.dateFormat.default,
-            language: lang,
-            clearBtn: true
+            language: 'pt',
+            clearBtn: false
         });
     }
 }

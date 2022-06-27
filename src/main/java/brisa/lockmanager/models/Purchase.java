@@ -1,15 +1,18 @@
 package brisa.lockmanager.models;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import brisa.lockmanager.commons.utils.DateUtil;
 
@@ -31,13 +34,18 @@ public class Purchase extends _BaseModelId {
     @JoinColumn(name = "id_client", nullable = false)
     private Client client;
 
-    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+    @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
     @Column(name = "purchase_date")
     private Timestamp purchaseDate;
 
-    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+    @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
     @Column(name = "due_date")
     private Timestamp dueDate;
+
+    // bi-directional many-to-one association to Account
+    @JsonIgnore
+    @OneToMany(mappedBy = "purchase")
+    private List<Item> lstPurchaseItem;
 
     // ---------------------------------------------------------------------------------------------
     // Constructors
@@ -89,6 +97,14 @@ public class Purchase extends _BaseModelId {
 
     public void setDueDate(Timestamp dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public List<Item> getLstPurchaseItem() {
+        return lstPurchaseItem;
+    }
+
+    public void setLstPurchaseItem(List<Item> lstPurchaseItem) {
+        this.lstPurchaseItem = lstPurchaseItem;
     }
 
 }

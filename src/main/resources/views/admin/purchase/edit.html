@@ -11,14 +11,14 @@
             <div class="col-12">
                 <div class="page-title-box">
                 
-                    <h4 class="page-title float-left" th:if="${object.id == null}" th:text="#{warehouse.add}" ></h4>
-                    <h4 class="page-title float-left" th:if="${object.id != null}" th:text="#{warehouse.edit}"></h4>     
+                    <h4 class="page-title float-left" th:if="${object.id == null}" th:text="#{purchase.add}" ></h4>
+                    <h4 class="page-title float-left" th:if="${object.id != null}" th:text="#{purchase.edit}"></h4>     
 
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item"><a th:href="@{#}" th:text="#{home}"></a></li>
-                        <li class="breadcrumb-item"><a th:href="@{/admin/warehouse/list}" th:text="#{menu.warehouse.list}"></a></li>
-                        <li class="breadcrumb-item active" th:if="${object.id == null}" th:text="#{warehouse.add}"></li>
-                        <li class="breadcrumb-item active" th:if="${object.id != null}" th:text="#{warehouse.edit}"></li>
+                        <li class="breadcrumb-item"><a th:href="@{/admin/purchase/list}" th:text="#{menu.purchase.list}"></a></li>
+                        <li class="breadcrumb-item active" th:if="${object.id == null}" th:text="#{purchase.add}"></li>
+                        <li class="breadcrumb-item active" th:if="${object.id != null}" th:text="#{purchase.edit}"></li>
                     </ol>
 
                     <div class="clearfix"></div>
@@ -33,7 +33,7 @@
                         <h4 class="m-t-0 header-title mb-4" th:text="#{fill.form.desc}"></h4> 
                         
                         <form id="editForm" 
-                            th:action="@{/admin/warehouse/edit}" 
+                            th:action="@{/admin/purchase/edit}" 
                             th:object="${object}" 
                             method="post" 
                             data-parsley-validate
@@ -41,29 +41,24 @@
                             
                             <input type="hidden" name="id" th:value="${object.id}"/>
 
-                            <div class="form-group">
-                                <label th:text="#{name}"></label> 
-                                <input type="text"class="form-control" th:field="*{name}" 
-                                    required
-                                    data-parsley-maxlength="255"
-                                />
-                                <ul class="parsley-errors-list filled">
-                                    <li class="parsley-required" th:errors="*{name}"></li>
-                                </ul>
+                           <div class="form-group col-md-4">
+                                <label th:text="#{client}"></label>
+                                <div>
+                                    <select class="form-control select2" th:field="*{client}"
+                                        data-parsley-errors-container="#select2-error-2">
+                                        <option value="" th:text="#{select}"></option>
+                                        <option th:each="item : ${lstClient}" th:value="${item.id}"
+                                            th:text="${item.name}"></option>
+                                    </select> <span id="select2-error-2"></span>
+                                    <ul class="parsley-errors-list filled">
+                                        <li class="parsley-required" th:errors="*{client}"></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="form-group">
-    							<label th:text="#{address}"></label> 
-                                <input type="text"
-    								class="form-control" th:field="*{address}"
-    								data-parsley-maxlength="255" />
-    							<ul class="parsley-errors-list filled">
-    								<li class="parsley-required" th:errors="*{address}"></li>
-    							</ul>
-    						</div>
                             <div class="form-group mb-1 mt-4 text-right">
                                 <div>
                                     <button type="submit" class="btn btn-primary waves-effect waves-light" th:text="#{save}"></button>
-                                    <a class="btn btn-secondary waves-effect ml-1" th:href="@{/admin/warehouse/list}" th:text="#{cancel}"></a>
+                                    <a class="btn btn-secondary waves-effect ml-1" th:href="@{/admin/purchase/list}" th:text="#{cancel}"></a>
                                 </div>
                             </div>
                             

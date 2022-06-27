@@ -21,6 +21,7 @@ import brisa.lockmanager.commons.constants.Alerts;
 import brisa.lockmanager.commons.utils.DateUtil;
 import brisa.lockmanager.models.Purchase;
 import brisa.lockmanager.repositories.ClientRepository;
+import brisa.lockmanager.repositories.ItemRepository;
 import brisa.lockmanager.repositories.LockRepository;
 import brisa.lockmanager.repositories.PurchaseRepository;
 import springfox.documentation.annotations.ApiIgnore;
@@ -32,10 +33,13 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
     private ClientRepository clientRepository;
     @Autowired
     private LockRepository lockRepository;
+    @Autowired
+    private ItemRepository itemRepository;
 
     private static final String OBJECTS = "objects";
     private static final String LST_LOCK = "lstLock";
     private static final String LST_CLIENT = "lstClient";
+    private static final String LST_ITEM = "lstItem";
 
     @GetMapping(ADMIN_PURCHASE_LIST)
     public String index(final Model model) {
@@ -54,6 +58,7 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
 
         model.addAttribute(LST_LOCK, this.lockRepository.findAll());
         model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
+        model.addAttribute(LST_ITEM, this.itemRepository.findAll());
         model.addAttribute(OBJECT, object);
         return ADMIN_PURCHASE_EDIT;
     }
@@ -66,6 +71,7 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
 
         model.addAttribute(LST_LOCK, this.lockRepository.findAll());
         model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
+        model.addAttribute(LST_ITEM, this.itemRepository.findAll());
         model.addAttribute(OBJECT, object);
         return ADMIN_PURCHASE_EDIT;
     }
