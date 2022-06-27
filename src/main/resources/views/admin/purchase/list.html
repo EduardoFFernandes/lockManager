@@ -96,11 +96,20 @@
                                 <td th:text="${#dates.format(object.dueDate, 'dd/MM/yyyy HH:mm')}"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
+                                    <span data-toggle="modal"
+                                          data-target="#modalListItens">
+                                            <a
+                                            class="action-icon edit"
+                                            href="#"
+                                            role="button">
+                                                <i class="mdi mdi-cart icon-resize"></i>
+                                            </a>
+                                    </span>
                                     <a class="action-icon edit"
                                     data-toggle="dropdown" href="#"
                                     role="button"> <i
                                         class="mdi mdi-menu icon-resize"></i>
-                                </a>
+                                    </a>
                                     <div
                                         class="dropdown-menu dropdown-menu-left profile-dropdown">
                                         <ul class="list-inline mb-0">
@@ -113,8 +122,9 @@
                                                     class="fas fa-edit font-size-16 tab-width"></i>
                                                     <span
                                                     th:text="#{edit}"></span>
-                                            </a> <span data-toggle="modal"
-                                                data-target="#modalDeleteWarning">
+                                            </a> 
+                                            <span data-toggle="modal"
+                                                  data-target="#modalDeleteWarning">
                                                     <a
                                                     class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
                                                     href="#"
@@ -123,7 +133,7 @@
                                                         <i
                                                         class="far fa-trash-alt font-size-16 tab-width"></i><span
                                                         th:text="#{delete}"></span>
-                                                </a>
+                                                    </a>
                                             </span>
                                             </li>
                                         </ul>
