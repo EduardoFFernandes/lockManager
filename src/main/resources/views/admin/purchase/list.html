@@ -100,6 +100,7 @@
                                           data-target="#modalListItens">
                                             <a
                                             class="action-icon edit"
+                                            id="showItens"
                                             href="#"
                                             role="button">
                                                 <i class="mdi mdi-cart icon-resize"></i>
@@ -168,6 +169,11 @@
                 $('#modalDeleteDesc').html([[#{message.warning.delete.desc}]]);
             });
         });
+        
+        $('#showItens').click(function(){
+            var index = $(this).parents('tr').index();
+            alert('you click an input on row #' + index);
+    	});
     </script>
 </div>
 
