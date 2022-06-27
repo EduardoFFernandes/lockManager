@@ -344,7 +344,7 @@ function formatStartEndDate(startValue, endValue) {
     var startDate, endDate;
     var startTime = '#startTime';
     var endTime = '#endTime';
-
+    
     if ($(startTime).val() !== undefined
         && $(endTime).val() !== undefined
         && $(startTime).val() !== ''
@@ -747,7 +747,6 @@ function initCheckAssociations(){
         $('.checkAssociations').click(function() {
             var id = $(this).children("a").data("id");
             var url = urlCheckAssociations + "/" + id;
-            debugger
             modalDeleteWarning = $($(this).attr("data-target"))
             call(GET, url, handleCheckAssociationsResponse);
         });

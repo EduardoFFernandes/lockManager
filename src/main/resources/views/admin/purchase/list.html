@@ -10,13 +10,13 @@
         <div class="col-12">
             <div class="page-title-box">
                 <h4 class="page-title float-left"
-                    th:text="#{menu.lock.list}"></h4>
+                    th:text="#{menu.purchase.list}"></h4>
 
                 <ol class="breadcrumb float-right">
                     <li class="breadcrumb-item"><a th:href="@{#}"
                         th:text="#{home}"></a></li>
                     <li class="breadcrumb-item active"
-                        th:text="#{menu.lock.list}"></li>
+                        th:text="#{menu.purchase.list}"></li>
                 </ol>
 
                 <div class="clearfix"></div>
@@ -38,14 +38,14 @@
                             class="col-sm-12 col-md-1 text-right pr-4 btn-add">
                             <a th:href="@{/admin/purchase/edit}"
                                 class="tooltip-left"
-                                th:title="#{lock.add}"> <i
+                                th:title="#{purchase.add}"> <i
                                 class="ion ion-ios-add-circle"></i>
                             </a>
                         </div>
 
                         <!--  <form
                                  id="editForm"
-                                 th:action="@{/admin/lock/list}"
+                                 th:action="@{/admin/purchase/list}"
                                  method="get"
                                  data-parsley-validate
                                  data-parsley-trigger="focusout"
@@ -81,7 +81,7 @@
 
                         <tbody>
                             <tr th:each="object : ${objects}">
-                                <td th:text="${#dates.format(object.purchaseDate, 'dd/MM/yyyy HH:mm')}"></td>
+                                <td th:text="${#dates.format(object.purchaseDate, 'dd/MM/yyyy')}"></td>
                                 <td
                                     th:text="${object.client} ? ${object.client.name} : ''"
                                     data-placement="top"
@@ -93,7 +93,7 @@
                                     <b>#{cellphone}</b>: ${object.client.cellphone} <br> 
                                     <b>#{identifier}</b>: ${object.client.identifier}| : ''"
                                     th:title="${object.client} ? ${object.client.name} : ''"></td>
-                                <td th:text="${#dates.format(object.dueDate, 'dd/MM/yyyy HH:mm')}"></td>
+                                <td th:text="${#dates.format(object.dueDate, 'dd/MM/yyyy')}"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
                                     <a class="action-icon edit"
@@ -118,7 +118,7 @@
                                                     <a
                                                     class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
                                                     href="#"
-                                                    th:data-url="@{/admin/lock/delete}"
+                                                    th:data-url="@{/admin/purchase/delete}"
                                                     th:data-id="${object.id}">
                                                         <i
                                                         class="far fa-trash-alt font-size-16 tab-width"></i><span

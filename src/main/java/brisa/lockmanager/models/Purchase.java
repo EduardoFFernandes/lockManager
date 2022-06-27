@@ -1,6 +1,7 @@
 package brisa.lockmanager.models;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,13 +35,13 @@ public class Purchase extends _BaseModelId {
     @JoinColumn(name = "id_client", nullable = false)
     private Client client;
 
-    @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
+    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
     @Column(name = "purchase_date")
-    private Timestamp purchaseDate;
+    private Date purchaseDate;
 
-    @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
+    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
     @Column(name = "due_date")
-    private Timestamp dueDate;
+    private Date dueDate;
 
     // bi-directional many-to-one association to Account
     @JsonIgnore
@@ -71,14 +72,6 @@ public class Purchase extends _BaseModelId {
         return client;
     }
 
-    public Timestamp getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public Timestamp getDueDate() {
-        return dueDate;
-    }
-
     public void setRegistryDate(Timestamp registryDate) {
         this.registryDate = registryDate;
     }
@@ -91,20 +84,28 @@ public class Purchase extends _BaseModelId {
         this.client = client;
     }
 
-    public void setPurchaseDate(Timestamp purchaseDate) {
-        this.purchaseDate = purchaseDate;
-    }
-
-    public void setDueDate(Timestamp dueDate) {
-        this.dueDate = dueDate;
-    }
-
     public List<Item> getLstPurchaseItem() {
         return lstPurchaseItem;
     }
 
     public void setLstPurchaseItem(List<Item> lstPurchaseItem) {
         this.lstPurchaseItem = lstPurchaseItem;
+    }
+
+    public Date getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 
 }

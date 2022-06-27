@@ -52,24 +52,8 @@
     <script th:src="@{/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
     
     <th:block th:with="language=${#locale.getLanguage()},country=${#locale.getCountry()}">
-    
-        <th:block th:switch="${language}">
-            <th:block th:case="'en'">
-                <script th:if="${country != 'US'}" th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}-${country}.min.js|"></script>
-            </th:block>
-            <th:block th:case="'pt'">
-                <script th:src="|@{/assets/plugins/parsleyjs/i18n/}${language}-${#strings.toLowerCase(country)}.js|"></script>
-                <script th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}-${country}.min.js|"></script>
-            </th:block>
-            <th:block th:case="'zh'">
-                <script th:src="|@{/assets/plugins/parsleyjs/i18n/}${language}_${#strings.toLowerCase(country)}.js|"></script>
-                <script th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}-${country}.min.js|"></script>
-            </th:block>
-            <th:block th:case="*">
-                <script th:src="|@{/assets/plugins/parsleyjs/i18n/}${language}.js|"></script>
-                <script th:src="|@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.}${language}.min.js|"></script>
-            </th:block>
-        </th:block>
+    <script th:src="@{/assets/plugins/parsleyjs/i18n/pt-br.js}"></script>
+    <script th:src="@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.min.js}"></script>
         
     </th:block>
     <script th:inline="javascript">

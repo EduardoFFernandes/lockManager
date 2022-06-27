@@ -12,4 +12,6 @@ public interface ItemRepository extends BaseRepository<Item, Long> {
     @Override
     List<Item> findAll();
 
+    List<Item> findAllByPurchaseIsNull();
+
 }

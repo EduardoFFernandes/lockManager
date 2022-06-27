@@ -1,6 +1,7 @@
 package brisa.lockmanager.controllers.admin;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import brisa.lockmanager.commons.constants.Alerts;
 import brisa.lockmanager.commons.utils.DateUtil;
+import brisa.lockmanager.models.Item;
 import brisa.lockmanager.models.Purchase;
 import brisa.lockmanager.repositories.ClientRepository;
 import brisa.lockmanager.repositories.ItemRepository;
@@ -58,7 +60,7 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
 
         model.addAttribute(LST_LOCK, this.lockRepository.findAll());
         model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
-        model.addAttribute(LST_ITEM, this.itemRepository.findAll());
+        model.addAttribute(LST_ITEM, this.itemRepository.findAllByPurchaseIsNull());
         model.addAttribute(OBJECT, object);
         return ADMIN_PURCHASE_EDIT;
     }
@@ -69,9 +71,13 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
 
         final Purchase object = super.repository.findById(id).orElseThrow(() -> new IllegalArgumentException());
 
+        final List<Item> lstItem = new ArrayList<Item>();
+        lstItem.addAll(this.itemRepository.findAllByPurchaseIsNull());
+        lstItem.addAll(object.getLstPurchaseItem());
+
         model.addAttribute(LST_LOCK, this.lockRepository.findAll());
         model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
-        model.addAttribute(LST_ITEM, this.itemRepository.findAll());
+        model.addAttribute(LST_ITEM, lstItem);
         model.addAttribute(OBJECT, object);
         return ADMIN_PURCHASE_EDIT;
     }
@@ -87,6 +93,9 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
 
         if (result.hasErrors()) {
             model.addAttribute(Alerts.error());
+            model.addAttribute(LST_LOCK, this.lockRepository.findAll());
+            model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
+            model.addAttribute(LST_ITEM, this.itemRepository.findAllByPurchaseIsNull());
             model.addAttribute(OBJECT, object);
             return ADMIN_PURCHASE_EDIT;
         }
@@ -95,11 +104,33 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
             final Purchase currentObject = this.repository.findById(object.getId()).get();
             object.setRegistryDate(currentObject.getRegistryDate());
             object.setUpdateDate(now);
+
+            if (!currentObject.getLstPurchaseItem().isEmpty()) {
+                currentObject.getLstPurchaseItem().forEach(x -> {
+                    x.setPurchase(null);
+                    this.itemRepository.save(x);
+                });
+            }
+
+            if (!object.getLstPurchaseItem().isEmpty()) {
+                object.getLstPurchaseItem().forEach(x -> {
+                    x.setPurchase(object);
+                    this.itemRepository.save(x);
+                });
+            }
         } else {
             object.setRegistryDate(now);
+
+            if (!object.getLstPurchaseItem().isEmpty()) {
+                object.getLstPurchaseItem().forEach(x -> {
+                    x.setPurchase(object);
+                    this.itemRepository.save(x);
+                });
+            }
         }
 
         this.repository.save(object);
+
         redirect.addFlashAttribute(Alerts.success());
         return this.forward(ADMIN_PURCHASE_LIST);
     }
