@@ -121,8 +121,8 @@ public class StartupConfig {
             final Timestamp now = DateUtil.getCurrentTimestamp();
 
             object.setRegistryDate(now);
-            object.setDueDate(now);
-            object.setPurchaseDate(now);
+//            object.setDueDate(now);
+//            object.setPurchaseDate(now);
             object.setClient(clientRepository.findFirstByOrderByIdAsc());
 
             repository.save(object);

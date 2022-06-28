@@ -1,7 +1,7 @@
 package brisa.lockmanager.models;
 
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,13 +37,13 @@ public class Purchase extends _BaseModelId {
     @JoinColumn(name = "id_client", nullable = false)
     private Client client;
 
-    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "purchase_date")
-    private Date purchaseDate;
+    private LocalDate purchaseDate;
 
-    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "due_date")
-    private Date dueDate;
+    private LocalDate dueDate;
 
     // bi-directional many-to-one association to Account
     @JsonIgnore
@@ -92,20 +94,20 @@ public class Purchase extends _BaseModelId {
         this.lstPurchaseItem = lstPurchaseItem;
     }
 
-    public Date getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(LocalDate purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
 }

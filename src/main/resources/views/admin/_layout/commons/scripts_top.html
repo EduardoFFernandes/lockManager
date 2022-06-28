@@ -49,9 +49,7 @@
     <script th:src="@{/assets/plugins/fullcalendar/vue/vue-fullcalendar-wrapper.js}"></script>
 
     <script th:src="@{/assets/plugins/parsleyjs/parsley.min.js}"></script>
-    <script th:src="@{/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
-    
-    <th:block th:with="language=${#locale.getLanguage()},country=${#locale.getCountry()}">
+    <script th:src="@{/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>    
     <script th:src="@{/assets/plugins/parsleyjs/i18n/pt-br.js}"></script>
     <script th:src="@{/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.min.js}"></script>
         
@@ -69,8 +67,8 @@
 
         var SYSTEM_LANGUAGE = [[${#locale.getLanguage()}]];
         var SYSTEM_LOCALE = [[${#locale.toLanguageTag()}]];
-        var DATATABLES_LANGUAGE = [[${#strings.capitalize(#locale.getDisplayLanguage('en'))}]];
-        var DATATABLES_COUNTRY = [[${#strings.capitalize(#locale.getDisplayCountry('en'))}]];
+        var DATATABLES_LANGUAGE = [[${#strings.capitalize(#locale.getDisplayLanguage('pt-BR'))}]];
+        var DATATABLES_COUNTRY = [[${#strings.capitalize(#locale.getDisplayCountry('pt-BR'))}]];
         
         /***********************************************
          * Different CSS depending on OS (mac/pc)- (c) Dynamic Drive (www.dynamicdrive.com)

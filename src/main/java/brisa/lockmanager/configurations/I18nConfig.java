@@ -43,7 +43,8 @@ public class I18nConfig implements WebMvcConfigurer {
     }
 
     // ---------------------------------------------------------------------------------------------
-    // * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#getValidator()
+    // * @see
+    // org.springframework.web.servlet.config.annotation.WebMvcConfigurer#getValidator()
     // ---------------------------------------------------------------------------------------------
     @Override
     @Bean
@@ -55,7 +56,8 @@ public class I18nConfig implements WebMvcConfigurer {
     }
 
     // ---------------------------------------------------------------------------------------------
-    // * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#addInterceptors(org.springframework.web.servlet.config.annotation.InterceptorRegistry)
+    // * @see
+    // org.springframework.web.servlet.config.annotation.WebMvcConfigurer#addInterceptors(org.springframework.web.servlet.config.annotation.InterceptorRegistry)
     // ---------------------------------------------------------------------------------------------
     @Override
     public void addInterceptors(final InterceptorRegistry registry) {

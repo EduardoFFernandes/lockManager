@@ -81,7 +81,7 @@
 
                         <tbody>
                             <tr th:each="object : ${objects}">
-                                <td th:text="${#dates.format(object.purchaseDate, 'dd/MM/yyyy')}"></td>
+                                <td th:text="${#temporals.format(object.purchaseDate, 'dd/MM/yyyy')}"></td>
                                 <td
                                     th:text="${object.client} ? ${object.client.name} : ''"
                                     data-placement="top"
@@ -93,7 +93,7 @@
                                     <b>#{cellphone}</b>: ${object.client.cellphone} <br> 
                                     <b>#{identifier}</b>: ${object.client.identifier}| : ''"
                                     th:title="${object.client} ? ${object.client.name} : ''"></td>
-                                <td th:text="${#dates.format(object.dueDate, 'dd/MM/yyyy')}"></td>
+                                <td th:text="${#temporals.format(object.dueDate, 'dd/MM/yyyy')}"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
                                     <span data-toggle="modal"

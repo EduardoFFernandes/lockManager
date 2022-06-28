@@ -401,8 +401,8 @@ function initDatepicker() {
         $('.datepicker').datepicker({
             autoclose: true,
             todayHighlight: true,
-            format:  DateUtil.dateFormat.default,
-            language: 'pt',
+            format: 'dd/mm/yyyy',
+            language: 'pt-BR',
             clearBtn: false
         });
     }

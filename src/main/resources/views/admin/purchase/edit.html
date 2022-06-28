@@ -81,7 +81,6 @@
                                         <input type="text"
                                             class="form-control datepicker mask-date"
                                             id="purchaseDate"
-                                            th:value="${object.purchaseDate}"
                                             th:field="*{purchaseDate}"
                                             autocomplete="off" required
                                             data-parsley-trigger="change"
@@ -107,7 +106,6 @@
                                         <input type="text"
                                             class="form-control datepicker mask-date"
                                             id="dueDate"
-                                            th:value="${object.dueDate}"
                                             th:field="*{dueDate}"
                                             autocomplete="off" required
                                             data-parsley-trigger="change"
@@ -187,20 +185,7 @@
                 return false;
             });
             
-            var purchaseDateFormatted = moment($('#purchaseDate').val());
-            var dueDateFormatted = moment($('#dueDate').val());
-            
-            $('#purchaseDate').val(purchaseDateFormatted.format('DD/MM/YYYY'))
-            $('#dueDate').val(dueDateFormatted.format('DD/MM/YYYY'))
-            
-            $('#editForm').submit(function(event) {
-                if($('#purchaseDate')) {
-                    $('#purchaseDate').val(moment($('#purchaseDate').val().format('YYYY/MM/DD')));
-                } 
-                if($('#dueDate')) {
-                    $('#dueDate').val(moment($('#dueDate').val().format('YYYY/MM/DD')));
-                }
-            });
+            console.log($('#purchaseDate').val())
         });
         </script>
 
