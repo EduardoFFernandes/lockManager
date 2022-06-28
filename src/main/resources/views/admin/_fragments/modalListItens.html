@@ -15,7 +15,7 @@
                     <button type="button" class="close"
                         data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
-
+                
                 <table id="datatable" class="table table-hover table-bordered">
                     <thead class="thead-light ">
                         <tr>
@@ -24,15 +24,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr id="listItens" th:each="row : ${object.lstPurchaseItem}">
-                            <td th:text="${row.lock.serialNumber}"></td>
-                            <td th:text="${row.lock.lockModel}"></td>
-                        </tr> -->
+                        <tr id="listItems" th:each="item : ${purchaseItems}">
+                            <td th:text="${item.lock.serialNumber}"></td>
+                            <td th:text="${item.lock.lockModel}"></td>
+                        </tr>
                     </tbody>
                 </table>
-
-            
-
             </div>
             <!-- /.modal-content -->
         </div>
