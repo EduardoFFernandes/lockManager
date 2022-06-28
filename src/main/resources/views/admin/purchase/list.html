@@ -84,7 +84,7 @@
                                 <td th:text="${#temporals.format(object.purchaseDate, 'dd/MM/yyyy')}"></td>
                                 <td
                                     th:text="${object.client} ? ${object.client.name} : ''"
-                                    data-placement="top"
+                                    data-placement="auto"
                                     data-trigger="hover"
                                     th:data-toggle="${object.client} ? 'popover' : ''"
                                     data-html="true"
@@ -100,13 +100,13 @@
                                           data-target="#modalListItens">
                                             <a
                                             class="action-icon edit"
-                                            id="showItens"
                                             href="#"
-                                            role="button">
+                                            role="button"
+                                            id="showItems"
+                                            th:data-purchase-id="${object.id}">
                                                 <i class="mdi mdi-cart icon-resize"></i>
                                             </a>
                                     </span>
-                                    <!-- <div id="" th:replace="admin/_fragments/modalListItens"></div> -->
                                     <a class="action-icon edit"
                                     data-toggle="dropdown" href="#"
                                     role="button"> <i
@@ -168,6 +168,17 @@
             
             $('#modalDeleteWarning').on('hidden.bs.modal', function () {
                 $('#modalDeleteDesc').html([[#{message.warning.delete.desc}]]);
+            });
+            
+            
+            $('#modalListItens').on('show.bs.modal', function () {
+                var id = $('#showItems').data('purchase-id')
+                $.ajax({
+                    url: [[@{${T(brisa.lockmanager.Routes).ADMIN_PURCHASE_ITEMS}}]] + "/" + id,
+                    success: function(response) {
+                        console.log(response)
+                    }
+                });
             });
         });
     </script>

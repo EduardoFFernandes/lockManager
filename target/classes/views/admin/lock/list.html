@@ -89,7 +89,7 @@
                                     th:text="${object.lockModel} ? ${object.lockModel.name} : ''"></td>
                                 <td
                                     th:text="${object.client} ? ${object.client.name} : ''"
-                                    data-placement="top"
+                                    data-placement="auto"
                                     data-trigger="hover"
                                     th:data-toggle="${object.client} ? 'popover' : ''"
                                     data-html="true"
@@ -101,7 +101,7 @@
                                     th:title="${object.client} ? ${object.client.name} : ''"></td>
                                 <td
                                     th:text="${object.warehouse} ? ${object.warehouse.name} : ''"
-                                    data-placement="top"
+                                    data-placement="auto"
                                     data-trigger="hover"
                                     th:data-toggle="${object.warehouse} ? 'popover' : ''"
                                     data-html="true"
