@@ -28,7 +28,9 @@ public final class DateUtil extends DateUtils {
     public static final String HH_MM_A = "hh:mm a";
     public static final String YYYY_MM_DD_TIMESTAMP_HH_MM_SS = "yyyy/MM/dd " + HH_MM_SS; // Data Table sort pattern
     public static final String DD_MMMM_YYYY = "dd, MMMM yyyy ";
+    public static final String DD_MM_YYYY = "DD/MM/YYYY";
     public static final String DD_MMMM_YYYY_HH_MM = DD_MMMM_YYYY + HH_MM;
+    public static final String YYYY_MM_DD = "yyyy-MM-dd";
     public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd " + HH_MM_SS;
     public static final String YYYY_MM_DD_T_HH_MM_SS_SSSXXX = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 
@@ -181,7 +183,7 @@ public final class DateUtil extends DateUtils {
     public static LocalTime toLocalTime(final String time) {
 
         if (StringUtil.isNotEmpty(time)) {
-            if(is12HourPattern(time)){
+            if (is12HourPattern(time)) {
                 return LocalTime.parse(normalizeTime(time), DateTimeFormatter.ofPattern(DateUtil.HH_MM_A));
             }
             return LocalTime.parse(normalizeTime(time));
@@ -190,7 +192,7 @@ public final class DateUtil extends DateUtils {
     }
 
     private static String normalizeTime(final String time) {
-        if(is12HourPattern(time)){
+        if (is12HourPattern(time)) {
             return StringUtils.leftPad(time, 8, "0");
         }
         return StringUtils.leftPad(time, 5, "0");
@@ -226,7 +228,8 @@ public final class DateUtil extends DateUtils {
                 new Timestamp(older.getTime()), new Timestamp(newer.getTime()), timeUnit);
     }
 
-    public static long getDiffDays(final Instant start, final Instant end, final ZoneId zoneId, final boolean startOfDay) {
+    public static long getDiffDays(final Instant start, final Instant end, final ZoneId zoneId,
+            final boolean startOfDay) {
         final LocalDateTime dtStart = LocalDateTime.ofInstant(start, zoneId);
         final LocalDateTime dtEnd = LocalDateTime.ofInstant(end, zoneId);
         if (startOfDay) {

@@ -32,11 +32,11 @@ public class Lock extends _BaseModelId {
     @Column(name = "firmware_version")
     private String firmwareVersion;
 
-    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+    @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
     @Column(name = "registry_date")
     private Timestamp registryDate;
 
-    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+    @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
     @Column(name = "update_date")
     private Timestamp updateDate;
 

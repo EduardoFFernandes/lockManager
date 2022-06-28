@@ -21,7 +21,7 @@ public class Item extends _BaseModelId {
 
     private static final long serialVersionUID = 2872707560912382028L;
 
-    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+    @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
     @Column(name = "registry_date")
     private Timestamp registryDate;
 

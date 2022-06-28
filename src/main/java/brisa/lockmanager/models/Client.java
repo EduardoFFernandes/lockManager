@@ -16,11 +16,11 @@ public class Client extends _BaseModelId {
 
 	private static final long serialVersionUID = -2188114092186464428L;
 
-	@JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+	@JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
 	@Column(name = "registry_date")
 	private Timestamp registryDate;
 
-	@JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+	@JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
 	@Column(name = "update_date")
 	private Timestamp updateDate;
 
