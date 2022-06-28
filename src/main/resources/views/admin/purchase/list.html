@@ -106,6 +106,7 @@
                                                 <i class="mdi mdi-cart icon-resize"></i>
                                             </a>
                                     </span>
+                                    <!-- <div id="" th:replace="admin/_fragments/modalListItens"></div> -->
                                     <a class="action-icon edit"
                                     data-toggle="dropdown" href="#"
                                     role="button"> <i
@@ -169,11 +170,6 @@
                 $('#modalDeleteDesc').html([[#{message.warning.delete.desc}]]);
             });
         });
-        
-        $('#showItens').click(function(){
-            var index = $(this).parents('tr').index();
-            alert('you click an input on row #' + index);
-    	});
     </script>
 </div>
 

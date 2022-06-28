@@ -1,4 +1,3 @@
-
 <div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="modalListItens">
 
     <div id="modalListItens" class="modal fade" tabindex="-1"
@@ -25,9 +24,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr th:each="object : ${objects[0].lstPurchaseItem}">
-                            <td th:text="${object.lock.serialNumber}"></td>
-                            <td th:text="${object.lock.lockModel}"></td>
+                        <!-- <tr id="listItens" th:each="row : ${object.lstPurchaseItem}">
+                            <td th:text="${row.lock.serialNumber}"></td>
+                            <td th:text="${row.lock.lockModel}"></td>
                         </tr> -->
                     </tbody>
                 </table>
