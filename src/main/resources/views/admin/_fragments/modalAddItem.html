@@ -22,7 +22,7 @@
                     <div class="col-12">
                         <div class="mt-4">
                             <form id="addForm"
-                                th:action="@{/admin/lock/edit}"
+                                th:action="@{/admin/item/edit}"
                                 method="post" data-parsley-validate
                                 data-parsley-trigger="focusout">
 
@@ -38,54 +38,35 @@
                                     </div>
 
                                     <div class="form-group col-6">
-                                        <label th:text="#{client}"></label>
-                                        <div>
-                                            <select
-                                                class="form-control select2"
-                                                data-parsley-errors-container="#select2-error-2">
-                                                <option value=""
-                                                    th:text="#{select}"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-12">
                                         <label th:text="#{address}"></label>
                                         <input type="text"
                                             class="form-control"
                                             data-parsley-maxlength="255" />
                                     </div>
+                                    
                                 </div>
-                                    <div
-                                        class="checkbox checkbox-primary pb-1 checkbox-width ml-1 checkboxStyle">
-                                        <input type="checkbox"
-                                            class="form-control d-none"
-                                            id="sensor"
-                                            name="sensor">
-                                        <label th:text="#{sensor}"></label>
+                                
+                                <div
+                                    class="checkbox checkbox-primary pb-1 checkbox-width ml-1 checkboxStyle">
+                                    <input type="checkbox"
+                                        class="form-control d-none"
+                                        id="sensor" name="sensor"
+                                        value="sensor"> <label
+                                        for="sensor" th:text="#{sensor}"></label>
+                                </div>
+                                <div class="form-group mb-1 mt-4 text-right">
+                                    <div>
+                                        <button type="submit"
+                                            class="btn btn-primary waves-effect waves-light"
+                                            th:text="#{save}"></button>
+                                        <a
+                                            class="btn btn-secondary waves-effect ml-1"
+                                            data-dismiss="modal"
+                                            th:text="#{cancel}"></a>
                                     </div>
-                                <!-- <div class="d-flex align-items-center">
-                                    <div class="checkbox checkbox-primary pb-1 checkbox-width ml-1">
-                                        <input type="checkbox" class="" id="applyToExistingUsers" name="applyToExistingUsers" th:checked="*{applyToExistingUsers}">
-                                        <label for="applyToExistingUsers"></label>
-                                    </div>
-                                    <label th:text="#{apply.to.existing.users}" class="mb-0 pt-2"></label>
-                                </div> -->
+                                </div>
                             </form>
-                            
-                            <div class="form-group mb-1 mt-4 text-right">
-                            <div>
-                                <button type="submit"
-                                    class="btn btn-primary waves-effect waves-light"
-                                    th:text="#{save}"></button>
-                                <a
-                                    class="btn btn-secondary waves-effect ml-1"
-                                    data-dismiss="modal"
-                                    th:text="#{cancel}"></a>
-                            </div>
-                        </div>
+
                         </div>
                     </div>
                 </div>
@@ -100,7 +81,7 @@
 </div>
 
 <style>
-.checkboxStyle{
+.checkboxStyle {
     padding-left: 14px;
 }
 </style>
