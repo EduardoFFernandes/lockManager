@@ -13,5 +13,7 @@ public interface ItemRepository extends BaseRepository<Item, Long> {
     List<Item> findAll();
 
     List<Item> findAllByPurchaseIsNull();
+    
+    List<Item> findAllByPurchaseId(Long purchaseId);
 
 }

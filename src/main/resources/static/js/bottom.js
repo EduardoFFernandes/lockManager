@@ -526,6 +526,31 @@ function buildDataTable(columnDefinitions) {
             >`,
     };
 }
+function buildListItemsDataTable(data, columns) {
+    return {
+		data,
+		columns,
+		destroy: true,
+        language: createLanguageDataTable(),
+        drawCallback: dataTableDrawCallbackFunction,
+        autoWidth: false,
+        responsive: {
+            details: false
+        },
+        dom:
+            `<'row'
+                <'col-sm-12 col-md-6 pr-0'f>
+                <'col-sm-12 col-md-6'l>
+            >
+            <'row'
+                <'col-sm-12't>
+            >
+            <'row'
+                <'col-sm-12 col-md-4'i>
+                <'col-sm-12 col-md-8'p>
+            >`,
+    };
+}
 
 function buildInvoiceDataTable(columnDefinitions) {
 
