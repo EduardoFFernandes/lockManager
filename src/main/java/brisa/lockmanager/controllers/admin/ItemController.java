@@ -37,7 +37,6 @@ public class ItemController extends BaseAdminController<ItemRepository> {
         }
 
         object.setRegistryDate(now);
-        System.out.println(object.getLock().getId());
         this.repository.save(object);
         redirect.addFlashAttribute(Alerts.success());
         return this.forward(ADMIN_LOCK_LIST);

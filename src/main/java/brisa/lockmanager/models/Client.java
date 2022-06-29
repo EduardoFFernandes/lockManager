@@ -79,7 +79,7 @@ public class Client extends _BaseModelId {
 	}
 
 	public String getCellphone() {
-		return this.cellphone;
+		return "(" + this.cellphone.substring(0, 2) + ") " + this.cellphone.substring(2, 12) ;
 	}
 
 	public void setCellphone(final String cellphone) {

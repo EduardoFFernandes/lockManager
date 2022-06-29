@@ -81,7 +81,7 @@
 
                         <tbody>
                             <tr th:each="object : ${objects}">
-                                <td th:text="${object.registryDate}"></td>
+                                <td th:text="${#dates.format(object.registryDate, 'dd/MM/yyyy')}"></td>
                                 <td th:text="${object.name}"></td>
                                 <td th:text="${object.address}"></td>
                                 <td
