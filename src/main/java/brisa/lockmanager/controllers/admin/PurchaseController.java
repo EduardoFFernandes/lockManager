@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,132 +32,134 @@ import brisa.lockmanager.repositories.PurchaseRepository;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller
+@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class PurchaseController extends BaseAdminController<PurchaseRepository> {
 
-    @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
-    private LockRepository lockRepository;
-    @Autowired
-    private ItemRepository itemRepository;
+	@Autowired
+	private ClientRepository clientRepository;
+	@Autowired
+	private LockRepository lockRepository;
+	@Autowired
+	private ItemRepository itemRepository;
 
-    private static final String OBJECTS = "objects";
-    private static final String LST_LOCK = "lstLock";
-    private static final String LST_CLIENT = "lstClient";
-    private static final String LST_ITEM = "lstItem";
+	private static final String OBJECTS = "objects";
+	private static final String LST_LOCK = "lstLock";
+	private static final String LST_CLIENT = "lstClient";
+	private static final String LST_ITEM = "lstItem";
 
-    @GetMapping(ADMIN_PURCHASE_LIST)
-    public String index(final Model model) {
+	@GetMapping(ADMIN_PURCHASE_LIST)
+	public String index(final Model model) {
 
-        final List<Purchase> lstPurchase = this.repository.findAll();
+		final List<Purchase> lstPurchase = this.repository.findAll();
 
-        model.addAttribute(OBJECTS, lstPurchase);
-        return ADMIN_PURCHASE_LIST;
-    }
+		model.addAttribute(OBJECTS, lstPurchase);
+		return ADMIN_PURCHASE_LIST;
+	}
 
-    @GetMapping(ADMIN_PURCHASE_EDIT)
-    @ApiIgnore
-    public String showAdd(final Model model) {
+	@GetMapping(ADMIN_PURCHASE_EDIT)
+	@ApiIgnore
+	public String showAdd(final Model model) {
 
-        final Purchase object = new Purchase();
+		final Purchase object = new Purchase();
 
-        model.addAttribute(LST_LOCK, this.lockRepository.findAll());
-        model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
-        model.addAttribute(LST_ITEM, this.itemRepository.findAllByPurchaseIsNull());
-        model.addAttribute(OBJECT, object);
-        return ADMIN_PURCHASE_EDIT;
-    }
+		model.addAttribute(LST_LOCK, this.lockRepository.findAll());
+		model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
+		model.addAttribute(LST_ITEM, this.itemRepository.findAllByPurchaseIsNull());
+		model.addAttribute(OBJECT, object);
+		return ADMIN_PURCHASE_EDIT;
+	}
 
-    @GetMapping(ADMIN_PURCHASE_EDIT + "/{id}")
-    @ApiIgnore
-    public String showEdit(final Model model, @PathVariable("id") final long id) {
+	@GetMapping(ADMIN_PURCHASE_EDIT + "/{id}")
+	@ApiIgnore
+	public String showEdit(final Model model, @PathVariable("id") final long id) {
 
-        final Purchase object = super.repository.findById(id).orElseThrow(() -> new IllegalArgumentException());
+		final Purchase object = super.repository.findById(id).orElseThrow(() -> new IllegalArgumentException());
 
-        final List<Item> lstItem = new ArrayList<Item>();
-        lstItem.addAll(this.itemRepository.findAllByPurchaseIsNull());
-        lstItem.addAll(object.getLstPurchaseItem());
+		final List<Item> lstItem = new ArrayList<Item>();
+		lstItem.addAll(this.itemRepository.findAllByPurchaseIsNull());
+		lstItem.addAll(object.getLstPurchaseItem());
 
-        model.addAttribute(LST_LOCK, this.lockRepository.findAll());
-        model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
-        model.addAttribute(LST_ITEM, lstItem);
-        model.addAttribute(OBJECT, object);
-        return ADMIN_PURCHASE_EDIT;
-    }
+		model.addAttribute(LST_LOCK, this.lockRepository.findAll());
+		model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
+		model.addAttribute(LST_ITEM, lstItem);
+		model.addAttribute(OBJECT, object);
+		return ADMIN_PURCHASE_EDIT;
+	}
 
-    @PostMapping(ADMIN_PURCHASE_EDIT)
-    @ApiIgnore
-    @Transactional
-    public String save(@Valid @ModelAttribute(OBJECT) final Purchase object, final BindingResult result,
-            final RedirectAttributes redirect, final Model model) {
+	@PostMapping(ADMIN_PURCHASE_EDIT)
+	@ApiIgnore
+	@Transactional
+	public String save(@Valid @ModelAttribute(OBJECT) final Purchase object, final BindingResult result,
+			final RedirectAttributes redirect, final Model model) {
 
-        final boolean isEditing = object.getId() != null;
-        final Timestamp now = DateUtil.getCurrentTimestamp();
+		final boolean isEditing = object.getId() != null;
+		final Timestamp now = DateUtil.getCurrentTimestamp();
 
-        if (result.hasErrors()) {
-            model.addAttribute(Alerts.error());
-            model.addAttribute(LST_LOCK, this.lockRepository.findAll());
-            model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
-            model.addAttribute(LST_ITEM, this.itemRepository.findAllByPurchaseIsNull());
-            model.addAttribute(OBJECT, object);
-            return ADMIN_PURCHASE_EDIT;
-        }
+		if (result.hasErrors()) {
+			model.addAttribute(Alerts.error());
+			model.addAttribute(LST_LOCK, this.lockRepository.findAll());
+			model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
+			model.addAttribute(LST_ITEM, this.itemRepository.findAllByPurchaseIsNull());
+			model.addAttribute(OBJECT, object);
+			return ADMIN_PURCHASE_EDIT;
+		}
 
-        if (isEditing) {
-            final Purchase currentObject = this.repository.findById(object.getId()).get();
-            object.setRegistryDate(currentObject.getRegistryDate());
-            object.setUpdateDate(now);
+		if (isEditing) {
+			final Purchase currentObject = this.repository.findById(object.getId()).get();
+			object.setRegistryDate(currentObject.getRegistryDate());
+			object.setUpdateDate(now);
 
-            if (!currentObject.getLstPurchaseItem().isEmpty()) {
-                currentObject.getLstPurchaseItem().forEach(x -> {
-                    x.setPurchase(null);
-                    this.itemRepository.save(x);
-                });
-            }
+			if (!currentObject.getLstPurchaseItem().isEmpty()) {
+				currentObject.getLstPurchaseItem().forEach(x -> {
+					x.setPurchase(null);
+					this.itemRepository.save(x);
+				});
+			}
 
-            if (!object.getLstPurchaseItem().isEmpty()) {
-                object.getLstPurchaseItem().forEach(x -> {
-                    x.setPurchase(object);
-                    this.itemRepository.save(x);
-                });
-            }
-        } else {
-            object.setRegistryDate(now);
+			if (!object.getLstPurchaseItem().isEmpty()) {
+				object.getLstPurchaseItem().forEach(x -> {
+					x.setPurchase(object);
+					this.itemRepository.save(x);
+				});
+			}
+		} else {
+			object.setRegistryDate(now);
 
-            if (!object.getLstPurchaseItem().isEmpty()) {
-                object.getLstPurchaseItem().forEach(x -> {
-                    x.setPurchase(object);
-                    this.itemRepository.save(x);
-                });
-            }
-        }
+			if (!object.getLstPurchaseItem().isEmpty()) {
+				object.getLstPurchaseItem().forEach(x -> {
+					x.setPurchase(object);
+					this.itemRepository.save(x);
+				});
+			}
+		}
 
-        this.repository.save(object);
+		this.repository.save(object);
 
-        redirect.addFlashAttribute(Alerts.success());
-        return this.forward(ADMIN_PURCHASE_LIST);
-    }
+		redirect.addFlashAttribute(Alerts.success());
+		return this.forward(ADMIN_PURCHASE_LIST);
+	}
 
-    @GetMapping(ADMIN_PURCHASE_DELETE)
-    @ApiIgnore
-    @Transactional
-    public String delete(final RedirectAttributes redirect, final Model model, @RequestParam("id") final long id) {
+	@GetMapping(ADMIN_PURCHASE_DELETE)
+	@ApiIgnore
+	@Transactional
+	public String delete(final RedirectAttributes redirect, final Model model, @RequestParam("id") final long id) {
 
-        final Purchase object = super.repository.findById(id).get();
+		final Purchase object = super.repository.findById(id).get();
 
-        if (object != null) {
-            super.repository.delete(object);
-        }
+		if (object != null) {
+			super.repository.delete(object);
+		}
 
-        redirect.addFlashAttribute(Alerts.success());
-        return this.forward(ADMIN_PURCHASE_LIST);
-    }
-
-    @GetMapping(ADMIN_PURCHASE_ITEMS)
-    @ResponseBody
-    public ResponseEntity<?> findItems() {
-
-        return ResponseEntity.ok().body(true);
-    }
-
+		redirect.addFlashAttribute(Alerts.success());
+		return this.forward(ADMIN_PURCHASE_LIST);
+	}
+	
+	@GetMapping(path =  { ADMIN_PURCHASE_ITEMS + "/{id}" })
+	@ResponseBody
+	public ResponseEntity<?> findItems(@PathVariable(value = "id") final Long id) {
+		
+		final List<Item> lstItem =  this.itemRepository.findAllByPurchaseId(id);
+		return ResponseEntity.ok().body(lstItem);
+	}
+	
 }
