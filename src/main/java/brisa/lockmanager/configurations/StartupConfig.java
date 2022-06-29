@@ -121,8 +121,8 @@ public class StartupConfig {
             final Timestamp now = DateUtil.getCurrentTimestamp();
 
             object.setRegistryDate(now);
-            object.setDueDate(now);
-            object.setPurchaseDate(now);
+//            object.setDueDate(now);
+//            object.setPurchaseDate(now);
             object.setClient(clientRepository.findFirstByOrderByIdAsc());
 
             repository.save(object);
@@ -142,7 +142,6 @@ public class StartupConfig {
             object.setRegistryDate(now);
             object.setInstallationLocation(DEFAULT_MESSAGE_STRING);
             object.setStatus(ItemStatus.OFF);
-            object.setPurchase(purchaseRepository.findFirstByOrderByIdAsc());
             object.setPrice(BigDecimal.TEN);
             object.setLock(lockRepository.findFirstByOrderByIdAsc());
             object.setSensor(true);

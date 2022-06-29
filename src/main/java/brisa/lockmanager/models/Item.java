@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import brisa.lockmanager.commons.utils.DateUtil;
 
@@ -21,7 +23,7 @@ public class Item extends _BaseModelId {
 
     private static final long serialVersionUID = 2872707560912382028L;
 
-    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+    @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
     @Column(name = "registry_date")
     private Timestamp registryDate;
 
@@ -31,10 +33,12 @@ public class Item extends _BaseModelId {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_purchase")
+    @JsonIgnore
     private Purchase purchase;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_lock")
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Lock lock;
 
     @Column(length = 50)

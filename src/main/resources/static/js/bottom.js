@@ -344,7 +344,7 @@ function formatStartEndDate(startValue, endValue) {
     var startDate, endDate;
     var startTime = '#startTime';
     var endTime = '#endTime';
-
+    
     if ($(startTime).val() !== undefined
         && $(endTime).val() !== undefined
         && $(startTime).val() !== ''
@@ -401,8 +401,8 @@ function initDatepicker() {
         $('.datepicker').datepicker({
             autoclose: true,
             todayHighlight: true,
-            format:  DateUtil.dateFormat.default,
-            language: 'pt',
+            format: 'dd/mm/yyyy',
+            language: 'pt-BR',
             clearBtn: false
         });
     }
@@ -506,6 +506,31 @@ function buildDataTable(columnDefinitions) {
 
     return {
         columnDefs : columnDefinitions,
+        language: createLanguageDataTable(),
+        drawCallback: dataTableDrawCallbackFunction,
+        autoWidth: false,
+        responsive: {
+            details: false
+        },
+        dom:
+            `<'row'
+                <'col-sm-12 col-md-6 pr-0'f>
+                <'col-sm-12 col-md-6'l>
+            >
+            <'row'
+                <'col-sm-12't>
+            >
+            <'row'
+                <'col-sm-12 col-md-4'i>
+                <'col-sm-12 col-md-8'p>
+            >`,
+    };
+}
+function buildListItemsDataTable(data, columns) {
+    return {
+		data,
+		columns,
+		destroy: true,
         language: createLanguageDataTable(),
         drawCallback: dataTableDrawCallbackFunction,
         autoWidth: false,
@@ -747,7 +772,6 @@ function initCheckAssociations(){
         $('.checkAssociations').click(function() {
             var id = $(this).children("a").data("id");
             var url = urlCheckAssociations + "/" + id;
-            debugger
             modalDeleteWarning = $($(this).attr("data-target"))
             call(GET, url, handleCheckAssociationsResponse);
         });

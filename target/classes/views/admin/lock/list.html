@@ -89,7 +89,7 @@
                                     th:text="${object.lockModel} ? ${object.lockModel.name} : ''"></td>
                                 <td
                                     th:text="${object.client} ? ${object.client.name} : ''"
-                                    data-placement="top"
+                                    data-placement="auto"
                                     data-trigger="hover"
                                     th:data-toggle="${object.client} ? 'popover' : ''"
                                     data-html="true"
@@ -101,7 +101,7 @@
                                     th:title="${object.client} ? ${object.client.name} : ''"></td>
                                 <td
                                     th:text="${object.warehouse} ? ${object.warehouse.name} : ''"
-                                    data-placement="top"
+                                    data-placement="auto"
                                     data-trigger="hover"
                                     th:data-toggle="${object.warehouse} ? 'popover' : ''"
                                     data-html="true"
@@ -110,11 +110,20 @@
                                     th:title="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
+                                    <span data-toggle="modal"
+                                          data-target="#modalAddItem">
+                                            <a class="action-icon edit"
+                                               id="showItens"
+                                               href="#"
+                                               role="button">
+                                               <i class="mdi mdi-plus-circle-outline icon-resize"></i>
+                                            </a>
+                                    </span>
                                     <a class="action-icon edit"
                                     data-toggle="dropdown" href="#"
                                     role="button"> <i
                                         class="mdi mdi-menu icon-resize"></i>
-                                </a>
+                                    </a>
                                     <div
                                         class="dropdown-menu dropdown-menu-left profile-dropdown">
                                         <ul class="list-inline mb-0">
