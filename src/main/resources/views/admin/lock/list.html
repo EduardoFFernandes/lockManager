@@ -110,11 +110,12 @@
                                     th:title="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
-                                    <span data-toggle="modal"
-                                          data-target="#modalAddItem">
+                                    <span>
                                             <a class="action-icon edit"
                                                id="showItens"
                                                href="#"
+                                               th:data-id="${object.id}"
+                                               onClick="javascript: showModal(this)"
                                                role="button">
                                                <i class="mdi mdi-plus-circle-outline icon-resize"></i>
                                             </a>
@@ -181,7 +182,14 @@
             $('#modalDeleteWarning').on('hidden.bs.modal', function () {
                 $('#modalDeleteDesc').html([[#{message.warning.delete.desc}]]);
             });
+            
         });
+            function showModal(it) {
+            	var idLock = $(it).data('id')
+            	$('#idLock').val(idLock);
+            	$('#modalAddItem').modal('show')
+            }
+        
     </script>
 </div>
 

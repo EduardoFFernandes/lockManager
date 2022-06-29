@@ -5,6 +5,8 @@
         style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+            
+            <input type=hidden name="objectId" value="" id="objectId" />
 
                 <div class="modal-header">
                     <h4 class="modal-title" id="mySmallModalLabel">
@@ -24,10 +26,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr id="listItems" th:each="item : ${purchaseItems}">
+                        <!-- <tr id="listItems" th:each="item : ${objects[0].purchaseItems}">
                             <td th:text="${item.lock.serialNumber}"></td>
                             <td th:text="${item.lock.lockModel}"></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
