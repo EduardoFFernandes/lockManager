@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Invoice</title>
+    <link rel="stylesheet" href="invoice.css" media="all" />
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <img th:src="@{${invoice.getImage}}"/>
+      </div>
+      <h1>BRISA INVOICE TEMPLATE</h1>
+      <table class="tableHeader">
+      	<tr>
+      		<td class="firstColumn">CLIENT</td>
+      		<td th:text="${invoice.getDestinataryName}" class="segundaColuna" style="width: 45%">Client's name</td>
+      		<td th:text="${invoice.getCompanyName}" class="thirdColumn" style="width: 45%"> Company Name</td>
+      	</tr>
+      	<tr>
+      		<td class="firstColumn">ADDRESS</td>
+      		<td th:text="${invoice.getDestinataryAdress} + ', ' + ${invoice.getDestinataryPostal}" class="segundaColuna">Client's Adress and postal code</td>
+      		<td th:text="${invoice.getAdress}" class="thirdColumn"> 455 Foggy Heights,</td>
+      	</tr>
+      	<tr>
+      		<td class="firstColumn">DATE</td>
+      		<td th:text="${invoice.getDate}" class="segundaColuna">Current date</td>
+      		<td th:text="${invoice.getPostal}" class="thirdColumn"> Company postal</td>
+      	</tr>
+      	<tr>
+      		<td class="firstColumn">DUE DATE</td>
+			<td th:text="${invoice.getDueDate}" class="segundaColuna"> Due Date</td>
+      	</tr>
+      	<tr>
+      		<td class="firstColumn">INVOICE ID</td>
+			<td th:text="${invoice.getId}" class="segundaColuna"> Invoice Id</td>
+      	</tr>       	
+      </table>
+      
+    </header>
+    <main>
+      <table class="tabela">
+        <thead>
+          <tr>
+            <th class="service">PRODUCT</th>
+            <th class="desc">DESCRIPTION</th>
+            <th>PRICE</th>
+            <th>QTY</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="item : ${invoice.itens}" >
+            <td th:text ="${item.getName}" class="service">Design</td>
+            <td th:text ="${item.getDescription}" class="desc">Description of the item</td>
+            <td th:text="'$' + ${item.getPrice}" class="unit">$40.00</td>
+            <td th:text="${item.getQuantity}" class="qty">26</td>
+            <td th:text="'$' + ${item.getAmount}" class="total">$1,040.00</td>
+          </tr>
+          <tr>
+            <td colspan="4">SUBTOTAL</td>
+            <td th:text="'$' + ${invoice.getSubtotal}" class="total">$5,200.00</td>
+          </tr>
+          <tr>
+            <td th:text="'TAX ' + ${invoice.getTaxRate} + '%'" colspan="4">TAX 25%</td>
+            <td th:text="'$' + ${invoice.getTax}" class="total">$1,300.00</td>
+          </tr>
+          <tr>
+            <td colspan="4">DISCOUNT</td>
+            <td th:text="'$' + ${invoice.getDiscount}" class="total">$1,300.00</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="grand total">GRAND TOTAL</td>
+            <td th:text="'$' + ${invoice.getTotal}" class="grand total">$6,500.00</td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="notices">
+        <div>Terms and Conditions:</div>
+        <div th:text="${invoice.termsAndConditions}" class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+      </div>
+    </main>
+    <footer>
+      Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+  </body>
+</html>

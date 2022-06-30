@@ -1,0 +1,158 @@
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+a {
+    color: #5D6975;
+    text-decoration: underline;
+}
+
+body {
+    position: relative;
+    width: 100%;
+    height: 29.7cm;
+    margin: 0 auto;
+    color: #001028;
+    background: #FFFFFF;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-family: Arial;
+}
+
+header {
+    padding: 10px 0;
+    margin-bottom: 30px;
+}
+
+#logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#logo img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1 {
+    border-top: 1px solid #5D6975;
+    border-bottom: 1px solid #5D6975;
+    color: #5D6975;
+    font-size: 2.4em;
+    line-height: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+
+#project {
+    text-align: left;
+}
+
+#project span {
+    color: #5D6975;
+    text-align: right;
+    width: 52px;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 0.8em;
+    padding-top: 1px;
+}
+
+#company {
+    text-align: right;
+}
+
+#project div, #company div {
+    white-space: nowrap;
+}
+
+.tableHeader {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.firstColumn {
+    color: #5D6975;
+    text-align: right;
+    width: 52px;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 0.8em;
+    padding-top: 1px;
+}
+
+.thirdColumn {
+    text-align: right;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+
+.tabela tr:nth-child(2n-1) td {
+    background: #F5F5F5;
+}
+
+.tabela th, .tabela td {
+    text-align: center;
+}
+
+.tabela th {
+    padding: 5px 20px;
+    color: #5D6975;
+    border-bottom: 1px solid #C1CED9;
+    white-space: nowrap;
+    font-weight: normal;
+}
+
+.tabela .service, .tabela .desc {
+    text-align: left;
+}
+
+.tabela td {
+    padding: 20px;
+    text-align: right;
+}
+
+.tabela td.service, .tabela td.desc {
+    vertical-align: top;
+}
+
+.tabela td.unit, .tabela td.qty, .tabela td.total {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.totalSum {
+    font-size: 1.2em;
+    border-top: 1px solid #5D6975;;
+}
+
+.tabela td.grand {
+    border-top: 1px solid #5D6975;;
+    font-size: 1.2em;
+}
+
+#notices .notice {
+    color: #5D6975;
+    font-size: 1.2em;
+}
+
+footer {
+    color: #5D6975;
+    width: 100%;
+    height: 30px;
+    position: relative;
+    bottom: 0;
+    top: 90px;
+    border-top: 1px solid #C1CED9;
+    padding: 8px 0 0 45%;
+    text-align: center;
+}
