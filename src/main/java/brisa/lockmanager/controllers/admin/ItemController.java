@@ -29,15 +29,21 @@ public class ItemController extends BaseAdminController<ItemRepository> {
             final RedirectAttributes redirect, final Model model) {
 
         final Timestamp now = DateUtil.getCurrentTimestamp();
-
+        
+        final boolean isEditing = object.getId() != null;
         if (result.hasErrors()) {
             model.addAttribute(Alerts.error());
             model.addAttribute(OBJECT, object);
             return ADMIN_LOCK_LIST;
         }
 
-        object.setRegistryDate(now);
-        System.out.println(object.getLock().getId());
+        if (isEditing) {
+            final Item currentObject = this.repository.findById(object.getId()).get();
+            object.setRegistryDate(currentObject.getRegistryDate());
+            object.setUpdateDate(now);
+        } else {
+            object.setRegistryDate(now);
+        }
         this.repository.save(object);
         redirect.addFlashAttribute(Alerts.success());
         return this.forward(ADMIN_LOCK_LIST);

@@ -158,7 +158,7 @@
                 $.ajax({
                     url: [[@{${T(brisa.lockmanager.Routes).ADMIN_PURCHASE_ITEMS}}]] + "/" + id,
                     success: function(response) {
-                   		var purchaseItems = response.map(x => { return Object.values({serialNumber: x.lock.serialNumber, lockModel: x.lock.lockModel ? x.lock.lockModel.name : ''})})
+                   		var purchaseItems = response.map(x => { return Object.values({serialNumber: x.lockSerialNumber, lockModel: x.lockModelName ? x.lockModelName : ''})})
                     	$('#datatableListItems').DataTable(
                     			buildListItemsDataTable(purchaseItems, columns)
                     	);

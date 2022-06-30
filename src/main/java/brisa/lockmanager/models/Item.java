@@ -10,10 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import brisa.lockmanager.commons.utils.DateUtil;
 
@@ -21,9 +21,10 @@ import brisa.lockmanager.commons.utils.DateUtil;
 @Table(name = "tb_item")
 public class Item extends _BaseModelId {
 
-    private static final long serialVersionUID = 2872707560912382028L;
 
-    @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
+	private static final long serialVersionUID = -4756385321153775454L;
+
+	@JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
     @Column(name = "registry_date")
     private Timestamp registryDate;
 
@@ -38,7 +39,7 @@ public class Item extends _BaseModelId {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_lock")
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    @JsonIgnore
     private Lock lock;
 
     @Column(length = 50)
@@ -50,6 +51,12 @@ public class Item extends _BaseModelId {
 
     @Column(name = "installation_location", length = 150)
     private String installationLocation;
+    
+    @Transient
+    private String lockSerialNumber;
+
+    @Transient
+    private String lockModelName;
 
     // ---------------------------------------------------------------------------------------------
     // Constructors
@@ -125,4 +132,19 @@ public class Item extends _BaseModelId {
     public void setInstallationLocation(String installationLocation) {
         this.installationLocation = installationLocation;
     }
+
+	public String getLockSerialNumber() {
+		if (this.lock != null) {
+			return lock.getSerialNumber();
+		}
+		return null;
+	}
+
+	public String getLockModelName() {
+		if (this.lock != null && this.lock.getLockModel() != null) {
+			return lock.getLockModel().getName();
+		}
+		return null;
+	}
+
 }

@@ -47,7 +47,6 @@ public class LockController extends BaseAdminController<LockRepository> {
     public String index(final Model model) {
 
         final List<Lock> lstLock = this.repository.findAll();
-
         model.addAttribute(OBJECTS, lstLock);
         return ADMIN_LOCK_LIST;
     }

@@ -110,16 +110,14 @@
                                     th:title="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
-                                    <span>
-                                            <a class="action-icon edit"
-                                               id="showItens"
-                                               href="#"
-                                               th:data-id="${object.id}"
-                                               onClick="javascript: showModal(this)"
-                                               role="button">
-                                               <i class="mdi mdi-plus-circle-outline icon-resize"></i>
-                                            </a>
-                                    </span>
+                                    <a class="action-icon edit"
+                                    	href="#"
+                                    	role="button"
+                                       	th:data-id="${object.id}"
+                                      	onClick="javascript: showModal(this)">
+                               			<i th:if="${object.item}" class="mdi mdi-pencil-box icon-resize"></i>
+                               			<i th:if="!${object.item}" class="mdi mdi-plus-circle-outline icon-resize"></i>
+                                    </a>
                                     <a class="action-icon edit"
                                     data-toggle="dropdown" href="#"
                                     role="button"> <i
@@ -184,11 +182,24 @@
             });
             
         });
-            function showModal(it) {
-            	var idLock = $(it).data('id')
-            	$('#idLock').val(idLock);
-            	$('#modalAddItem').modal('show')
-            }
+        function showModal(object) {
+        	var idLock = $(object).data('id') 
+        	var lock = [[${objects}]].filter(x => x.id === idLock)[0]
+        	$('#idLock').val(idLock);
+        	if(lock.item) {
+	        	$('#idItem').val(lock.item.id);
+	        	$('#price').val(Number(lock.item.price).toFixed(2));
+	        	$('#sensor').prop("checked", lock.item.sensor);
+	       		$('#installationLocation').val(lock.item.installationLocation);
+        	} else {
+        		$('#idItem').val(null);
+	        	$('#price').val(Number(0).toFixed(2));
+	        	$('#sensor').prop("checked", false);
+	       		$('#installationLocation').val('');
+        	}
+        	
+        	$('#modalAddItem').modal('show')
+        }
         
     </script>
 </div>

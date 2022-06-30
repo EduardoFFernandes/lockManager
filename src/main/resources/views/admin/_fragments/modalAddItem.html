@@ -28,10 +28,11 @@
                                 
                                 <input type="hidden" name="status" id="status" value="OFF"/>
                                 <input type="hidden" name="lock.id" id="idLock" value=""/> 
+                                <input type="hidden" name="id" id="idItem" value=""/> 
 
                                 <div class="row">
 
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-2">
                                         <label th:text="#{value}"></label>
                                         <div>
                                             <input type="text"
@@ -41,7 +42,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-10">
                                         <label th:text="#{address}"></label>
                                         <input type="text"
                                             name="installationLocation"
