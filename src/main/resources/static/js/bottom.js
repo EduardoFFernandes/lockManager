@@ -552,51 +552,6 @@ function buildListItemsDataTable(data, columns) {
     };
 }
 
-function buildInvoiceDataTable(columnDefinitions) {
-
-    // $.fn.dataTable.moment(DateUtil.dateFormat.moment);
-
-    var dataTableOpt = buildDataTable(columnDefinitions);
-    dataTableOpt.order = [[ 0, 'desc' ]]
-    dataTableOpt.dom =
-            `<'row'
-                <'col-sm-12't>
-            >
-            <'row'
-                <'col-sm-12 col-md-4'i>
-                <'col-sm-12 col-md-8'p>
-            >`;
-    return dataTableOpt;
-}
-
-function buildReportDataTable(columnDefinitions, exportFileName, buttons){
-    var dataTableOptions = buildDataTable(columnDefinitions)
-    dataTableOptions.buttons = [
-        {
-            extend: 'excel',
-            text: `<span class="mdi mdi-file-excel"></span><span> ${i18n.export} </span>`,
-            filename: exportFileName
-        }
-    ];
-    dataTableOptions.buttons = dataTableOptions.buttons.concat(buttons)
-    dataTableOptions.dom =
-    `
-        <'row'
-            <'col-sm-12 col-md-6 pr-0'f>
-            <'col-sm-12 col-md-6 pr-0'l>
-            <'col-sm-12 col-md-12 pl-0 d-flex justify-content-end excel-export-button'B>
-        >
-        <'row'
-            <'col-sm-12't>
-        >
-        <'row'
-            <'col-sm-12 col-md-4'i>
-            <'col-sm-12 col-md-8'p>
-        >
-    `
-    // dataTableOptions.dom = 'Bfrtip'
-    return dataTableOptions;
-}
 
 function createLanguageDataTable() {
 
