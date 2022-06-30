@@ -197,6 +197,7 @@
 	       		$('#modalDeleteWarning').css('zIndex', '9998');
 	            $('#deleteId').val(lock.item.id);
 	            $('#deleteForm').attr('action', [[@{${T(brisa.lockmanager.Routes).ADMIN_ITEM_DELETE}}]]);
+                $('#modalAddItemLabel').html([[#{message.info.edit.item }]]);
         	} else {
         		$('#idItem').val(null);
 	        	$('#price').val(Number(0).toFixed(2));

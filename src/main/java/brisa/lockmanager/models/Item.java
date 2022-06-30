@@ -41,7 +41,6 @@ public class Item extends _BaseModelId {
     @JsonIgnore
     private Lock lock;
 
-    @Column(length = 50)
     private ItemStatus status;
 
     private boolean sensor;
