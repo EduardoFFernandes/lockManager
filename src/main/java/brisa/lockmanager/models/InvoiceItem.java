@@ -23,7 +23,8 @@ public class InvoiceItem {
     private int quantity;
     private BigDecimal amount;
 
-    public InvoiceItem(String description, BigDecimal price, int quantity) {
+    public InvoiceItem(String name, String description, BigDecimal price, int quantity) {
+        this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
