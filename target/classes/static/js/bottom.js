@@ -651,7 +651,7 @@ function dataTableDrawCallbackFunction(settings) {
         $('#deleteId').val($(this).data('id'));
         $('#deleteForm').attr('action', $(this).data('url'));
     });
-
+    
     initBlockUi();
     fillTooltips();
     initShowHidePin();
@@ -661,6 +661,7 @@ function dataTableDrawCallbackFunction(settings) {
 }
 
 var clickedSwitcheryEl;
+
 function initSwitchery() {
 
     if ($('.switchery')[0]) {

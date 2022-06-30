@@ -48,6 +48,7 @@ public interface Routes {
     // -------------
 
     static final String ADMIN_ITEM_EDIT = ADMIN + "/item/edit";
+    static final String ADMIN_ITEM_DELETE = ADMIN + "/item/delete";
 
     // Invoice Routes
     // -------------
