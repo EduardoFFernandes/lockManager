@@ -37,6 +37,7 @@ public class ItemController extends BaseAdminController<ItemRepository> {
             return ADMIN_LOCK_LIST;
         }
 
+<<<<<<< HEAD
         if (isEditing) {
             final Item currentObject = this.repository.findById(object.getId()).get();
             object.setRegistryDate(currentObject.getRegistryDate());
@@ -44,6 +45,9 @@ public class ItemController extends BaseAdminController<ItemRepository> {
         } else {
             object.setRegistryDate(now);
         }
+=======
+        object.setRegistryDate(now);
+>>>>>>> 25506ccc57f31e3fd6160da6ff5a525f3f807090
         this.repository.save(object);
         redirect.addFlashAttribute(Alerts.success());
         return this.forward(ADMIN_LOCK_LIST);
