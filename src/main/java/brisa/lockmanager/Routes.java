@@ -43,11 +43,21 @@ public interface Routes {
     static final String ADMIN_PURCHASE_EDIT = ADMIN + "/purchase/edit";
     static final String ADMIN_PURCHASE_ITEMS = ADMIN + "/purchase/items";
     static final String ADMIN_PURCHASE_DELETE = ADMIN + "/purchase/delete";
-    
+
     // Item Routes
     // -------------
-    
+
     static final String ADMIN_ITEM_EDIT = ADMIN + "/item/edit";
+
+    // Invoice Routes
+    // -------------
+
+    static final String FILE = "file://";
+    static final String PATH_INVOICE_HTML = "/Users/home/invoice.html";
+    static final String PATH_INVOICE_CSS = "/Users/home/invoice.css";
+    static final String PATH_INVOICE_PDF = "/Users/home/invoice.pdf";
+    static final String PATH_TEMPLATE = "/static/assets/invoice/template";
+    static final String ADMIN_INVOICE = ADMIN + "/invoice";
 
     // REST Routes
     // -----------
