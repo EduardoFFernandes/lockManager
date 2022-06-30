@@ -21,10 +21,9 @@ import brisa.lockmanager.commons.utils.DateUtil;
 @Table(name = "tb_item")
 public class Item extends _BaseModelId {
 
+    private static final long serialVersionUID = -4756385321153775454L;
 
-	private static final long serialVersionUID = -4756385321153775454L;
-
-	@JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
+    @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
     @Column(name = "registry_date")
     private Timestamp registryDate;
 
@@ -51,7 +50,9 @@ public class Item extends _BaseModelId {
 
     @Column(name = "installation_location", length = 150)
     private String installationLocation;
-    
+
+    private String notes;
+
     @Transient
     private String lockSerialNumber;
 
@@ -133,18 +134,26 @@ public class Item extends _BaseModelId {
         this.installationLocation = installationLocation;
     }
 
-	public String getLockSerialNumber() {
-		if (this.lock != null) {
-			return lock.getSerialNumber();
-		}
-		return null;
-	}
+    public String getLockSerialNumber() {
+        if (this.lock != null) {
+            return lock.getSerialNumber();
+        }
+        return null;
+    }
 
-	public String getLockModelName() {
-		if (this.lock != null && this.lock.getLockModel() != null) {
-			return lock.getLockModel().getName();
-		}
-		return null;
-	}
+    public String getLockModelName() {
+        if (this.lock != null && this.lock.getLockModel() != null) {
+            return lock.getLockModel().getName();
+        }
+        return null;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
 }

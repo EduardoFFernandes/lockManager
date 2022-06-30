@@ -52,10 +52,8 @@ public class _BaseModel implements Serializable {
     }
 
     public enum ItemStatus {
-
         INSTALLED,
         OFF,
         DEFECTIVE
-
     }
 }

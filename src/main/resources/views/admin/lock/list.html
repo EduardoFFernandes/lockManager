@@ -168,7 +168,7 @@
         $(function() {
 
             var columnsDefinitions = [ 
-                { targets : [ 4 ], orderable : false } 
+                { targets : [ 5 ], orderable : false } 
             ];
 
             if ([[${!objects?.isEmpty()}]]) {
@@ -191,13 +191,22 @@
 	        	$('#price').val(Number(lock.item.price).toFixed(2));
 	        	$('#sensor').prop("checked", lock.item.sensor);
 	       		$('#installationLocation').val(lock.item.installationLocation);
+	       		$('#notes').val(lock.item.notes);
+	       		
+	       		$('#deleteItemBtn').css('display', 'block');
+	       		$('#modalDeleteWarning').css('zIndex', '9998');
+	            $('#deleteId').val(lock.item.id);
+	            $('#deleteForm').attr('action', [[@{${T(brisa.lockmanager.Routes).ADMIN_ITEM_DELETE}}]]);
         	} else {
         		$('#idItem').val(null);
 	        	$('#price').val(Number(0).toFixed(2));
 	        	$('#sensor').prop("checked", false);
 	       		$('#installationLocation').val('');
+	       		$('#notes').val('');
+	       		$('#deleteItemBtn').css('display', 'none');
         	}
         	
+        	$('#modalAddItem').css('zIndex', '1080');
         	$('#modalAddItem').modal('show')
         }
         

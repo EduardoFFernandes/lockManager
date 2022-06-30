@@ -43,11 +43,12 @@ public interface Routes {
     static final String ADMIN_PURCHASE_EDIT = ADMIN + "/purchase/edit";
     static final String ADMIN_PURCHASE_ITEMS = ADMIN + "/purchase/items";
     static final String ADMIN_PURCHASE_DELETE = ADMIN + "/purchase/delete";
-    
+
     // Item Routes
     // -------------
-    
+
     static final String ADMIN_ITEM_EDIT = ADMIN + "/item/edit";
+    static final String ADMIN_ITEM_DELETE = ADMIN + "/item/delete";
 
     // REST Routes
     // -----------
