@@ -192,6 +192,7 @@
 	        	$('#sensor').prop("checked", lock.item.sensor);
 	       		$('#installationLocation').val(lock.item.installationLocation);
 	       		$('#notes').val(lock.item.notes);
+	       		$('#status').val(lock.item.status).change(); 
 	       		
 	       		$('#deleteItemBtn').css('display', 'block');
 	       		$('#modalDeleteWarning').css('zIndex', '9998');

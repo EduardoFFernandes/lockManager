@@ -1,139 +1,118 @@
 
 <div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="modalAddItem">
 
-    <div id="modalAddItem" class="modal fade" tabindex="-1"
-        role="dialog" aria-labelledby="mySmallModalLabel"
-        style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+	<div id="modalAddItem" class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" style="display: none;"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
 
-                <div class="modal-header">
-                    <h4 class="modal-title" id="mySmallModalLabel">
-                        <i
-                            class="mdi mdi-information-outline icon-warning"></i>
-                        <span class="ml-2" id="modalAddItemLabel"
-                            th:text="#{message.info.add.item}"></span>
-                    </h4>
-                    <button type="button" class="close"
-                        data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
+				<div class="modal-header">
+					<h4 class="modal-title" id="mySmallModalLabel">
+						<i class="mdi mdi-information-outline icon-warning"></i> <span
+							class="ml-2" id="modalAddItemLabel"
+							th:text="#{message.info.add.item}"></span>
+					</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+				</div>
 
-                <div class="mx-1 row">
-                    <div class="col-12">
-                        <div class="mt-4">
-                            <form id="addForm"
-                                th:action="@{/admin/item/edit}"
-                                method="post" data-parsley-validate
-                                data-parsley-trigger="focusout">
+				<div class="mx-1 row">
+					<div class="col-12">
+						<div class="mt-4">
+							<form id="addForm" th:action="@{/admin/item/edit}" method="post"
+								data-parsley-validate data-parsley-trigger="focusout">
 
-                                <input type="hidden" name="status"
-                                    id="status" value="OFF" /> <input
-                                    type="hidden" name="lock.id"
-                                    id="idLock" value="" /> <input
-                                    type="hidden" name="id" id="idItem"
-                                    value="" />
+								<input type="hidden" name="lock.id" id="idLock" value="" /> <input
+									type="hidden" name="id" id="idItem" value="" />
 
-                                <div class="row">
+								<div class="row">
 
-                                    <div class="form-group col-4">
-                                        <label th:text="#{price}"></label>
-                                        <div class="input-group">
-                                            <div
-                                                class="input-group-append">
-                                                <span
-                                                    class="input-group-text"><i
-                                                    class="mdi mdi-currency-usd"></i></span>
-                                            </div>
-                                            <input type="text"
-                                                name="price" id="price"
-                                                class="form-control mask-money" />
-                                        </div>
-                                    </div>
+									<div class="form-group col-4">
+										<label th:text="#{price}"></label>
+										<div class="input-group">
+											<div class="input-group-append">
+												<span class="input-group-text"><i
+													class="mdi mdi-currency-usd"></i></span>
+											</div>
+											<input type="text" name="price" id="price"
+												class="form-control mask-money" />
+										</div>
+									</div>
 
-                                    <div class="form-group col-8">
-                                        <label th:text="#{address}"></label>
-                                        <input type="text"
-                                            name="installationLocation"
-                                            id="installationLocation"
-                                            class="form-control"
-                                            data-parsley-maxlength="255" />
-                                    </div>
+									<div class="form-group col-8">
+										<label th:text="#{address}"></label> <input type="text"
+											name="installationLocation" id="installationLocation"
+											class="form-control" data-parsley-maxlength="255" />
+									</div>
 
-                                </div>
-                                <div class="form-group">
-                                    <label th:text="#{notes}"></label>
-                                    <div>
-                                        <textarea class="form-control"
-                                            rows="5" name="notes"
-                                            id="notes"
-                                            data-parsley-maxlength="300">
+								</div>
+								<div class="form-group">
+									<label th:text="#{notes}"></label>
+									<div>
+										<textarea class="form-control" rows="5" name="notes"
+											id="notes" data-parsley-maxlength="300">
                                         </textarea>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-between">
-                                    <div class="form-group col-md-4">
-                                        <label th:text="#{status}"></label>
-                                        <div>
-                                            <select
-                                                class="form-control select2"
-                                                data-minimum-results-for-search="Infinity"
-                                                name="status"
-                                                data-parsley-errors-container="#select2-error-1">
-                                               <option
-                                                    th:each="value : ${T(brisa.lockmanager.models._BaseModel.ItemStatus).values()}" th:value="${value}" th:text="#{${value}}"></option>
-                                            </select> <span id="select2-error-1"></span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div
-                                        class="checkbox checkbox-primary pb-1 checkbox-width mr-3 checkboxStyle">
-                                        <input type="checkbox"
-                                            class="form-control d-none"
-                                            id="sensor" name="sensor">
-                                        <label for="sensor"
-                                            th:text="#{sensor}"></label>
-                                    </div>
-                                </div>
+									</div>
+								</div>
+								<div class="row justify-content-between">
+									<div class="form-group col-md-4">
+										<label th:text="#{status}"></label>
+										<div>
+											<select class="form-control select2"
+												data-minimum-results-for-search="Infinity" name="status"
+												id="status" data-parsley-errors-container="#select2-error-1">
+												<option
+													th:each="value : ${T(brisa.lockmanager.models._BaseModel.ItemStatus).values()}"
+													th:value="${value}" th:text="#{${value}}"></option>
+											</select> <span id="select2-error-1"></span>
+										</div>
+									</div>
+
+									<div
+										class="checkbox checkbox-primary pb-1 checkbox-width mr-3 checkboxStyle">
+										<input type="checkbox" class="form-control d-none" id="sensor"
+											name="sensor"> <label for="sensor"
+											th:text="#{sensor}"></label>
+									</div>
+								</div>
 
 
-                                <div
-                                    class="row justify-content-between mx-1 my-2">
-                                    <div>
-                                        <a id="deleteItemBtn"
-                                            data-toggle="modal"
-                                            data-target="#modalDeleteWarning"
-                                            class="btn btn-danger waves-effect waves-light"
-                                            th:text="#{delete}"></a>
-                                    </div>
-                                    <div>
-                                        <button type="submit"
-                                            class="btn btn-primary waves-effect waves-light"
-                                            th:text="#{save}"></button>
-                                        <a
-                                            class="btn btn-secondary waves-effect ml-1"
-                                            data-dismiss="modal"
-                                            th:text="#{cancel}"></a>
-                                    </div>
-                                </div>
-                            </form>
+								<div class="row justify-content-between mx-1 my-2">
+									<div>
+										<a id="deleteItemBtn" data-toggle="modal"
+											data-target="#modalDeleteWarning"
+											class="btn btn-danger waves-effect waves-light"
+											th:text="#{delete}"></a>
+									</div>
+									<div>
+										<button type="submit"
+											class="btn btn-primary waves-effect waves-light"
+											th:text="#{save}"></button>
+										<a class="btn btn-secondary waves-effect ml-1"
+											data-dismiss="modal" th:text="#{cancel}"></a>
+									</div>
+								</div>
+							</form>
 
-                        </div>
-                    </div>
-                </div>
+						</div>
+					</div>
+				</div>
 
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
 </div>
 
 <style>
 .checkboxStyle {
-    padding-left: 14px;
+	padding-left: 14px;
 }
+
 .select2-container--open {
-    z-index: 9999999
+	z-index: 9999999
 }
 </style>
