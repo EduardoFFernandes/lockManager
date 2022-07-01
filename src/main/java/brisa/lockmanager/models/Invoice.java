@@ -82,12 +82,12 @@ public class Invoice extends _BaseModelId {
         this.image = image;
     }
 
-    public boolean isValid(String dueDate) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    public boolean isValid(String dueDate) {        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
         return sdf.parse(dueDate, new ParsePosition(0)) != null;
     }
-
+    
     public void addItem(InvoiceItem item) {
         this.itens.add(item);
     }

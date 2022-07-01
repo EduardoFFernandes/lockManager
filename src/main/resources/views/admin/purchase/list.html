@@ -126,10 +126,11 @@
                                                     <span
                                                     th:text="#{edit}"></span>
                                             </a> <a
-                                                th:href="|@{/admin/invoice}/${object.id}|"
+                                                th:data-id="${object.id}"
+                                                onClick="javascript: postMethod(this)"
                                                 class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
                                                     <i
-                                                    class="fas fa-clipboard-list font-size-16 tab-width"></i>
+                                                    class="fas fa-download font-size-16 tab-width"></i>
                                                     <span
                                                     th:text="#{invoice}"></span>
                                             </a> <span data-toggle="modal"
@@ -214,6 +215,12 @@
             });
             
         });
+        
+        function postMethod(object) {
+        	var id = $(object).data('id')
+        	// Fazer um post para ADMIN_INVOICE + id
+        }
+        
     </script>
 </div>
 
