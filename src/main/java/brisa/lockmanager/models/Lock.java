@@ -41,19 +41,13 @@ public class Lock extends _BaseModelId {
 	@Column(name = "update_date")
 	private Timestamp updateDate;
 
-	// uni-directional many-to-one association to Address
+	// uni-directional many-to-one association to LockModel
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_model", nullable = false)
 	private LockModel lockModel;
 
-	// uni-directional many-to-one association to Address
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_client", nullable = false)
-	private Client client;
-
-	// uni-directional many-to-one association to Address
+	// uni-directional many-to-one association to Warehouse
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_warehouse", nullable = false)
@@ -104,14 +98,6 @@ public class Lock extends _BaseModelId {
 
 	public void setLockModel(final LockModel lockModel) {
 		this.lockModel = lockModel;
-	}
-
-	public Client getClient() {
-		return this.client;
-	}
-
-	public void setClient(final Client client) {
-		this.client = client;
 	}
 
 	public Warehouse getWarehouse() {

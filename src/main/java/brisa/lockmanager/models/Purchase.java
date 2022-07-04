@@ -45,7 +45,7 @@ public class Purchase extends _BaseModelId {
     @Column(name = "due_date")
     private LocalDate dueDate;
 
-    // bi-directional many-to-one association to Account
+    // bi-directional many-to-one association to Purchase
     @JsonIgnore
     @OneToMany(mappedBy = "purchase")
     private List<Item> lstPurchaseItem;
