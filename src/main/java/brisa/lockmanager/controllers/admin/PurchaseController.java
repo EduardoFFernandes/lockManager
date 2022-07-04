@@ -4,15 +4,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.pdfbox.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
@@ -172,29 +174,33 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
         return ResponseEntity.ok().body(lstItem);
     }
 
-    @GetMapping(path = {
-            ADMIN_INVOICE + "/{id}"
-    })
-    @ResponseBody
-    public ResponseEntity<?> getInvoice(@PathVariable(value = "id") final Long id) throws FileNotFoundException, IOException {
+    @GetMapping(ADMIN_INVOICE + "/{id}")
+    @ApiIgnore
+    @Transactional
+    public String getInvoice(@PathVariable(value = "id") final Long id, HttpServletResponse resp) throws FileNotFoundException, IOException {
 
         final Purchase object = this.repository.findById(id).get();
 
         Invoice invoice = InvoiceService.populateInvoice(object);
+        
+        resp.setHeader("Content-disposition", "attachment; filename=invoice.pdf");
 
         File pdfFile = new File(PATH_INVOICE_PDF);
-
+        
         InvoiceService.generatePDF(invoice);
 
-        ResponseEntity<InputStreamResource> response = ResponseEntity
-                .ok()
-                .contentLength(pdfFile.length())
-                .contentType(MediaType.parseMediaType("application/pdf"))
-                .body(new InputStreamResource(new FileInputStream(pdfFile)));
-
-        InvoiceService.deleteCopiedFiles();
-
-        return response;
+        try(OutputStream out = resp.getOutputStream()) {
+            
+            InputStream inputStream = new FileInputStream(pdfFile);
+            IOUtils.copy(inputStream, resp.getOutputStream());
+            resp.flushBuffer();
+            
+            InvoiceService.deleteCopiedFiles();
+            return "/admin/lock/list";
+        } catch (Exception e) {
+//            ResponseEntity<?> response = ResponseEntity.badRequest().body(e.getMessage());
+            return ADMIN_PURCHASE_LIST;
+        }
 
     }
 
