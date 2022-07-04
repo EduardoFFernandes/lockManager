@@ -127,7 +127,7 @@
                                                     th:text="#{edit}"></span>
                                             </a> <a
                                                 th:data-id="${object.id}"
-                                                onClick="javascript: getMethod(this);"
+                                                onClick="javascript: getInvoice(this);"
                                                 href="#"
                                                 class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
                                                     <i
@@ -217,12 +217,22 @@
             
         });
         
-        function getMethod(object) {
+        function getInvoice(object){
         	var id = $(object).data('id')
-        	$.get([[@{${T(brisa.lockmanager.Routes).ADMIN_INVOICE}}]] + "/" + id, function (response) {
-        		debugger
-        		return response
-        	});
+            axios.get([[@{${T(brisa.lockmanager.Routes).ADMIN_INVOICE}}]] + "/" + id,{
+                responseType: "blob"
+            }).then(x=> {
+                const filenameHeader = x.headers["content-disposition"].split(';')[1];
+                const filename = filenameHeader.substring(filenameHeader.indexOf("=")+1);
+                const url = URL.createObjectURL(x.data); 
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', filename);
+                document.body.append(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            });
         }
         
     </script>

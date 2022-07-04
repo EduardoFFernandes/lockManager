@@ -171,39 +171,6 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
         final List<Item> lstItem = this.itemRepository.findAllByPurchaseId(id);
         return ResponseEntity.ok().body(lstItem);
     }
-
-//    @GetMapping(ADMIN_INVOICE + "/{id}")
-//    @ApiIgnore
-//    @Transactional
-//    public String getInvoice(@PathVariable(value = "id") final Long id, final RedirectAttributes redirect, HttpServletResponse resp) throws FileNotFoundException, IOException {
-//
-//        final Purchase object = this.repository.findById(id).get();
-//
-//        Invoice invoice = InvoiceService.populateInvoice(object);
-//        
-//        resp.setHeader("Content-disposition", "attachment; filename=invoice.pdf");
-//
-//        File pdfFile = new File(PATH_INVOICE_PDF);
-//        
-//        
-//        InvoiceService.generatePDF(invoice);
-//
-//        try(OutputStream out = resp.getOutputStream()) {
-//            
-//            InputStream inputStream = new FileInputStream(pdfFile);
-//            IOUtils.copy(inputStream, out);
-//            resp.flushBuffer();
-//            
-//            InvoiceService.deleteCopiedFiles();
-//            
-//            redirect.addFlashAttribute(Alerts.success());
-//            return this.forward(ADMIN_PURCHASE_LIST);
-//        } catch (Exception e) {
-////            ResponseEntity<?> response = ResponseEntity.badRequest().body(e.getMessage());
-//            return ADMIN_PURCHASE_LIST;
-//        }
-//        
-//    }
     
     @GetMapping(ADMIN_INVOICE + "/{id}")
     @ApiIgnore
