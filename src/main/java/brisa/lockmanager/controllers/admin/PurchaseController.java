@@ -198,5 +198,17 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
 
         return response;
     }
+    
+    
+    @GetMapping(path = {
+    		API_EXISTS_PURCHASE_ASSOCIATIONS + "/{idPurchase}"
+
+    })
+    @ResponseBody
+    public ResponseEntity<?> existsAssociation(@PathVariable(name = "idPurchase") final Long idPurchase) {
+    	boolean hasPurchaseItems = itemRepository.existsByPurchaseId(idPurchase);
+        return ResponseEntity.ok().body(hasPurchaseItems);
+    }
+
 
 }

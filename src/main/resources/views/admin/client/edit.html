@@ -54,9 +54,10 @@
 						<div class="form-group">
 							<label th:text="#{phone.number}"></label>
 							<div>
-								<input type="text" class="form-control phone"
-									th:field="*{cellphone}" id="phone" data-parsley-maxlength="30"
-									data-parsley-trigger="keypress change" data-parsley-phonelength />
+								<input type="text" class="form-control"
+									th:field="*{cellphone}" id="cellphone" 
+									data-parsley-maxlength="12"
+								/>
 								<ul class="parsley-errors-list filled">
 									<li class="parsley-required" th:errors="*{cellphone}"></li>
 								</ul>

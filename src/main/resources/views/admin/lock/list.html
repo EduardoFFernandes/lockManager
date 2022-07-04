@@ -135,7 +135,7 @@
                                                     class="fas fa-edit font-size-16 tab-width"></i>
                                                     <span
                                                     th:text="#{edit}"></span>
-                                            </a> <span data-toggle="modal"
+                                            </a> <span class="checkAssociations" data-toggle="modal"
                                                 data-target="#modalDeleteWarning">
                                                     <a
                                                     class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
@@ -179,6 +179,7 @@
             
             $('#modalDeleteWarning').on('hidden.bs.modal', function () {
                 $('#modalDeleteDesc').html([[#{message.warning.delete.desc}]]);
+                $('#modalDeleteWarning').find(':submit').attr('disabled', false);
             });
             
         });

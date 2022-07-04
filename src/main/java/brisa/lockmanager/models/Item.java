@@ -56,7 +56,7 @@ public class Item extends _BaseModelId {
     private String lockSerialNumber;
 
     @Transient
-    private String lockModelName;
+	private String lockModelName;
 
     // ---------------------------------------------------------------------------------------------
     // Constructors

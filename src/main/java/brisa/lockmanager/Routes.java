@@ -64,5 +64,6 @@ public interface Routes {
     // -----------
     static final String API = "/api";
     static final String API_EXISTS_LOCK_ASSOCIATIONS = API + "/lock/associations";
+    static final String API_EXISTS_PURCHASE_ASSOCIATIONS = API + "/purchase/associations";
 
 }

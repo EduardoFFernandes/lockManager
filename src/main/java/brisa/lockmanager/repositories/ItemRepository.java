@@ -15,5 +15,9 @@ public interface ItemRepository extends BaseRepository<Item, Long> {
     List<Item> findAllByPurchaseIsNull();
     
     List<Item> findAllByPurchaseId(Long purchaseId);
-
+    
+    boolean existsByPurchaseId(Long purchaseId);
+    
+    boolean existsByLockIdAndPurchaseNotNull(Long lockId);
+    
 }

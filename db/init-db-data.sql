@@ -1,9 +1,9 @@
 INSERT INTO lockmanager.tb_lock_model(name, description) VALUES ( 'EZYLOCK US 4G WF', 'Modelo com 4G e WIFI');
 
-INSERT INTO lockmanager.tb_warehouse(registry_date, update_date, name, address) VALUES (now(), 'VHC', 'Setor Comercial Sul Q. 6 - Asa Sul, Brasília - DF, 70307-902');
-INSERT INTO lockmanager.tb_warehouse(registry_date, update_date, name, address) VALUES (now(), 'BRISA-USA', 'Orlando, FL, United States');
-INSERT INTO lockmanager.tb_warehouse(registry_date, update_date, name, address) VALUES (now(), 'BRISA-DF', 'Av. Paulista, 1578 - Bela Vista, São Paulo - SP, 01310-200');
-INSERT INTO lockmanager.tb_warehouse(registry_date, update_date, name, address) VALUES (now(), 'BRISA-SP', 'Palácio do Congresso Nacional - Praça dos 3 Poderes, Brasília - DF, 70160-900');
+INSERT INTO lockmanager.tb_warehouse(registry_date, update_date, name, address) VALUES (now(), null, 'VHC', 'Setor Comercial Sul Q. 6 - Asa Sul, Brasília - DF, 70307-902');
+INSERT INTO lockmanager.tb_warehouse(registry_date, update_date, name, address) VALUES (now(), null, 'BRISA-USA', 'Orlando, FL, United States');
+INSERT INTO lockmanager.tb_warehouse(registry_date, update_date, name, address) VALUES (now(), null, 'BRISA-DF', 'Av. Paulista, 1578 - Bela Vista, São Paulo - SP, 01310-200');
+INSERT INTO lockmanager.tb_warehouse(registry_date, update_date, name, address) VALUES (now(), null, 'BRISA-SP', 'Palácio do Congresso Nacional - Praça dos 3 Poderes, Brasília - DF, 70160-900');
 
 INSERT INTO lockmanager.tb_lock(serial_number, registry_date, id_model, acquired_date, update_date, id_warehouse, firmware_version) VALUES ('87650', now(), 1, null, now(), 0, '03.00.11');
 INSERT INTO lockmanager.tb_lock(serial_number, registry_date, id_model, acquired_date, update_date, id_warehouse, firmware_version) VALUES ('87651', now(), 1, null, now(), 0, '03.00.11');

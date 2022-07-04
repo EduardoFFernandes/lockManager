@@ -24,19 +24,19 @@ public class Client extends _BaseModelId {
 	@Column(name = "update_date")
 	private Timestamp updateDate;
 
-	@Column(name = "name", length = 255, nullable = false)
+	@Column(length = 255, nullable = false)
 	private String name;
 
-	@Column(name = "cellphone", length = 20, nullable = false)
+	@Column(length = 20, nullable = false)
 	private String cellphone;
 
-	@Column(name = "email", length = 255, nullable = false)
+	@Column(length = 255, nullable = false)
 	private String email;
 
-	@Column(name = "identifier", length = 30, nullable = false)
+	@Column(length = 30, nullable = false)
 	private String identifier;
 
-	@Column(name = "address")
+	@Column
 	private String address;
 
 	// ---------------------------------------------------------------------------------------------

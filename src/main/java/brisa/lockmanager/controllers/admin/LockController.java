@@ -23,6 +23,7 @@ import brisa.lockmanager.commons.constants.Alerts;
 import brisa.lockmanager.commons.utils.DateUtil;
 import brisa.lockmanager.models.Lock;
 import brisa.lockmanager.repositories.ClientRepository;
+import brisa.lockmanager.repositories.ItemRepository;
 import brisa.lockmanager.repositories.LockModelRepository;
 import brisa.lockmanager.repositories.LockRepository;
 import brisa.lockmanager.repositories.WarehouseRepository;
@@ -37,6 +38,8 @@ public class LockController extends BaseAdminController<LockRepository> {
     private WarehouseRepository warehouseRepository;
     @Autowired
     private LockModelRepository lockModelRepository;
+    @Autowired
+    private ItemRepository itemRepository;
 
     private static final String OBJECTS = "objects";
     private static final String LST_MODEL = "lstModel";
@@ -126,7 +129,8 @@ public class LockController extends BaseAdminController<LockRepository> {
     })
     @ResponseBody
     public ResponseEntity<?> existsAssociation(@PathVariable(name = "idLock") final Long lockId) {
-        return ResponseEntity.ok().body(lockId);
+    	boolean hasAssociations = itemRepository.existsByLockIdAndPurchaseNotNull(lockId);
+        return ResponseEntity.ok().body(hasAssociations);
     }
 
 }

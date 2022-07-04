@@ -43,13 +43,13 @@ public class Lock extends _BaseModelId {
 
 	// uni-directional many-to-one association to LockModel
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_model", nullable = false)
 	private LockModel lockModel;
 
 	// uni-directional many-to-one association to Warehouse
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_warehouse", nullable = false)
 	private Warehouse warehouse;
 	
