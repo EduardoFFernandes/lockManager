@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{admin/_layout/main_layout}">
@@ -9,13 +10,16 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title float-left"
+                <h4
+                    class="page-title float-left"
                     th:text="#{menu.purchase.list}"></h4>
 
                 <ol class="breadcrumb float-right">
-                    <li class="breadcrumb-item"><a th:href="@{#}"
+                    <li class="breadcrumb-item"><a
+                        th:href="@{#}"
                         th:text="#{home}"></a></li>
-                    <li class="breadcrumb-item active"
+                    <li
+                        class="breadcrumb-item active"
                         th:text="#{menu.purchase.list}"></li>
                 </ol>
 
@@ -31,12 +35,14 @@
 
                     <div class="row">
                         <div class="col-sm-12 col-md-11">
-                            <h4 class="m-t-0 header-title mb-5"
+                            <h4
+                                class="m-t-0 header-title mb-5"
                                 th:text="#{menu.purchase.list.desc}"></h4>
                         </div>
                         <div
                             class="col-sm-12 col-md-1 text-right pr-4 btn-add">
-                            <a th:href="@{/admin/purchase/edit}"
+                            <a
+                                th:href="@{/admin/purchase/edit}"
                                 class="tooltip-left"
                                 th:title="#{purchase.add}"> <i
                                 class="ion ion-ios-add-circle"></i>
@@ -61,7 +67,8 @@
 
                     </div>
 
-                    <table id="datatable"
+                    <table
+                        id="datatable"
                         class="table table-hover table-bordered">
 
                         <thead class="thead-light ">
@@ -70,11 +77,14 @@
                                 <th th:text="#{no.records.found}"></th>
                             </tr>
                             <tr th:if="${!objects?.isEmpty()}">
-                                <th data-priority="1"
+                                <th
+                                    data-priority="1"
                                     th:text="#{purchase.date}"></th>
                                 <th th:text="#{client}"></th>
                                 <th th:text="#{due.date}"></th>
-                                <th th:text="#{menu}" data-priority="2"
+                                <th
+                                    th:text="#{menu}"
+                                    data-priority="2"
                                     class="actions">&nbsp;</th>
                             </tr>
                         </thead>
@@ -98,19 +108,23 @@
                                     th:text="${#temporals.format(object.dueDate, 'dd/MM/yyyy')}"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
-                                    <span data-toggle="modal"
-                                    data-target="#modalListItens">
+                                    <span
+                                        data-toggle="modal"
+                                        data-target="#modalListItens">
                                         <a
-                                        class="action-icon edit tooltip-top"
-                                        href="#" role="button"
-                                        id="showItems"
-                                        th:data-purchase-id="${object.id}"
-                                        th:title="#{purchase.items}">
+                                            class="action-icon edit tooltip-top"
+                                            href="#"
+                                            role="button"
+                                            id="showItems"
+                                            th:data-purchase-id="${object.id}"
+                                            th:title="#{purchase.items}">
                                             <i
                                             class="mdi mdi-cart icon-resize"></i>
-                                    </a>
-                                </span> <a class="action-icon edit"
-                                    data-toggle="dropdown" href="#"
+                                        </a>
+                                    </span> <a
+                                    class="action-icon edit"
+                                    data-toggle="dropdown"
+                                    href="#"
                                     role="button"> <i
                                         class="mdi mdi-menu icon-resize"></i>
                                 </a>
@@ -142,15 +156,16 @@
                                             <span class="checkAssociations" data-toggle="modal"
                                                 data-target="#modalDeleteWarning">
                                                     <a
-                                                    class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
-                                                    href="#"
-                                                    th:data-url="@{/admin/purchase/delete}"
-                                                    th:data-id="${object.id}">
+                                                        class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
+                                                        href="#"
+                                                        th:data-url="@{/admin/purchase/delete}"
+                                                        th:data-id="${object.id}">
                                                         <i
-                                                        class="far fa-trash-alt font-size-16 tab-width"></i><span
-                                                        th:text="#{delete}"></span>
-                                                </a>
-                                            </span></li>
+                                                        class="far fa-trash-alt font-size-16 tab-width"></i>
+                                                        <span
+                                                            th:text="#{delete}"></span>
+                                                    </a>
+                                                </span></li>
                                         </ul>
                                     </div>
                                 </td>

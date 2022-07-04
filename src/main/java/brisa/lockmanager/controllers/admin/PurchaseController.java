@@ -171,18 +171,18 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
         final List<Item> lstItem = this.itemRepository.findAllByPurchaseId(id);
         return ResponseEntity.ok().body(lstItem);
     }
-    
+
     @GetMapping(ADMIN_INVOICE + "/{id}")
     @ApiIgnore
     @Transactional
     public ResponseEntity<InputStreamResource> getInvoice(@PathVariable(value = "id") final Long id, HttpServletResponse resp) throws IOException {
-        
+
         final Purchase object = this.repository.findById(id).get();
 
         Invoice invoice = InvoiceService.populateInvoice(object);
-        
-        /* inline -> open pdf on web    //   attachment -> downloads pdf */
-        resp.setHeader("Content-disposition", "inline; filename=invoice.pdf");
+
+        /* inline -> open pdf on web // attachment -> downloads pdf */
+        resp.setHeader("Content-disposition", "inline; filename=invoice_" + object.getId() + ".pdf");
 
         File pdfFile = new File(PATH_INVOICE_PDF);
 
