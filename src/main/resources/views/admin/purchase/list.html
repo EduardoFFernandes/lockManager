@@ -127,7 +127,8 @@
                                                     th:text="#{edit}"></span>
                                             </a> <a
                                                 th:data-id="${object.id}"
-                                                onClick="javascript: postMethod(this)"
+                                                onClick="javascript: getMethod(this);"
+                                                href="#"
                                                 class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
                                                     <i
                                                     class="fas fa-download font-size-16 tab-width"></i>
@@ -216,9 +217,12 @@
             
         });
         
-        function postMethod(object) {
+        function getMethod(object) {
         	var id = $(object).data('id')
-        	// Fazer um post para ADMIN_INVOICE + id
+        	$.get([[@{${T(brisa.lockmanager.Routes).ADMIN_INVOICE}}]] + "/" + id, function (response) {
+        		debugger
+        		return response
+        	});
         }
         
     </script>
