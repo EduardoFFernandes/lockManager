@@ -88,17 +88,17 @@
                                 <td
                                     th:text="${object.lockModel} ? ${object.lockModel.name} : ''"></td>
                                 <td
-                                    th:text="${object.client} ? ${object.client.name} : ''"
+                                    th:text="${object.item?.purchase?.client} ? ${object.item.purchase.client.name} : ''"
                                     data-placement="auto"
                                     data-trigger="hover"
-                                    th:data-toggle="${object.client} ? 'popover' : ''"
+                                    th:data-toggle="${object.item?.purchase?.client} ? 'popover' : ''"
                                     data-html="true"
-                                    th:data-content="${object.client} ? 
+                                    th:data-content="${object.item?.purchase?.client} ? 
                                     #{popover.client.content(
-                                    ${object.client.email} ? ${object.client.email} : #{not.found},
-                                     ${object.client.cellphone} ? ${object.client.cellphone} : #{not.found},
-                                      ${object.client.identifier} ? ${object.client.identifier} : #{not.found})} : ''"
-                                    th:title="${object.client} ? ${object.client.name} : ''"></td>
+                                    ${object.item.purchase.client.email} ? ${object.item.purchase.client.email} : #{not.found},
+                                     ${object.item.purchase.client.cellphone} ? ${object.item.purchase.client.cellphone} : #{not.found},
+                                      ${object.item.purchase.client.identifier} ? ${object.item.purchase.client.identifier} : #{not.found})} : ''"
+                                    th:title="${object.item?.purchase?.client} ? ${object.item.purchase.client.name} : ''"></td>
                                 <td
                                     th:text="${object.warehouse} ? ${object.warehouse.name} : ''"
                                     data-placement="auto"
@@ -184,7 +184,8 @@
         });
         function showModal(object) {
         	var idLock = $(object).data('id') 
-        	var lock = [[${objects}]].filter(x => x.id === idLock)[0]
+        	var objects = [[${objects}]]
+        	var lock = objects.content.filter(x => x.id === idLock)[0]
         	$('#idLock').val(idLock);
         	if(lock.item) {
 	        	$('#idItem').val(lock.item.id);

@@ -69,7 +69,7 @@
 
 						<div class="row">
 
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-6">
 								<label th:text="#{lock.model}"></label>
 								<div>
 									<select class="form-control select2" th:field="*{lockModel}"
@@ -83,21 +83,7 @@
 									</ul>
 								</div>
 							</div>
-							<div class="form-group col-md-4">
-								<label th:text="#{client}"></label>
-								<div>
-									<select class="form-control select2" th:field="*{client}"
-										data-parsley-errors-container="#select2-error-2">
-										<option value="" th:text="#{select}"></option>
-										<option th:each="item : ${lstClient}" th:value="${item.id}"
-											th:text="${item.name}"></option>
-									</select> <span id="select2-error-2"></span>
-									<ul class="parsley-errors-list filled">
-										<li class="parsley-required" th:errors="*{client}"></li>
-									</ul>
-								</div>
-							</div>
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-6">
 								<label th:text="#{warehouse}"></label>
 								<div>
 									<select class="form-control select2" th:field="*{warehouse}"
