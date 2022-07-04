@@ -16,7 +16,6 @@ CREATE TABLE lockmanager.tb_lock (
     firmware_version CHARACTER VARYING(8),
     registry_date TIMESTAMP DEFAULT now()  NOT NULL,
     update_date TIMESTAMP,
-    id_client BIGINT,
     id_model BIGINT,
     id_warehouse BIGINT,
     acquired_date TIMESTAMP,
