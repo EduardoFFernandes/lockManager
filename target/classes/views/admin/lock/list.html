@@ -91,6 +91,7 @@
                                     th:text="${object.item?.purchase?.client} ? ${object.item.purchase.client.name} : ''"
                                     data-placement="auto"
                                     data-trigger="hover"
+                                    class="clientPopover"
                                     th:data-toggle="${object.item?.purchase?.client} ? 'popover' : ''"
                                     data-html="true"
                                     th:data-content="${object.item?.purchase?.client} ? 
@@ -110,19 +111,19 @@
                                     th:title="${object.warehouse} ? ${object.warehouse.name} : ''"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
-                                    <a class="action-icon edit"
-                                    	href="#"
-                                    	role="button"
-                                       	th:data-id="${object.id}"
-                                      	onClick="javascript: showModal(this)">
-                               			<i th:if="${object.item}" class="mdi mdi-pencil-box icon-resize"></i>
-                               			<i th:if="!${object.item}" class="mdi mdi-plus-circle-outline icon-resize"></i>
-                                    </a>
-                                    <a class="action-icon edit"
+                                    <a class="action-icon edit" href="#"
+                                    role="button"
+                                    th:data-id="${object.id}"
+                                    onClick="javascript: showModal(this)">
+                                        <i th:if="${object.item}"
+                                        class="mdi mdi-pencil-box icon-resize"></i>
+                                        <i th:if="!${object.item}"
+                                        class="mdi mdi-plus-circle-outline icon-resize"></i>
+                                </a> <a class="action-icon edit"
                                     data-toggle="dropdown" href="#"
                                     role="button"> <i
                                         class="mdi mdi-menu icon-resize"></i>
-                                    </a>
+                                </a>
                                     <div
                                         class="dropdown-menu dropdown-menu-left profile-dropdown">
                                         <ul class="list-inline mb-0">
@@ -135,7 +136,9 @@
                                                     class="fas fa-edit font-size-16 tab-width"></i>
                                                     <span
                                                     th:text="#{edit}"></span>
-                                            </a> <span class="checkAssociations" data-toggle="modal"
+                                            </a> <span
+                                                class="checkAssociations"
+                                                data-toggle="modal"
                                                 data-target="#modalDeleteWarning">
                                                     <a
                                                     class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
@@ -166,6 +169,10 @@
     <script th:inline="javascript">
         var urlCheckAssociations = [[@{${T(brisa.lockmanager.Routes).API_EXISTS_LOCK_ASSOCIATIONS}}]]; // used in bottom.js
         $(function() {
+            
+            $('.clientPopover').on('shown.bs.popover', function () {
+                initI18nTelTd()
+            })
 
             var columnsDefinitions = [ 
                 { targets : [ 5 ], orderable : false } 
@@ -217,4 +224,20 @@
 </div>
 
 </html>
+<style>
+.tdPhone {
+    border: 0px;
+    background-color: transparent;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.iti {
+    display: flex;
+}
+
+.iti__flag-container {
+    position: inherit;
+}
+</style>
 <!-- end fragment -->

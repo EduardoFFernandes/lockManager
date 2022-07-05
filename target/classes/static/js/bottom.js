@@ -623,6 +623,20 @@ function initI18nTelInput() {
         })
     }
 }
+function initI18nTelTd() {
+    if ($('.tdPhone')[0]) {
+        var input = $('.tdPhone')[0];
+        var iti = window.intlTelInput(input, {
+            utilsScript: utilsI18nPhoneInput,
+            allowDropdown: false,
+        });
+        iti.promise.then(function() {
+            if ($('.tdPhone')[0] && $('.tdPhone')[0] === input) {
+                handleI18nTelTd(input, iti);
+            }
+        });
+    }
+}
 var DEFAULT_MAX_LENGTH = 30;
 function handleI18nTelInput(inputEl, iti) {
     var countryMask;
