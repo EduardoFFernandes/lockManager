@@ -10,7 +10,7 @@ public class LockModel extends _BaseModelId {
 
     private static final long serialVersionUID = -2662409103201603452L;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
     // ---------------------------------------------------------------------------------------------

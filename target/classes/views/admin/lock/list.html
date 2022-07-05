@@ -185,8 +185,7 @@
         });
         function showModal(object) {
         	var idLock = $(object).data('id') 
-        	var objects = [[${objects}]]
-        	var lock = objects.content.filter(x => x.id === idLock)[0]
+        	var lock = [[${objects}]].filter(x => x.id === idLock)[0]
         	$('#idLock').val(idLock);
         	if(lock.item) {
 	        	$('#idItem').val(lock.item.id);
