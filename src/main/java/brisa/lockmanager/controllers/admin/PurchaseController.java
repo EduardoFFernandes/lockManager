@@ -40,6 +40,11 @@ import springfox.documentation.annotations.ApiIgnore;
 @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class PurchaseController extends BaseAdminController<PurchaseRepository> {
 
+    private static final String DEFAULT_MEDIA_TYPE_PDF = "application/pdf";
+//    private static final String PDF = ".pdf";
+//    private static final String FILENAME = "filename=invoice_";
+//    private static final String INLINE = "inline;";
+//    private static final String CONTENT_DISPOSITION = "Content-disposition";
     @Autowired
     private ClientRepository clientRepository;
     @Autowired
@@ -179,12 +184,12 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
         Invoice invoice = InvoiceService.populateInvoice(object);
         byte[] pdfFile = InvoiceService.generatePDF(invoice);
 
-        resp.setHeader("Content-disposition", "inline; filename=invoice_" + object.getId() + ".pdf");
+//        resp.setHeader(CONTENT_DISPOSITION, INLINE + FILENAME + object.getId() + PDF);
 
         return ResponseEntity
                 .ok()
                 .contentLength(pdfFile.length)
-                .contentType(MediaType.parseMediaType("application/pdf"))
+                .contentType(MediaType.parseMediaType(DEFAULT_MEDIA_TYPE_PDF))
                 .body(pdfFile);
     }
 
