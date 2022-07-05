@@ -42,6 +42,7 @@
 						data-parsley-trigger="focusout">
 
 						<input type="hidden" name="id" th:value="${object.id}" />
+                        <input type="hidden" name="dialCode" id="dialCode" th:value="${object.dialCode}"/>
 
 						<div class="form-group">
 							<label th:text="#{name}"></label> <input type="text"
@@ -54,9 +55,12 @@
 						<div class="form-group">
 							<label th:text="#{phone.number}"></label>
 							<div>
-								<input type="text" class="form-control"
+								<input type="text" class="form-control phone"
 									th:field="*{cellphone}" id="cellphone" 
-									data-parsley-maxlength="12"
+                                    required
+                                    data-parsley-maxlength="30"
+                                    data-parsley-trigger="keypress change"
+                                    data-parsley-phonelength
 								/>
 								<ul class="parsley-errors-list filled">
 									<li class="parsley-required" th:errors="*{cellphone}"></li>
@@ -109,6 +113,17 @@
 
 	<script th:inline="javascript">
         $(function(){
+            var cell = [[${object.cellphone}]];
+            if (cell) {
+                var dialCode = $('#dialCode').val()
+                var elPhone = $('#cellphone');
+                var phoneValue = elPhone.val();
+
+                var cellHasDialCode = (cell.search(/\+/) != -1)
+                if(!cellHasDialCode && dialCode.length > 0){
+                    elPhone.val('+' + dialCode + ' ' + phoneValue)
+                }
+            }
         });
     </script>
 

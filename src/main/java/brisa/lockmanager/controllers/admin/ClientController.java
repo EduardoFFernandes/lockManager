@@ -26,6 +26,9 @@ import springfox.documentation.annotations.ApiIgnore;
 public class ClientController extends BaseAdminController<ClientRepository> {
 
     private static final String OBJECTS = "objects";
+    private static final String SIGN_PLUS = "+";
+    private static final String I18N_CELLPHONE_FORMAT = "+%s%s";
+    private static final String EMPTY_STRING = "";
 
     @GetMapping(ADMIN_CLIENT_LIST)
     public String index(final Model model) {
@@ -75,6 +78,15 @@ public class ClientController extends BaseAdminController<ClientRepository> {
             object.setUpdateDate(now);
         } else {
             object.setRegistryDate(now);
+        }
+
+        if (!object.getCellphone().isEmpty()) {
+            if (!object.getCellphone().contains(SIGN_PLUS)) {
+                object.setCellphone(String.format(
+                        I18N_CELLPHONE_FORMAT,
+                        object.getDialCode().replace(SIGN_PLUS, EMPTY_STRING),
+                        object.getCellphone()));
+            }
         }
 
         this.repository.save(object);

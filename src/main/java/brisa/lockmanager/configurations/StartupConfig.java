@@ -25,7 +25,7 @@ import brisa.lockmanager.repositories.WarehouseRepository;
 @Configuration
 public class StartupConfig {
 
-    // private static final long DEFAULT_ID = NumberUtils.LONG_ZERO;
+    private static final String DEFAULT_CELLPHONE = "+55(61) 99999-9999";
     private static final String DEFAULT_SERIAL_NUMBER = "00000";
     private static final String DEFAULT_MESSAGE_STRING = "INFORMACAO TESTE";
 
@@ -69,7 +69,7 @@ public class StartupConfig {
             final Timestamp now = DateUtil.getCurrentTimestamp();
 
             object.setName(DEFAULT_MESSAGE_STRING);
-            object.setCellphone("6198147-3090");
+            object.setCellphone(DEFAULT_CELLPHONE);
             object.setEmail(DEFAULT_MESSAGE_STRING);
             object.setIdentifier(DEFAULT_MESSAGE_STRING);
             object.setRegistryDate(now);
@@ -121,8 +121,8 @@ public class StartupConfig {
             final Timestamp now = DateUtil.getCurrentTimestamp();
 
             object.setRegistryDate(now);
-//            object.setDueDate(now);
-//            object.setPurchaseDate(now);
+            //            object.setDueDate(now);
+            //            object.setPurchaseDate(now);
             object.setClient(clientRepository.findFirstByOrderByIdAsc());
 
             repository.save(object);

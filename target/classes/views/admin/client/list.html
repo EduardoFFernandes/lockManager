@@ -79,7 +79,10 @@
                         <tbody>
                             <tr th:each="object : ${objects}">
                                 <td th:text="${object.name}"></td>
-                                <td th:text="${object.cellphone}"></td>
+                                <td>
+                                    <input class="tdPhone" type="tel" th:value="${object.cellphone}" disabled>
+                                </td>
+<!--                                 <td th:text="${object.cellphone}"></td> -->
                                 <td th:text="${object.email}"></td>
                                 <td th:text="${object.identifier}"></td>
                                 <td
@@ -132,20 +135,33 @@
 
     <script th:inline="javascript">
 
-            $(function() {
+        $(function() {
 
             var columnsDefinitions = [ 
                 { targets : [ 4 ], orderable : false } 
             ];
-
+    
             if ([[${!objects?.isEmpty()}]]) {
                 $('#datatable').DataTable(
                     buildDataTable(columnsDefinitions)
                 );
             }
-            });
+        });
         </script>
 </div>
 
 </html>
+<style>
+.tdPhone {
+    border: 0px;
+    background-color: transparent;
+    padding-right: 0px;
+}
+.iti {
+    display: flex;
+}
+.iti__flag-container {
+    position: inherit;
+}
+</style>>
 <!-- end fragment -->
