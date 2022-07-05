@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -13,75 +15,90 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import brisa.lockmanager.commons.constants.Alerts;
 import brisa.lockmanager.models.LockModel;
 import brisa.lockmanager.repositories.LockModelRepository;
+import brisa.lockmanager.repositories.LockRepository;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller
 public class LockModelController extends BaseAdminController<LockModelRepository> {
 
-	private static final String OBJECTS = "objects";
+    private static final String OBJECTS = "objects";
 
-	@GetMapping(ADMIN_LOCK_MODEL_LIST)
-	public String index(final Model model) {
+    @Autowired
+    private LockRepository lockRepository;
 
-		final List<LockModel> lstLockModel = this.repository.findAll();
+    @GetMapping(ADMIN_LOCK_MODEL_LIST)
+    public String index(final Model model) {
 
-		model.addAttribute(OBJECTS, lstLockModel);
-		return ADMIN_LOCK_MODEL_LIST;
-	}
+        final List<LockModel> lstLockModel = this.repository.findAll();
 
-	@GetMapping(ADMIN_LOCK_MODEL_EDIT)
-	@ApiIgnore
-	public String showAdd(final Model model) {
+        model.addAttribute(OBJECTS, lstLockModel);
+        return ADMIN_LOCK_MODEL_LIST;
+    }
 
-		final LockModel object = new LockModel();
-		model.addAttribute(OBJECT, object);
-		return ADMIN_LOCK_MODEL_EDIT;
-	}
+    @GetMapping(ADMIN_LOCK_MODEL_EDIT)
+    @ApiIgnore
+    public String showAdd(final Model model) {
 
-	@GetMapping(ADMIN_LOCK_MODEL_EDIT + "/{id}")
-	@ApiIgnore
-	public String showEdit(final Model model, @PathVariable("id") final long id) {
+        final LockModel object = new LockModel();
+        model.addAttribute(OBJECT, object);
+        return ADMIN_LOCK_MODEL_EDIT;
+    }
 
-		final LockModel object = super.repository.findById(id).orElseThrow(() -> new IllegalArgumentException());
+    @GetMapping(ADMIN_LOCK_MODEL_EDIT + "/{id}")
+    @ApiIgnore
+    public String showEdit(final Model model, @PathVariable("id") final long id) {
 
-		model.addAttribute(OBJECT, object);
-		return ADMIN_LOCK_MODEL_EDIT;
-	}
+        final LockModel object = super.repository.findById(id).orElseThrow(() -> new IllegalArgumentException());
 
-	@PostMapping(ADMIN_LOCK_MODEL_EDIT)
-	@ApiIgnore
-	@Transactional
-	public String save(@Valid @ModelAttribute(OBJECT) final LockModel object, final BindingResult result,
-			final RedirectAttributes redirect, final Model model) {
+        model.addAttribute(OBJECT, object);
+        return ADMIN_LOCK_MODEL_EDIT;
+    }
 
-		if (result.hasErrors()) {
-			model.addAttribute(Alerts.error());
-			model.addAttribute(OBJECT, object);
-			return ADMIN_LOCK_MODEL_EDIT;
-		}
+    @PostMapping(ADMIN_LOCK_MODEL_EDIT)
+    @ApiIgnore
+    @Transactional
+    public String save(@Valid @ModelAttribute(OBJECT) final LockModel object, final BindingResult result,
+            final RedirectAttributes redirect, final Model model) {
 
-		this.repository.save(object);
-		redirect.addFlashAttribute(Alerts.success());
-		return this.forward(ADMIN_LOCK_MODEL_LIST);
-	}
+        if (result.hasErrors()) {
+            model.addAttribute(Alerts.error());
+            model.addAttribute(OBJECT, object);
+            return ADMIN_LOCK_MODEL_EDIT;
+        }
 
-	@GetMapping(ADMIN_LOCK_MODEL_DELETE)
-	@ApiIgnore
-	@Transactional
-	public String delete(final RedirectAttributes redirect, final Model model, @RequestParam("id") final long id) {
+        this.repository.save(object);
+        redirect.addFlashAttribute(Alerts.success());
+        return this.forward(ADMIN_LOCK_MODEL_LIST);
+    }
 
-		final LockModel object = super.repository.findById(id).get();
+    @GetMapping(ADMIN_LOCK_MODEL_DELETE)
+    @ApiIgnore
+    @Transactional
+    public String delete(final RedirectAttributes redirect, final Model model, @RequestParam("id") final long id) {
 
-		if (object != null) {
-			super.repository.delete(object);
-		}
+        final LockModel object = super.repository.findById(id).get();
 
-		redirect.addFlashAttribute(Alerts.success());
-		return this.forward(ADMIN_LOCK_MODEL_LIST);
-	}
+        if (object != null) {
+            super.repository.delete(object);
+        }
+
+        redirect.addFlashAttribute(Alerts.success());
+        return this.forward(ADMIN_LOCK_MODEL_LIST);
+    }
+
+    @GetMapping(path = {
+            API_EXISTS_LOCK_MODEL_ASSOCIATIONS + "/{idLockModel}"
+
+    })
+    @ResponseBody
+    public ResponseEntity<?> existsAssociation(@PathVariable(name = "idLockModel") final Long lockModelId) {
+        boolean hasAssociations = lockRepository.existsByLockModelId(lockModelId);
+        return ResponseEntity.ok().body(hasAssociations);
+    }
 }

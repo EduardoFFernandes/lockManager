@@ -187,6 +187,7 @@
             $('#modalDeleteWarning').on('hidden.bs.modal', function () {
                 $('#modalDeleteDesc').html([[#{message.warning.delete.desc}]]);
                 $('#modalDeleteWarning').find(':submit').attr('disabled', false);
+                $('#modalDeleteWarning').find(':submit').css('cursor', 'pointer');
             });
             
         });

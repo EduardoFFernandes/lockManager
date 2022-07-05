@@ -13,6 +13,10 @@ public interface LockRepository extends BaseRepository<Lock, Long> {
 
     boolean existsBySerialNumberIgnoreCase(String serialNumber);
 
+    boolean existsByLockModelId(Long lockModelId);
+
+    boolean existsByWarehouseId(Long warehouseId);
+
     Lock findFirstByOrderByIdAsc();
 
     @Override
