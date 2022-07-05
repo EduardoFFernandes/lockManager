@@ -14,4 +14,6 @@ public interface PurchaseRepository extends BaseRepository<Purchase, Long> {
     @Override
     List<Purchase> findAll();
 
+    boolean existsByClientId(Long clientId);
+
 }

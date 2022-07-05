@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -14,12 +16,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import brisa.lockmanager.commons.constants.Alerts;
 import brisa.lockmanager.commons.utils.DateUtil;
 import brisa.lockmanager.models.Client;
 import brisa.lockmanager.repositories.ClientRepository;
+import brisa.lockmanager.repositories.PurchaseRepository;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller
@@ -29,6 +33,9 @@ public class ClientController extends BaseAdminController<ClientRepository> {
     private static final String SIGN_PLUS = "+";
     private static final String I18N_CELLPHONE_FORMAT = "+%s%s";
     private static final String EMPTY_STRING = "";
+
+    @Autowired
+    private PurchaseRepository purchaseRepository;
 
     @GetMapping(ADMIN_CLIENT_LIST)
     public String index(final Model model) {
@@ -107,6 +114,16 @@ public class ClientController extends BaseAdminController<ClientRepository> {
 
         redirect.addFlashAttribute(Alerts.success());
         return this.forward(ADMIN_CLIENT_LIST);
+    }
+
+    @GetMapping(path = {
+            API_EXISTS_CLIENT_ASSOCIATIONS + "/{idClient}"
+
+    })
+    @ResponseBody
+    public ResponseEntity<?> existsAssociation(@PathVariable(name = "idClient") final Long clientId) {
+        boolean hasAssociations = purchaseRepository.existsByClientId(clientId);
+        return ResponseEntity.ok().body(hasAssociations);
     }
 
 }

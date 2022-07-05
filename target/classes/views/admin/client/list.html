@@ -104,7 +104,7 @@
                                                     class="fas fa-edit font-size-16 tab-width"></i>
                                                     <span
                                                     th:text="#{edit}"></span>
-                                            </a> <span
+                                            </a> <span class="checkAssociations"
                                                 data-toggle="modal"
                                                 data-target="#modalDeleteWarning">
                                                     <a
@@ -134,6 +134,8 @@
     <!-- end row -->
 
     <script th:inline="javascript">
+    
+    var urlCheckAssociations = [[@{${T(brisa.lockmanager.Routes).API_EXISTS_CLIENT_ASSOCIATIONS}}]]; // used in bottom.js
 
         $(function() {
 
@@ -146,6 +148,12 @@
                     buildDataTable(columnsDefinitions)
                 );
             }
+            
+            $('#modalDeleteWarning').on('hidden.bs.modal', function () {
+                $('#modalDeleteDesc').html([[#{message.warning.delete.desc}]]);
+                $('#modalDeleteWarning').find(':submit').attr('disabled', false);
+                $('#modalDeleteWarning').find(':submit').css('cursor', 'pointer');
+            });
         });
         </script>
 </div>
@@ -163,5 +171,5 @@
 .iti__flag-container {
     position: inherit;
 }
-</style>>
+</style>
 <!-- end fragment -->
