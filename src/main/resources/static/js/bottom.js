@@ -503,6 +503,8 @@ function initPortletsActions() {
 
 
 function buildDataTable(columnDefinitions) {
+    
+    $.fn.dataTable.moment( 'DD/MM/YYYY' );
 
     return {
         columnDefs: columnDefinitions,
