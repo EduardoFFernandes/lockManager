@@ -56,7 +56,7 @@ CREATE TABLE lockmanager.tb_purchase (
     id BIGINT DEFAULT nextval('tb_purchase_id_seq') NOT NULL,
     registry_date TIMESTAMP DEFAULT now()  NOT NULL,
     update_date TIMESTAMP,
-    id_client BIGINT,
+    id_client BIGINT NOT NULL,
     purchase_date TIMESTAMP,
     due_date TIMESTAMP,
     CONSTRAINT pk_tb_purchase PRIMARY KEY (id)
