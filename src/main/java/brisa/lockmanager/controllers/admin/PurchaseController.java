@@ -1,7 +1,5 @@
 package brisa.lockmanager.controllers.admin;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -175,40 +172,30 @@ public class PurchaseController extends BaseAdminController<PurchaseRepository> 
     @GetMapping(ADMIN_INVOICE + "/{id}")
     @ApiIgnore
     @Transactional
-    public ResponseEntity<InputStreamResource> getInvoice(@PathVariable(value = "id") final Long id, HttpServletResponse resp) throws IOException {
+    public ResponseEntity<byte[]> getInvoice(@PathVariable(value = "id") final Long id, HttpServletResponse resp) throws IOException {
 
         final Purchase object = this.repository.findById(id).get();
 
         Invoice invoice = InvoiceService.populateInvoice(object);
+        byte[] pdfFile = InvoiceService.generatePDF(invoice);
 
-        /* inline -> open pdf on web // attachment -> downloads pdf */
         resp.setHeader("Content-disposition", "inline; filename=invoice_" + object.getId() + ".pdf");
 
-        File pdfFile = new File(PATH_INVOICE_PDF);
-
-        InvoiceService.generatePDF(invoice);
-
-        ResponseEntity<InputStreamResource> response = ResponseEntity
+        return ResponseEntity
                 .ok()
-                .contentLength(pdfFile.length())
+                .contentLength(pdfFile.length)
                 .contentType(MediaType.parseMediaType("application/pdf"))
-                .body(new InputStreamResource(new FileInputStream(pdfFile)));
-
-        InvoiceService.deleteCopiedFiles();
-
-        return response;
+                .body(pdfFile);
     }
-    
-    
+
     @GetMapping(path = {
-    		API_EXISTS_PURCHASE_ASSOCIATIONS + "/{idPurchase}"
+            API_EXISTS_PURCHASE_ASSOCIATIONS + "/{idPurchase}"
 
     })
     @ResponseBody
     public ResponseEntity<?> existsAssociation(@PathVariable(name = "idPurchase") final Long idPurchase) {
-    	boolean hasPurchaseItems = itemRepository.existsByPurchaseId(idPurchase);
+        boolean hasPurchaseItems = itemRepository.existsByPurchaseId(idPurchase);
         return ResponseEntity.ok().body(hasPurchaseItems);
     }
-
 
 }

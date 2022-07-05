@@ -54,9 +54,6 @@ public interface Routes {
     // -------------
 
     static final String FILE = "file://";
-    static final String PATH_INVOICE_HTML = "/Users/home/invoice.html";
-    static final String PATH_INVOICE_CSS = "/Users/home/invoice.css";
-    static final String PATH_INVOICE_PDF = "/Users/home/invoice.pdf";
     static final String PATH_TEMPLATE = "/static/assets/invoice/template";
     static final String ADMIN_INVOICE = ADMIN + "/invoice";
 
