@@ -243,12 +243,10 @@
         
         function getInvoice(object) {
         	var id = $(object).data('id')
-        	debugger
             axios.get([[@{${T(brisa.lockmanager.Routes).ADMIN_INVOICE}}]] + "/" + id, {
                 responseType: "blob"
             }).then(x=> {
-                const filenameHeader = x.headers["content-disposition"].split(';')[1];
-                const filename = filenameHeader.substring(filenameHeader.indexOf("=")+1);
+                const filename = 'invoice_' + id + '.pdf';
                 const url = URL.createObjectURL(x.data); 
                 const link = document.createElement('a');
                 link.href = url;
