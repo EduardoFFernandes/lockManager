@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{admin/_layout/main_layout}">
+    
+    <div layout:fragment="content">
+    
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                
+                    <h4 class="page-title float-left" th:if="${object.id == null}" th:text="#{version.add}" ></h4>
+                    <h4 class="page-title float-left" th:if="${object.id != null}" th:text="#{version.edit}"></h4>     
+
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a th:href="@{#}" th:text="#{home}"></a></li>
+                        <li class="breadcrumb-item"><a th:href="@{/admin/version/list}" th:text="#{menu.version.list}"></a></li>
+                        <li class="breadcrumb-item active" th:if="${object.id == null}" th:text="#{version.add}"></li>
+                        <li class="breadcrumb-item active" th:if="${object.id != null}" th:text="#{version.edit}"></li>
+                    </ol>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" id="form-edit-special-pin">
+            <div class="col-12">
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h4 class="m-t-0 header-title mb-4" th:text="#{fill.form.desc}"></h4> 
+                        
+                        <form id="editForm" 
+                            th:action="@{/admin/version/edit}" 
+                            th:object="${object}" 
+                            method="post" 
+                            data-parsley-validate
+                            data-parsley-trigger="focusout"> 
+                            
+                            <input type="hidden" name="id" th:value="${object.id}"/>
+
+                            <div class="form-group">
+                                <label th:text="#{name}"></label> 
+                                <input type="text" class="form-control" th:field="*{name}" 
+                                    required
+                                    data-parsley-maxlength="255"
+                                />
+                                <ul class="parsley-errors-list filled">
+                                    <li class="parsley-required" th:errors="*{name}"></li>
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <label th:text="#{release.notes}"></label>
+                                <textarea class="form-control h-100" rows="15" th:field="*{releaseNotes}"
+                                    data-parsley-maxlength="900"></textarea>
+                            </div>
+                            <div class="form-group mb-1 mt-4 text-right">
+                            <div>
+                                <button type="submit"
+                                    class="btn btn-primary waves-effect waves-light"
+                                    th:text="#{save}"></button>
+                                <a class="btn btn-secondary waves-effect ml-1"
+                                    th:href="@{/admin/version/list}" th:text="#{cancel}"></a>
+                            </div>
+                        </div>                            
+                        </form>
+                    </div> 
+                </div><!-- end card -->
+            </div><!-- end col -->
+        </div>
+
+        <script th:inline="javascript">
+            $(function(){
+            });
+    	</script>
+        
+    </div>
+        
+</html>

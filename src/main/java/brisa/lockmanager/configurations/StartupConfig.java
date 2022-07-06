@@ -105,7 +105,6 @@ public class StartupConfig {
 
             object.setRegistryDate(now);
             object.setSerialNumber(DEFAULT_SERIAL_NUMBER);
-            object.setFirmwareVersion("0.0.0.00");
 
             repository.save(object);
 

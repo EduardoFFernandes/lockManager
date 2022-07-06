@@ -57,13 +57,19 @@
     								</ul>
     							</div>
     						</div>
-                            <div class="form-group col-md-8">
-                                <label th:text="#{firmware.version}"></label> <input type="text"
-                                    class="form-control" th:field="*{firmwareVersion}"
-                                    data-parsley-maxlength="150" />
-                                <ul class="parsley-errors-list filled">
-                                    <li class="parsley-required" th:errors="*{firmwareVersion}"></li>
-                                </ul>
+                            <div class="form-group col-md-4">
+                                <label th:text="#{firmware.version}"></label>
+                                <div>
+                                    <select class="form-control select2" th:field="*{version}"
+                                        data-parsley-errors-container="#select2-error-1">
+                                        <option value="" th:text="#{select}"></option>
+                                        <option th:each="item : ${lstVersion}" th:value="${item.id}"
+                                            th:text="${item.name}"></option>
+                                    </select> <span id="select2-error-1"></span>
+                                    <ul class="parsley-errors-list filled">
+                                        <li class="parsley-required" th:errors="*{version}"></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 

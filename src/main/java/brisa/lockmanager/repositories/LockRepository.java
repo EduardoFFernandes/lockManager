@@ -17,6 +17,8 @@ public interface LockRepository extends BaseRepository<Lock, Long> {
 
     boolean existsByWarehouseId(Long warehouseId);
 
+    boolean existsByVersionId(Long versionId);
+
     Lock findFirstByOrderByIdAsc();
 
     @Override

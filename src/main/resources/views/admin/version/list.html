@@ -9,11 +9,14 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title float-left" th:text="#{menu.client.list}"></h4>
+                <h4 class="page-title float-left"
+                    th:text="#{menu.version.list}"></h4>
 
                 <ol class="breadcrumb float-right">
-                    <li class="breadcrumb-item"><a th:href="@{#}" th:text="#{home}"></a></li>
-                    <li class="breadcrumb-item active" th:text="#{menu.client.list}"></li>
+                    <li class="breadcrumb-item"><a th:href=@{#}
+                        th:text="#{home}"></a></li>
+                    <li class="breadcrumb-item active"
+                        th:text="#{menu.version.list}"></li>
                 </ol>
 
                 <div class="clearfix"></div>
@@ -29,33 +32,16 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-11">
                             <h4 class="m-t-0 header-title mb-5"
-                                th:text="#{menu.client.list.desc}"></h4>
+                                th:text="#{menu.version.list.desc}"></h4>
                         </div>
                         <div
                             class="col-sm-12 col-md-1 text-right pr-4 btn-add">
-                            <a th:href="@{/admin/client/edit}"
+                            <a th:href="@{/admin/version/edit}"
                                 class="tooltip-left"
-                                th:title="#{client.add}"> <i
+                                th:title="#{version.add}"> <i
                                 class="ion ion-ios-add-circle"></i>
                             </a>
                         </div>
-
-                        <!--  <form
-                                 id="editForm"
-                                 th:action="@{/admin/lock/list}"
-                                 method="get"
-                                 data-parsley-validate
-                                 data-parsley-trigger="focusout"
-                            >
-                                <div class="d-flex align-items-center active-filter target">
-                                    <div class="checkbox checkbox-primary activeCheckBox mt-2 mr-3 ml-1">
-                                        <input type="checkbox" id="commIssue" name="commIssue" th:checked="*{commIssue}">
-                                        <label class="clickable" for="commIssue" th:text="#{filter.comm.issue}">
-                                        </label>
-                                    </div>
-                                </div>
-                            </form> -->
-
                     </div>
 
                     <table id="datatable"
@@ -67,11 +53,9 @@
                                 <th th:text="#{no.records.found}"></th>
                             </tr>
                             <tr th:if="${!objects?.isEmpty()}">
-                                <th data-priority="1" th:text="#{name}"></th>
-                                <th th:text="#{cellphone}"></th>
-                                <th th:text="#{email}"></th>
-                                <th th:text="#{identifier}"></th>
-                                <th th:text="#{address}"></th>
+                                <th data-priority="1"
+                                    th:text="#{registry.date}"></th>
+                                <th th:text="#{firmware.version}"></th>
                                 <th th:text="#{menu}" data-priority="2"
                                     class="actions">&nbsp;</th>
                             </tr>
@@ -79,13 +63,13 @@
 
                         <tbody>
                             <tr th:each="object : ${objects}">
-                                <td th:text="${object.name}"></td>
+                                <td th:text="${#dates.format(object.registryDate, 'dd/MM/yyyy')}"></td>
                                 <td>
-                                    <input class="tdPhone" type="tel" th:value="${object.cellphone}" disabled>
+                                    <span 
+                                        class="link btn p-0"
+                                        th:attr="onclick=${'javascript: getReleaseNotes(' + object.id + ')'}" 
+                                        th:text="${object.name}"></span>
                                 </td>
-                                <td th:text="${object.email}"></td>
-                                <td th:text="${object.identifier}"></td>
-                                <td th:text="${object.address}"></td>
                                 <td
                                     class="actions lock-actions pb-0 pt-10">
                                     <a class="action-icon edit"
@@ -99,25 +83,23 @@
                                             <li
                                                 class="dropdown notification-list">
                                                 <a
-                                                th:href="|@{/admin/client/edit}/${object.id}|"
+                                                th:href="|@{/admin/version/edit}/${object.id}|"
                                                 class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
-                                                    <i
-                                                    class="fas fa-edit font-size-16 tab-width"></i>
-                                                    <span
-                                                    th:text="#{edit}"></span>
-                                            </a> <span class="checkAssociations"
+                                                    <i class="fas fa-edit font-size-16 tab-width"></i>
+                                                    <span th:text="#{edit}"></span>
+                                                </a> 
+                                                <span class="checkAssociations"
                                                 data-toggle="modal"
-                                                data-target="#modalDeleteWarning">
-                                                    <a
-                                                    class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
-                                                    href="#"
-                                                    th:data-url="@{/admin/client/delete}"
-                                                    th:data-id="${object.id}">
-                                                        <i
-                                                        class="far fa-trash-alt font-size-16 tab-width"></i><span
-                                                        th:text="#{delete}"></span>
-                                                </a>
-                                            </span>
+                                                data-target="#modalDeleteWarning"> 
+                                                    <a href="#"
+                                                       class="delete dropdown-item notify-item pt-1 pb-1 action-icon edit"
+                                                       th:title="#{delete}"
+                                                       th:data-url="@{/admin/version/delete}"
+                                                       th:data-id="${object.id}">
+                                                       <i class="far fa-trash-alt font-size-16 tab-width"></i>
+                                                       <span th:text="#{delete}"></span>
+                                                    </a>
+                                                </span>
                                             </li>
                                         </ul>
                                     </div>
@@ -133,15 +115,18 @@
         <!-- end col -->
     </div>
     <!-- end row -->
-
     <script th:inline="javascript">
     
-    var urlCheckAssociations = [[@{${T(brisa.lockmanager.Routes).API_EXISTS_CLIENT_ASSOCIATIONS}}]]; // used in bottom.js
+        var urlCheckAssociations = [[@{${T(brisa.lockmanager.Routes).API_EXISTS_VERSION_ASSOCIATIONS}}]]; // used in bottom.js
 
         $(function() {
+            
+            /* $('#datatable tbody').on('click', 'tr', function () {
+                
+            }); */
 
             var columnsDefinitions = [ 
-                { targets : [ 4 ], orderable : false } 
+                { targets : [ 2 ], orderable : false } 
             ];
     
             if ([[${!objects?.isEmpty()}]]) {
@@ -156,21 +141,19 @@
                 $('#modalDeleteWarning').find(':submit').css('cursor', 'pointer');
             });
         });
+        
+        function getReleaseNotes(id) {
+            $.ajax({
+                url: [[@{${T(brisa.lockmanager.Routes).API_RELEASE_NOTES}}]] + "/" + id,
+                success: function(response) {
+                    $('#releaseNotesTextarea').val(response.releaseNotes);
+                    $('#releaseNotesModalLabel').html([[#{version}]] + ' ' + response.name);
+                    $('#modalReleaseNotes').modal('show')
+                }
+            });
+        }
         </script>
 </div>
 
 </html>
-<style>
-.tdPhone {
-    border: 0px;
-    background-color: transparent;
-    padding-right: 0px;
-}
-.iti {
-    display: flex;
-}
-.iti__flag-container {
-    position: inherit;
-}
-</style>
 <!-- end fragment -->

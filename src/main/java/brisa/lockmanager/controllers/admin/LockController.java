@@ -26,6 +26,7 @@ import brisa.lockmanager.repositories.ClientRepository;
 import brisa.lockmanager.repositories.ItemRepository;
 import brisa.lockmanager.repositories.LockModelRepository;
 import brisa.lockmanager.repositories.LockRepository;
+import brisa.lockmanager.repositories.VersionRepository;
 import brisa.lockmanager.repositories.WarehouseRepository;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -40,11 +41,14 @@ public class LockController extends BaseAdminController<LockRepository> {
     private LockModelRepository lockModelRepository;
     @Autowired
     private ItemRepository itemRepository;
+    @Autowired
+    private VersionRepository versionRepository;
 
     private static final String OBJECTS = "objects";
     private static final String LST_MODEL = "lstModel";
     private static final String LST_CLIENT = "lstClient";
     private static final String LST_WAREHOUSE = "lstWarehouse";
+    private static final String LST_VERSION = "lstVersion";
 
     @GetMapping(ADMIN_LOCK_LIST)
     public String index(final Model model) {
@@ -63,6 +67,7 @@ public class LockController extends BaseAdminController<LockRepository> {
         model.addAttribute(LST_MODEL, this.lockModelRepository.findAll());
         model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
         model.addAttribute(LST_WAREHOUSE, this.warehouseRepository.findAll());
+        model.addAttribute(LST_VERSION, this.versionRepository.findAll());
         model.addAttribute(OBJECT, object);
         return ADMIN_LOCK_EDIT;
     }
@@ -76,6 +81,7 @@ public class LockController extends BaseAdminController<LockRepository> {
         model.addAttribute(LST_MODEL, this.lockModelRepository.findAll());
         model.addAttribute(LST_CLIENT, this.clientRepository.findAll());
         model.addAttribute(LST_WAREHOUSE, this.warehouseRepository.findAll());
+        model.addAttribute(LST_VERSION, this.versionRepository.findAll());
         model.addAttribute(OBJECT, object);
         return ADMIN_LOCK_EDIT;
     }
@@ -129,7 +135,7 @@ public class LockController extends BaseAdminController<LockRepository> {
     })
     @ResponseBody
     public ResponseEntity<?> existsAssociation(@PathVariable(name = "idLock") final Long lockId) {
-    	boolean hasAssociations = itemRepository.existsByLockIdAndPurchaseNotNull(lockId);
+        boolean hasAssociations = itemRepository.existsByLockIdAndPurchaseNotNull(lockId);
         return ResponseEntity.ok().body(hasAssociations);
     }
 

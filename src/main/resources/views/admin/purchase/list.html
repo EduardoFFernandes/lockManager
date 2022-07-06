@@ -86,7 +86,7 @@
                                 <td
                                     th:text="${object.client} ? ${object.client.name} : ''"
                                     data-placement="auto"
-                                    data-trigger="hover"
+                                    data-trigger="click"
                                     class="clientPopover"
                                     th:data-toggle="${object.client} ? 'popover' : ''"
                                     data-html="true"
@@ -205,8 +205,8 @@
        	                data: 'sensor',
        	                className: 'd-flex justify-content-center',
        	                render : function(data, type, row) {
-       	                    return data.sensor ? '<i title="' + data.title + '" class="yesIcon mdi mdi-check-box-outline fa-xl"></i>' 
-       	                            : '<i title="' + data.title + '" class="noIcon mdi mdi-close-box-outline fa-xl"></i>'
+       	                    return data.sensor ? '<i title="' + data.title + '" class="yesIcon mdi mdi-check fa-xl"></i>' 
+       	                            : '<i title="' + data.title + '" class="noIcon mdi mdi-close fa-xl"></i>'
            	            }
    	                },
        	            { title: [[#{installation.location}]], data: 'installationLocation'},

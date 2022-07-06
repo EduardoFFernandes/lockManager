@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import brisa.lockmanager.commons.utils.DateUtil;
-import brisa.lockmanager.commons.validations.SerialNumberUnique;
 
 /**
  * The persistent class for the tb_lock database table.
@@ -23,16 +22,12 @@ import brisa.lockmanager.commons.validations.SerialNumberUnique;
  */
 @Entity
 @Table(name = "tb_lock")
-@SerialNumberUnique(fieldId = "id", fieldSerialNumber = "serialNumber")
 public class Lock extends _BaseModelId {
 
     private static final long serialVersionUID = 929153996749512858L;
 
     @Column(name = "serial_number", nullable = false)
     private String serialNumber;
-
-    @Column(name = "firmware_version")
-    private String firmwareVersion;
 
     @JsonFormat(pattern = DateUtil.DD_MMMM_YYYY_HH_MM)
     @Column(name = "registry_date")
@@ -50,6 +45,15 @@ public class Lock extends _BaseModelId {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_model", nullable = false)
     private LockModel lockModel;
+
+    // uni-directional many-to-one association to LockModel
+    @JsonIgnoreProperties({
+            "hibernateLazyInitializer",
+            "handler"
+    })
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_version")
+    private Version version;
 
     // uni-directional many-to-one association to Warehouse
     @JsonIgnoreProperties({
@@ -114,12 +118,12 @@ public class Lock extends _BaseModelId {
         this.warehouse = warehouse;
     }
 
-    public String getFirmwareVersion() {
-        return this.firmwareVersion;
+    public Version getVersion() {
+        return version;
     }
 
-    public void setFirmwareVersion(String firmwareVersion) {
-        this.firmwareVersion = firmwareVersion;
+    public void setVersion(Version version) {
+        this.version = version;
     }
 
     public Item getItem() {

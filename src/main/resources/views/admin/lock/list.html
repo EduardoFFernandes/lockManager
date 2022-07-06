@@ -84,13 +84,18 @@
                         <tbody>
                             <tr th:each="object : ${objects}">
                                 <td th:text="${object.serialNumber}"></td>
-                                <td th:text="${object.firmwareVersion}"></td>
+                                <td>
+                                    <span th:if="${object.version}" 
+                                        class="link btn p-0"
+                                        th:attr="onclick=${'javascript: getReleaseNotes(' + object.version.id + ')'}" 
+                                        th:text="${object.version.name}"></span>
+                                </td>
                                 <td
                                     th:text="${object.lockModel} ? ${object.lockModel.name} : ''"></td>
                                 <td
                                     th:text="${object.item?.purchase?.client} ? ${object.item.purchase.client.name} : ''"
                                     data-placement="auto"
-                                    data-trigger="hover"
+                                    data-trigger="click"
                                     class="clientPopover"
                                     th:data-toggle="${object.item?.purchase?.client} ? 'popover' : ''"
                                     data-html="true"
@@ -191,6 +196,7 @@
             });
             
         });
+        
         function showModal(object) {
         	var idLock = $(object).data('id') 
         	var lock = [[${objects}]].filter(x => x.id === idLock)[0]
@@ -219,6 +225,17 @@
         	
         	$('#modalAddItem').css('zIndex', '1080');
         	$('#modalAddItem').modal('show')
+        }
+        
+        function getReleaseNotes(id) {
+            $.ajax({
+                url: [[@{${T(brisa.lockmanager.Routes).API_RELEASE_NOTES}}]] + "/" + id,
+                success: function(response) {
+                    $('#releaseNotesTextarea').val(response.releaseNotes);
+                    $('#releaseNotesModalLabel').html([[#{version}]] + ' ' + response.name);
+                    $('#modalReleaseNotes').modal('show')
+                }
+            });
         }
         
     </script>

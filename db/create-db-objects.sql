@@ -10,17 +10,28 @@ CREATE SEQUENCE lockmanager.tb_purchase_id_seq INCREMENT 1 MINVALUE 0 MAXVALUE 9
 
 CREATE SEQUENCE lockmanager.tb_item_id_seq INCREMENT 1 MINVALUE 0 MAXVALUE 9223372036854775807 START 0 CACHE 1;
 
+CREATE SEQUENCE lockmanager.tb_version_id_seq INCREMENT 1 MINVALUE 0 MAXVALUE 9223372036854775807 START 0 CACHE 1;
+
 CREATE TABLE lockmanager.tb_lock (
     id BIGINT DEFAULT nextval('lockmanager.tb_lock_id_seq') NOT NULL,
     serial_number CHARACTER VARYING(10)  NOT NULL,
-    firmware_version CHARACTER VARYING(8),
     registry_date TIMESTAMP DEFAULT now()  NOT NULL,
     update_date TIMESTAMP,
+    id_version BIGINT,
     id_model BIGINT,
     id_warehouse BIGINT,
     acquired_date TIMESTAMP,
     CONSTRAINT pk_tb_lock PRIMARY KEY (id)
 
+);
+
+CREATE TABLE lockmanager.tb_version (
+    id BIGINT DEFAULT nextval('tb_version_id_seq') NOT NULL,
+    name CHARACTER VARYING(20),
+    release_notes TEXT,
+    registry_date TIMESTAMP DEFAULT now()  NOT NULL,
+    update_date TIMESTAMP,
+    CONSTRAINT pk_tb_version PRIMARY KEY (id)
 );
 
 CREATE TABLE lockmanager.tb_client (

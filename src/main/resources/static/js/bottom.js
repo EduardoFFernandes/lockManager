@@ -666,19 +666,25 @@ function handleI18nTelTd(inputEl, iti) {
     var countryMask;
 
     if (iti.getSelectedCountryData().iso2 === 'br') {
-        var brazilMaskBehavior = function(val) {
-            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-        },
-            phoneNumberOptions = {
-                onKeyPress: function(val, e, field, options) {
-                    field.mask(brazilMaskBehavior.apply({}, arguments), options);
+        if ($('.tdPhone')[0] && $('.tdPhone')[0] === inputEl) {
+            var brazilMaskBehavior = function(val) {
+                return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+            },
+                phoneNumberOptions = {
+                    onKeyPress: function(val, e, field, options) {
+                        field.mask(brazilMaskBehavior.apply({}, arguments), options);
                 }
-            }
-            ;
-        $('.tdPhone').mask(brazilMaskBehavior, phoneNumberOptions);
+            };
+        
+            $('.tdPhone').mask(brazilMaskBehavior, phoneNumberOptions);
+        }
     } else {
-        countryMask = $('.tdPhone').attr('placeholder').replace(/[0-9]/g, 0);
-        $('.tdPhone').mask(countryMask);
+        if ($('.tdPhone')[0] && $('.tdPhone')[0] === inputEl) {
+            if( $('.tdPhone').attr('placeholder')) {
+                countryMask = $('.tdPhone').attr('placeholder').replace(/[0-9]/g, 0);
+                $('.tdPhone').mask(countryMask);
+            }
+        }
     }
     inputEl.maxLength = DEFAULT_MAX_LENGTH;
 }

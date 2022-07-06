@@ -29,6 +29,13 @@ public interface Routes {
     static final String ADMIN_WAREHOUSE_EDIT = ADMIN + "/warehouse/edit";
     static final String ADMIN_WAREHOUSE_DELETE = ADMIN + "/warehouse/delete";
 
+    // Warehouse Routes
+    // -------------
+
+    static final String ADMIN_VERSION_LIST = ADMIN + "/version/list";
+    static final String ADMIN_VERSION_EDIT = ADMIN + "/version/edit";
+    static final String ADMIN_VERSION_DELETE = ADMIN + "/version/delete";
+
     // Client Routes
     // -------------
 
@@ -65,5 +72,7 @@ public interface Routes {
     static final String API_EXISTS_WAREHOUSE_ASSOCIATIONS = API + "/warehouse/associations";
     static final String API_EXISTS_LOCK_MODEL_ASSOCIATIONS = API + "/lock-model/associations";
     static final String API_EXISTS_CLIENT_ASSOCIATIONS = API + "/client/associations";
+    static final String API_EXISTS_VERSION_ASSOCIATIONS = API + "/version/associations";
+    static final String API_RELEASE_NOTES = API + "/version/release-notes";
 
 }
