@@ -125,24 +125,9 @@
                                                     <i
                                                     class="fas fa-edit font-size-16 tab-width"></i>
                                                     <span
-                                                        th:text="#{edit}"></span>
+                                                    th:text="#{edit}"></span>
                                             </a>
                                                 <div>
-                                                    <a
-                                                        th:if="${object.hasPurchasedItems}"
-                                                        th:data-id="${object.id}"
-                                                        onClick="javascript: getInvoice(this);"
-                                                        href="#"
-                                                        class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
-                                                        <i
-                                                        class="fas fa-download font-size-16 tab-width"></i>
-                                                        <span
-                                                            th:text="#{invoice}"></span>
-                                                    </a>
-                                                </div> <span
-                                                    class="checkAssociations"
-                                                    data-toggle="modal"
-                                                    data-target="#modalDeleteWarning">
                                                     <a
                                                         th:if="${object.hasPurchasedItems}"
                                                         th:data-id="${object.id}"
@@ -188,27 +173,15 @@
        	var urlCheckAssociations = [[@{${T(brisa.lockmanager.Routes).API_EXISTS_PURCHASE_ASSOCIATIONS}}]]; // used in bottom.js
        	
         $(function() {
-        	
-        	$.fn.dataTable.moment( 'DD/MM/YYYY' );
- 
+            
             var columnsDefinitions = [ 
-                { 
-                	targets : [ 3 ], 
-                	orderable : false,
-                	render: function (data, type, row) {
-                        if (type === 'sort' || type === 'type') {
-                          return $(data).text();
-                        }
-                      	return data;
-                    }
-            	} 
+                { targets : [ 3 ], orderable : false } 
             ];
             
             if ([[${!objects?.isEmpty()}]]) {
                 $('#datatable').DataTable(
                     buildDataTable(columnsDefinitions)
                 );
-                
             }
             
             $('.clientPopover').on('shown.bs.popover', function () {
@@ -270,7 +243,7 @@
             });
             
         });
-       	
+        
         function getInvoice(object) {
         	var id = $(object).data('id')
             axios.get([[@{${T(brisa.lockmanager.Routes).ADMIN_INVOICE}}]] + "/" + id, {
