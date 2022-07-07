@@ -7,9 +7,9 @@ CREATE DATABASE dblockmanager_desenv
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
     
-    DROP SCHEMA public;
-    
-    CREATE SCHEMA lockmanager AUTHORIZATION dblockmanager;
+DROP SCHEMA public;
+
+CREATE SCHEMA lockmanager AUTHORIZATION dblockmanager;
   
 ALTER DATABASE dblockmanager_desenv SET search_path TO lockmanager;
 
