@@ -24,4 +24,6 @@ public interface LockRepository extends BaseRepository<Lock, Long> {
     @Override
     List<Lock> findAll();
 
+    List<Lock> findAllByVersionIdNot(Long versionId);
+
 }

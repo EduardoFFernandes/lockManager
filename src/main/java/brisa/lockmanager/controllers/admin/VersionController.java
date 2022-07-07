@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import brisa.lockmanager.commons.constants.Alerts;
 import brisa.lockmanager.commons.utils.DateUtil;
+import brisa.lockmanager.models.Lock;
 import brisa.lockmanager.models.Version;
 import brisa.lockmanager.repositories.LockRepository;
 import brisa.lockmanager.repositories.VersionRepository;
@@ -41,6 +42,15 @@ public class VersionController extends BaseAdminController<VersionRepository> {
 
         model.addAttribute(OBJECTS, lstVersions);
         return ADMIN_VERSION_LIST;
+    }
+
+    @GetMapping(ADMIN_VERSION_CHANGE_LOCKS + "/{id}")
+    public String changeLocksVerion(final Model model, @PathVariable("id") final long id) {
+
+        final List<Lock> lstLocks = this.lockRepository.findAllByVersionIdNot(id);
+
+        model.addAttribute(OBJECTS, lstLocks);
+        return ADMIN_VERSION_CHANGE_LOCKS;
     }
 
     @GetMapping(ADMIN_VERSION_EDIT)

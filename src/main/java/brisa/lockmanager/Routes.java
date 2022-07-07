@@ -29,12 +29,13 @@ public interface Routes {
     static final String ADMIN_WAREHOUSE_EDIT = ADMIN + "/warehouse/edit";
     static final String ADMIN_WAREHOUSE_DELETE = ADMIN + "/warehouse/delete";
 
-    // Warehouse Routes
+    // Version Routes
     // -------------
 
     static final String ADMIN_VERSION_LIST = ADMIN + "/version/list";
     static final String ADMIN_VERSION_EDIT = ADMIN + "/version/edit";
     static final String ADMIN_VERSION_DELETE = ADMIN + "/version/delete";
+    static final String ADMIN_VERSION_CHANGE_LOCKS = ADMIN + "/version/locks";
 
     // Client Routes
     // -------------

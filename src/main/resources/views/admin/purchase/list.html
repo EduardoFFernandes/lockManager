@@ -83,19 +83,25 @@
                             <tr th:each="object : ${objects}">
                                 <td
                                     th:text="${#temporals.format(object.purchaseDate, 'dd/MM/yyyy')}"></td>
-                                <td
+                                <td>
+                                    <a 
+                                    tabindex="0"
                                     th:text="${object.client} ? ${object.client.name} : ''"
                                     data-placement="auto"
-                                    data-trigger="click"
-                                    class="clientPopover"
+                                    data-trigger="focus"
+                                    class="link btn p-0 clientPopover"
+                                    th:data-id="${object.id}"
                                     th:data-toggle="${object.client} ? 'popover' : ''"
                                     data-html="true"
                                     th:data-content="${object.client} ? 
                                     #{popover.client.content(
-                                    ${object.client.email} ? ${object.client.email} : #{not.found},
-                                     ${object.client.cellphone} ? ${object.client.cellphone} : #{not.found},
-                                      ${object.client.identifier} ? ${object.client.identifier} : #{not.found})} : ''"
-                                    th:title="${object.client} ? ${object.client.name} : ''"></td>
+                                     ${object.client.email} ? ${object.client.email} : #{not.found},
+                                      ${object.id},
+                                       ${object.client.cellphone} ? ${object.client.cellphone} : #{not.found},
+                                        ${object.client.identifier} ? ${object.client.identifier} : #{not.found})} : ''"
+                                    th:title="${object.client} ? ${object.client.name} : ''">
+                                    </a>
+                                </td>
                                 <td
                                     th:text="${#temporals.format(object.dueDate, 'dd/MM/yyyy')}"></td>
                                 <td
@@ -185,7 +191,8 @@
             }
             
             $('.clientPopover').on('shown.bs.popover', function () {
-                initI18nTelTd()
+                var id = $(this).data('id')
+                initI18nTelTd(id)
             })
             
             $('#modalDeleteWarning').on('hidden.bs.modal', function () {

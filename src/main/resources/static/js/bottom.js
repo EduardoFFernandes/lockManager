@@ -625,21 +625,18 @@ function initI18nTelInput() {
         })
     }
 }
-function initI18nTelTd() {
-    if ($('.tdPhone')[0]) {
-        var input = $('.tdPhone')[0];
-        var iti = window.intlTelInput(input, {
-            utilsScript: utilsI18nPhoneInput,
-            allowDropdown: false,
-        });
-        iti.promise.then(function() {
-            if ($('.tdPhone')[0] && $('.tdPhone')[0] === input) {
-                handleI18nTelTd(input, iti);
-            }
-        });
-    }
+function initI18nTelTd(id) {
+    var input = $('#phonePopover-' + id + '')[0];
+    var iti = window.intlTelInput(input, {
+        utilsScript: utilsI18nPhoneInput,
+        allowDropdown: false,
+    });
+    iti.promise.then(function() {
+        handleI18nPopover(id, input, iti);
+    });
 }
 var DEFAULT_MAX_LENGTH = 30;
+
 function handleI18nTelInput(inputEl, iti) {
     var countryMask;
 
@@ -684,6 +681,29 @@ function handleI18nTelTd(inputEl, iti) {
                 countryMask = $('.tdPhone').attr('placeholder').replace(/[0-9]/g, 0);
                 $('.tdPhone').mask(countryMask);
             }
+        }
+    }
+    inputEl.maxLength = DEFAULT_MAX_LENGTH;
+}
+
+function handleI18nPopover(id, inputEl, iti) {
+    var countryMask;
+
+    if (iti.getSelectedCountryData().iso2 === 'br') {
+        var brazilMaskBehavior = function(val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+            phoneNumberOptions = {
+                onKeyPress: function(val, e, field, options) {
+                    field.mask(brazilMaskBehavior.apply({}, arguments), options);
+            }
+        };
+    
+        $('#phonePopover-' + id + '').mask(brazilMaskBehavior, phoneNumberOptions);
+    } else {
+        if( $('#phonePopover-' + id + '').attr('placeholder')) {
+            countryMask = $('#phonePopover-' + id + '').attr('placeholder').replace(/[0-9]/g, 0);
+            $('#phonePopover-' + id + '').mask(countryMask);
         }
     }
     inputEl.maxLength = DEFAULT_MAX_LENGTH;
