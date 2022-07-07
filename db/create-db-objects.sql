@@ -26,7 +26,7 @@ CREATE TABLE lockmanager.tb_lock (
 );
 
 CREATE TABLE lockmanager.tb_version (
-    id BIGINT DEFAULT nextval('tb_version_id_seq') NOT NULL,
+    id BIGINT DEFAULT nextval('lockmanager.tb_version_id_seq') NOT NULL,
     name CHARACTER VARYING(20),
     release_notes TEXT,
     registry_date TIMESTAMP DEFAULT now()  NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE lockmanager.tb_lock_model (
 );
 
 CREATE TABLE lockmanager.tb_purchase (
-    id BIGINT DEFAULT nextval('tb_purchase_id_seq') NOT NULL,
+    id BIGINT DEFAULT nextval('lockmanager.tb_purchase_id_seq') NOT NULL,
     registry_date TIMESTAMP DEFAULT now()  NOT NULL,
     update_date TIMESTAMP,
     id_client BIGINT NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE lockmanager.tb_purchase (
 );
 
 CREATE TABLE lockmanager.tb_item (
-    id BIGINT DEFAULT nextval('tb_item_id_seq') NOT NULL,
+    id BIGINT DEFAULT nextval('lockmanager.tb_item_id_seq') NOT NULL,
     registry_date TIMESTAMP DEFAULT now()  NOT NULL,
     update_date TIMESTAMP,
     id_purchase BIGINT,
