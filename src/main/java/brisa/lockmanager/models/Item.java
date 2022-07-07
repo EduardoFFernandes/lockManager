@@ -2,6 +2,7 @@ package brisa.lockmanager.models;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import brisa.lockmanager.commons.utils.DateUtil;
+import brisa.lockmanager.commons.utils.StringUtil;
 
 @Entity
 @Table(name = "tb_item")
@@ -56,7 +58,7 @@ public class Item extends _BaseModelId {
     private String lockSerialNumber;
 
     @Transient
-	private String lockModelName;
+    private String lockModelName;
 
     // ---------------------------------------------------------------------------------------------
     // Constructors
@@ -153,6 +155,10 @@ public class Item extends _BaseModelId {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getCurrencyString(BigDecimal value) {
+        return StringUtil.getCurrencyString(Locale.US, value);
     }
 
 }

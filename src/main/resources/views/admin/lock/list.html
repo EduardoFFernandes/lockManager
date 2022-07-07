@@ -193,7 +193,6 @@
         	var lock = [[${objects}]].filter(x => x.id === idLock)[0]
         	$('#idLock').val(idLock);
         	if(lock.item) {
-        	    debugger
 	        	$('#idItem').val(lock.item.id);
 	        	$('#price').val(Number(lock.item.price).toFixed(2));
 	        	$('#sensor').prop("checked", lock.item.sensor);

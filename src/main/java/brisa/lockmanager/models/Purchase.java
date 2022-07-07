@@ -1,5 +1,6 @@
 package brisa.lockmanager.models;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
@@ -24,98 +25,110 @@ import brisa.lockmanager.commons.utils.DateUtil;
 @Table(name = "tb_purchase")
 public class Purchase extends _BaseModelId {
 
-	private static final long serialVersionUID = 8339307493249944086L;
+    private static final long serialVersionUID = 8339307493249944086L;
 
-	@JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
-	@Column(name = "registry_date")
-	private Timestamp registryDate;
+    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+    @Column(name = "registry_date")
+    private Timestamp registryDate;
 
-	@JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
-	@Column(name = "update_date")
-	private Timestamp updateDate;
+    @JsonFormat(pattern = DateUtil.YYYY_MM_DD_T_HH_MM_SS_SSSXXX)
+    @Column(name = "update_date")
+    private Timestamp updateDate;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_client", nullable = false)
-	private Client client;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_client", nullable = false)
+    private Client client;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Column(name = "purchase_date")
-	private LocalDate purchaseDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "purchase_date")
+    private LocalDate purchaseDate;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Column(name = "due_date")
-	private LocalDate dueDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "due_date")
+    private LocalDate dueDate;
 
-	// bi-directional many-to-one association to Purchase
-	@JsonIgnore
-	@OneToMany(mappedBy = "purchase")
-	private List<Item> lstPurchaseItem;
+    // bi-directional many-to-one association to Purchase
+    @JsonIgnore
+    @OneToMany(mappedBy = "purchase")
+    private List<Item> lstPurchaseItem;
 
-	@Transient
-	private boolean hasPurchasedItems;
+    @Transient
+    private boolean hasPurchasedItems;
 
-	// ---------------------------------------------------------------------------------------------
-	// Constructors
-	// ---------------------------------------------------------------------------------------------
+    @Transient
+    private BigDecimal totalPrice;
 
-	public Purchase() {
-		super();
-	}
+    // ---------------------------------------------------------------------------------------------
+    // Constructors
+    // ---------------------------------------------------------------------------------------------
 
-	// ---------------------------------------------------------------------------------------------
-	// get/set
-	// ---------------------------------------------------------------------------------------------
+    public Purchase() {
+        super();
+    }
 
-	public Timestamp getRegistryDate() {
-		return registryDate;
-	}
+    // ---------------------------------------------------------------------------------------------
+    // get/set
+    // ---------------------------------------------------------------------------------------------
 
-	public Timestamp getUpdateDate() {
-		return updateDate;
-	}
+    public Timestamp getRegistryDate() {
+        return registryDate;
+    }
 
-	public Client getClient() {
-		return client;
-	}
+    public Timestamp getUpdateDate() {
+        return updateDate;
+    }
 
-	public void setRegistryDate(Timestamp registryDate) {
-		this.registryDate = registryDate;
-	}
+    public Client getClient() {
+        return client;
+    }
 
-	public void setUpdateDate(Timestamp updateDate) {
-		this.updateDate = updateDate;
-	}
+    public void setRegistryDate(Timestamp registryDate) {
+        this.registryDate = registryDate;
+    }
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
+    }
 
-	public List<Item> getLstPurchaseItem() {
-		return lstPurchaseItem;
-	}
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
-	public void setLstPurchaseItem(List<Item> lstPurchaseItem) {
-		this.lstPurchaseItem = lstPurchaseItem;
-	}
+    public List<Item> getLstPurchaseItem() {
+        return lstPurchaseItem;
+    }
 
-	public LocalDate getDueDate() {
-		return dueDate;
-	}
+    public void setLstPurchaseItem(List<Item> lstPurchaseItem) {
+        this.lstPurchaseItem = lstPurchaseItem;
+    }
 
-	public void setDueDate(LocalDate dueDate) {
-		this.dueDate = dueDate;
-	}
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
 
-	public LocalDate getPurchaseDate() {
-		return purchaseDate;
-	}
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
 
-	public void setPurchaseDate(LocalDate purchaseDate) {
-		this.purchaseDate = purchaseDate;
-	}
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
+    }
 
-	public boolean isHasPurchasedItems() {
-		return this.lstPurchaseItem.size() > 0;
-	}
+    public void setPurchaseDate(LocalDate purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public boolean isHasPurchasedItems() {
+        return this.lstPurchaseItem.size() > 0;
+    }
+
+    public BigDecimal getTotalPrice() {
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Item purchaseItem : lstPurchaseItem) {
+            total = total.add(purchaseItem.getPrice());
+        }
+        return total;
+    }
 
 }

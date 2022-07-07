@@ -90,9 +90,10 @@
                                                 </a> 
                                                 <a
                                                 th:href="|@{/admin/version/locks}/${object.id}|"
-                                                class="dropdown-item notify-item pt-1 pb-1 action-icon edit">
-                                                    <i class="fas fa-edit font-size-16 tab-width"></i>
-                                                    <span th:text="#{edit}"></span>
+                                                class="dropdown-item notify-item pt-1 pb-1 action-icon"
+                                                style="padding-left: 19px;">
+                                                    <i class="mdi mdi-lock font-size-16 tab-width"></i>
+                                                    <span th:text="#{change.locks}"></span>
                                                 </a> 
                                                 <span class="checkAssociations"
                                                 data-toggle="modal"

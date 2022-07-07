@@ -43,7 +43,7 @@
 
 						<input type="hidden" name="id" th:value="${object.id}" />
                         <div class="row">
-    						<div class="form-group col-md-4">
+    						<div class="form-group col-md-6">
     							<label th:text="#{serial.number}"></label>
     							<div>
     								<input th:if="${object.id == null}" type="text"
@@ -57,7 +57,7 @@
     								</ul>
     							</div>
     						</div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label th:text="#{firmware.version}"></label>
                                 <div>
                                     <select class="form-control select2" th:field="*{version}"

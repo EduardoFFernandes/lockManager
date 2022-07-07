@@ -860,7 +860,6 @@ function initJoditEditor() {
 }
 
 function bindMultiSelect(elementId, selectableFooter, selectionFooter) {
-
     $('#' + elementId).multiSelect({
         selectableHeader: "<input type='text' class='form-control custom-mult-search-input' autocomplete='off' placeholder='" + i18n.filter + "'>",
         selectionHeader: "<input type='text' class='form-control custom-mult-search-input' autocomplete='off' placeholder='" + i18n.filter + "'>",

@@ -74,6 +74,7 @@
                                     th:text="#{purchase.date}"></th>
                                 <th th:text="#{client}"></th>
                                 <th th:text="#{due.date}"></th>
+                                <th th:text="#{total.price}"></th>
                                 <th th:text="#{menu}" data-priority="2"
                                     class="actions">&nbsp;</th>
                             </tr>
@@ -104,25 +105,22 @@
                                 </td>
                                 <td
                                     th:text="${#temporals.format(object.dueDate, 'dd/MM/yyyy')}"></td>
-                                <td
-                                    class="actions lock-actions pb-0 pt-10">
-                                    <span data-toggle="modal"
-                                    data-target="#modalListItens">
-                                        <a
-                                        class="action-icon edit tooltip-top showItems"
+                                <td th:text="${'$ ' + object.totalPrice}"></td>
+                                <td class="actions lock-actions pb-0 pt-10">
+                                    <span data-toggle="modal" data-target="#modalListItens">
+                                        <a class="action-icon edit tooltip-top showItems"
                                         href="#" role="button"
                                         th:data-id="${object.id}"
                                         th:title="#{purchase.items}">
-                                            <i
-                                            class="mdi mdi-cart icon-resize"></i>
+                                            <i class="mdi mdi-cart icon-resize"></i>
+                                        </a>
+                                    </span> 
+                                    <a class="action-icon edit"
+                                        data-toggle="dropdown" href="#"
+                                        role="button"> 
+                                        <i class="mdi mdi-menu icon-resize"></i>
                                     </a>
-                                </span> <a class="action-icon edit"
-                                    data-toggle="dropdown" href="#"
-                                    role="button"> <i
-                                        class="mdi mdi-menu icon-resize"></i>
-                                </a>
-                                    <div
-                                        class="dropdown-menu dropdown-menu-left profile-dropdown">
+                                    <div class="dropdown-menu dropdown-menu-left profile-dropdown">
                                         <ul class="list-inline mb-0">
                                             <li
                                                 class="dropdown notification-list"><a
@@ -159,7 +157,8 @@
                                                         <span
                                                         th:text="#{delete}"></span>
                                                 </a>
-                                            </span></li>
+                                            </span>
+                                            </li>
                                         </ul>
                                     </div>
                                 </td>
@@ -224,6 +223,12 @@
                             return '<b>' + data + '</b>'
                         }
        	            },
+       	            { title: [[#{price}]],
+       	                data: 'price',
+       	                render : function(data, type, row) {
+                            return '<span class="mask-money"> $ ' + data + '</span>'
+                        }
+       	            },
        	        ];
                 $.ajax({
                     url: [[@{${T(brisa.lockmanager.Routes).ADMIN_PURCHASE_ITEMS}}]] + "/" + id,
@@ -235,6 +240,7 @@
                    		            sensor: { sensor : x.sensor, title: x.sensor ? [[#{yes}]] : [[#{no}]] },
                		                installationLocation: x.installationLocation,
                		                status: getStatusName(x.status),
+               		                price: Number(x.price).toFixed(2),
                		            }
            		            })
            		            

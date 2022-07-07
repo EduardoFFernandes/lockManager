@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import brisa.lockmanager.commons.constants.Alerts;
 import brisa.lockmanager.commons.utils.DateUtil;
+import brisa.lockmanager.models.ChangeLocksObject;
 import brisa.lockmanager.models.Lock;
 import brisa.lockmanager.models.Version;
 import brisa.lockmanager.repositories.LockRepository;
@@ -31,6 +32,7 @@ import springfox.documentation.annotations.ApiIgnore;
 public class VersionController extends BaseAdminController<VersionRepository> {
 
     private static final String OBJECTS = "objects";
+    private static final String LST_LOCK = "lstLock";
 
     @Autowired
     private LockRepository lockRepository;
@@ -42,15 +44,6 @@ public class VersionController extends BaseAdminController<VersionRepository> {
 
         model.addAttribute(OBJECTS, lstVersions);
         return ADMIN_VERSION_LIST;
-    }
-
-    @GetMapping(ADMIN_VERSION_CHANGE_LOCKS + "/{id}")
-    public String changeLocksVerion(final Model model, @PathVariable("id") final long id) {
-
-        final List<Lock> lstLocks = this.lockRepository.findAllByVersionIdNot(id);
-
-        model.addAttribute(OBJECTS, lstLocks);
-        return ADMIN_VERSION_CHANGE_LOCKS;
     }
 
     @GetMapping(ADMIN_VERSION_EDIT)
@@ -96,6 +89,39 @@ public class VersionController extends BaseAdminController<VersionRepository> {
         }
 
         this.repository.save(object);
+        redirect.addFlashAttribute(Alerts.success());
+        return this.forward(ADMIN_VERSION_LIST);
+    }
+
+    @GetMapping(ADMIN_VERSION_CHANGE_LOCKS + "/{id}")
+    public String changeLocksVerion(final Model model, @PathVariable("id") final long id) {
+
+        ChangeLocksObject object = new ChangeLocksObject();
+
+        final Version version = super.repository.findById(id).orElseThrow(() -> new IllegalArgumentException());
+
+        final List<Lock> lstLock = this.lockRepository.findByVersionIdNotOrVersionIsNullOrderBySerialNumberAsc(id);
+
+        object.setVersion(version);
+        model.addAttribute(LST_LOCK, lstLock);
+        model.addAttribute(OBJECT, object);
+        return ADMIN_VERSION_CHANGE_LOCKS;
+    }
+
+    @PostMapping(ADMIN_VERSION_CHANGE_LOCKS)
+    @ApiIgnore
+    @Transactional
+    public String saveLocks(@Valid @ModelAttribute(OBJECT) final ChangeLocksObject object, final BindingResult result,
+            final RedirectAttributes redirect, final Model model) {
+
+        List<Lock> lstLocks = object.getLstLock();
+
+        lstLocks.forEach(x -> {
+            x.setVersion(object.getVersion());
+        });
+
+        this.lockRepository.saveAll(lstLocks);
+
         redirect.addFlashAttribute(Alerts.success());
         return this.forward(ADMIN_VERSION_LIST);
     }
